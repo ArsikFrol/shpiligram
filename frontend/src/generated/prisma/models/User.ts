@@ -29,6 +29,7 @@ export type UserMinAggregateOutputType = {
   name: string | null
   userName: string | null
   avatar: string | null
+  password: string | null
   mobile: string | null
   birhday: string | null
   createdAt: Date | null
@@ -40,6 +41,7 @@ export type UserMaxAggregateOutputType = {
   name: string | null
   userName: string | null
   avatar: string | null
+  password: string | null
   mobile: string | null
   birhday: string | null
   createdAt: Date | null
@@ -51,6 +53,7 @@ export type UserCountAggregateOutputType = {
   name: number
   userName: number
   avatar: number
+  password: number
   mobile: number
   birhday: number
   createdAt: number
@@ -64,6 +67,7 @@ export type UserMinAggregateInputType = {
   name?: true
   userName?: true
   avatar?: true
+  password?: true
   mobile?: true
   birhday?: true
   createdAt?: true
@@ -75,6 +79,7 @@ export type UserMaxAggregateInputType = {
   name?: true
   userName?: true
   avatar?: true
+  password?: true
   mobile?: true
   birhday?: true
   createdAt?: true
@@ -86,6 +91,7 @@ export type UserCountAggregateInputType = {
   name?: true
   userName?: true
   avatar?: true
+  password?: true
   mobile?: true
   birhday?: true
   createdAt?: true
@@ -170,6 +176,7 @@ export type UserGroupByOutputType = {
   name: string
   userName: string
   avatar: string
+  password: string
   mobile: string
   birhday: string
   createdAt: Date
@@ -202,6 +209,7 @@ export type UserWhereInput = {
   name?: Prisma.StringFilter<"User"> | string
   userName?: Prisma.StringFilter<"User"> | string
   avatar?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringFilter<"User"> | string
   mobile?: Prisma.StringFilter<"User"> | string
   birhday?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -213,6 +221,7 @@ export type UserOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   birhday?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -227,6 +236,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   userName?: Prisma.StringFilter<"User"> | string
   avatar?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringFilter<"User"> | string
   mobile?: Prisma.StringFilter<"User"> | string
   birhday?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -238,6 +248,7 @@ export type UserOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   birhday?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -255,6 +266,7 @@ export type UserScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   userName?: Prisma.StringWithAggregatesFilter<"User"> | string
   avatar?: Prisma.StringWithAggregatesFilter<"User"> | string
+  password?: Prisma.StringWithAggregatesFilter<"User"> | string
   mobile?: Prisma.StringWithAggregatesFilter<"User"> | string
   birhday?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -266,6 +278,7 @@ export type UserCreateInput = {
   name: string
   userName: string
   avatar: string
+  password: string
   mobile: string
   birhday: string
   createdAt?: Date | string
@@ -277,6 +290,7 @@ export type UserUncheckedCreateInput = {
   name: string
   userName: string
   avatar: string
+  password: string
   mobile: string
   birhday: string
   createdAt?: Date | string
@@ -288,6 +302,7 @@ export type UserUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   birhday?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -299,6 +314,7 @@ export type UserUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   birhday?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -310,6 +326,7 @@ export type UserCreateManyInput = {
   name: string
   userName: string
   avatar: string
+  password: string
   mobile: string
   birhday: string
   createdAt?: Date | string
@@ -321,6 +338,7 @@ export type UserUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   birhday?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -332,6 +350,7 @@ export type UserUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   birhday?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -343,6 +362,7 @@ export type UserCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   birhday?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -354,6 +374,7 @@ export type UserMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   birhday?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -365,6 +386,7 @@ export type UserMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   birhday?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -386,6 +408,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   userName?: boolean
   avatar?: boolean
+  password?: boolean
   mobile?: boolean
   birhday?: boolean
   createdAt?: boolean
@@ -397,6 +420,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   userName?: boolean
   avatar?: boolean
+  password?: boolean
   mobile?: boolean
   birhday?: boolean
   createdAt?: boolean
@@ -408,6 +432,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   userName?: boolean
   avatar?: boolean
+  password?: boolean
   mobile?: boolean
   birhday?: boolean
   createdAt?: boolean
@@ -419,13 +444,14 @@ export type UserSelectScalar = {
   name?: boolean
   userName?: boolean
   avatar?: boolean
+  password?: boolean
   mobile?: boolean
   birhday?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "userName" | "avatar" | "mobile" | "birhday" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "userName" | "avatar" | "password" | "mobile" | "birhday" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
@@ -435,6 +461,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: string
     userName: string
     avatar: string
+    password: string
     mobile: string
     birhday: string
     createdAt: Date
@@ -866,6 +893,7 @@ export interface UserFieldRefs {
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly userName: Prisma.FieldRef<"User", 'String'>
   readonly avatar: Prisma.FieldRef<"User", 'String'>
+  readonly password: Prisma.FieldRef<"User", 'String'>
   readonly mobile: Prisma.FieldRef<"User", 'String'>
   readonly birhday: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>

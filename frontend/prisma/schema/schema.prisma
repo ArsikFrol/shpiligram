@@ -12,13 +12,25 @@ model User {
     id String @id @default(cuid())
 
     name     String
-    userName String @map("user_name")
+    userName String @unique @map("user_name")
     avatar   String
-    mobile   String
-    birhday  String
+    password String
+    email    String @unique
+
+    mobile  String
+    birhday String
 
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")
 
     @@map("Users")
+}
+
+model Chat {
+    id String @id @default(cuid())
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("Chats")
 }

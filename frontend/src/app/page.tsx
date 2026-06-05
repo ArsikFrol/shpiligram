@@ -1,7 +1,9 @@
-export default function Home() {
+import Navigation from "@/components/Navigation";
+
+export default async function Home() {
     return (
         <div className=''>
-            adsf
+            sdf
         </div>
     );
 }

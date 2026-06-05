@@ -3,10 +3,8 @@
 @theme inline {
     --font-sans: var(--font-nunito-sans);
 
-    --color-gray: #646464;
-    --color-blue: #4880FF;
-    --color-black: #202224;
-    --color-graphite: #404040;
+    --color-bg: #151E27;
+    --color-container: #1D2733
 }
 
 ::-webkit-scrollbar {
