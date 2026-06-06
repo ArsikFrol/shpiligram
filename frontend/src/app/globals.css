@@ -4,7 +4,9 @@
     --font-sans: var(--font-nunito-sans);
 
     --color-bg: #151E27;
-    --color-container: #1D2733
+    --color-container: #1D2733;
+    --color-active-bg: #20364D;
+    --color-active-text: #2239EF;
 }
 
 ::-webkit-scrollbar {

@@ -29,6 +29,8 @@ model User {
 model Chat {
     id String @id @default(cuid())
 
+    ownersId String[] @map("owners_id")
+
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")
 
