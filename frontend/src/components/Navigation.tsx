@@ -16,10 +16,10 @@ type TElem = {
 }
 
 const listNav: TElem[] = [
-    { id: 1, text: 'Chats', elem: <MessageSquare strokeWidth={2} color='white' size={25} />, link: '/' },
-    { id: 2, text: 'Contacts', elem: < CircleUser strokeWidth={2} color='white' size={25} />, link: '/contacts' },
-    { id: 3, text: 'Settings', elem: <Settings strokeWidth={2} color='white' size={25} />, link: '/settings' },
-    { id: 4, text: 'Profile', elem: <UserRoundPen strokeWidth={2} color='white' size={25} />, link: '/profile' }
+    { id: 1, text: 'Chats', elem: <MessageSquare color='white' size={25} />, link: '/' },
+    { id: 2, text: 'Contacts', elem: < CircleUser color='white' size={25} />, link: '/contacts' },
+    { id: 3, text: 'Settings', elem: <Settings color='white' size={25} />, link: '/settings' },
+    { id: 4, text: 'Profile', elem: <UserRoundPen color='white' size={25} />, link: '/profile' }
 ]
 
 export default function Navigation() {
