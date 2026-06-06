@@ -16,8 +16,8 @@ export default function TopContentChat(props: Props) {
 
     return (
         <div className={cn(
-            'w-[900px] bg-container my-[10px] mx-auto py-[10px]',
-            'flex justify-between items-center px-[40px] rounded-2xl absolute left-1/2 transform -translate-x-1/2'
+            'w-[1050px] bg-container my-[10px] mx-auto py-[10px]',
+            'flex justify-between items-center px-[40px] rounded-2xl'
         )}>
             <div className='w-[35px] h-[35px] flex justify-center items-center group  cursor-pointer'
                 onClick={clickToReturn}>
