@@ -93,7 +93,7 @@ export default function ContantChat(props: Props) {
     return (
         <div className="flex flex-col gap-y-[15px]">
             <div ref={containerRef} className={cn(
-                'w-[1064px] h-[calc(100vh-515px)] px-[10px] overflow-y-auto',
+                'w-[1064px] h-[calc(100vh-405px)] px-[10px] overflow-y-auto',
                 'flex flex-col gap-y-[10px] pt-[90px]'
             )} >
                 {listMessages.map((obj, index: number) => (
@@ -109,14 +109,14 @@ export default function ContantChat(props: Props) {
                 ))}
                 <div ref={messagesEndRef} />
             </div>
-            <div className='relative mr-[70px]'>
-                <div className='absolute bottom-[-65px] left-1/2 transform -translate-x-1/2 w-[800px]'>
+            <div className='relative'>
+                <div className='absolute bottom-[-65px] left-1/2 transform -translate-x-1/2 w-[1050px]'>
                     <div className={cn(
                         'flex justify-between items-center gap-2 shadow-xl rounded-2xl',
                         'bg-[#202D3D] p-[10px]'
                     )}>
                         <Sticker color="white" size={28} strokeWidth={1.5} />
-                        <div className="w-[600px]">
+                        <div className="w-[850px]">
                             <textarea ref={textareaRef} placeholder="Message" value={valueInput}
                                 className={cn(
                                     'w-full text-white px-[10px] py-[7px] border border-white/30 rounded-xl',
