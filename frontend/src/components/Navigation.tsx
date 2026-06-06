@@ -41,7 +41,7 @@ export default function Navigation() {
 
                     return (
                         <div className={cn(
-                            "flex flex-col items-center gap-y-[5px] w-[110px] py-[10px]",
+                            "flex flex-col items-center gap-y-[5px] w-[150px] py-[10px]",
                             'hover:scale-105 transition-transform duration-300 cursor-pointer',
                             isActive && 'bg-active-bg rounded-4xl'
                         )} key={index} onClick={() => clickNav(obj)}>
