@@ -11,7 +11,7 @@ type Props = {
 export default function Chat({ obj, setShowChatId }: Props) {
 
     return (
-        <div className='w-full bg-bg mt-[10px] rounded-2xl h-[calc(100vh-340px)]'>
+        <div className='w-full bg-bg mt-[10px] rounded-2xl h-[calc(100vh-230px)]'>
             <TopContentChat setShowChatId={setShowChatId} obj={obj} />
             <ContantChat obj={obj} />
         </div>

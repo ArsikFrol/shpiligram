@@ -53,12 +53,12 @@ export default function Home() {
 
     return (
         <>
-            <Groups />
+            {!showChatId && <Groups />}
             <div className='flex gap-x-[10px]'>
                 {!loading
                     ? <div className={cn(
-                        "flex flex-col gap-y-[30px] h-[calc(100vh-340px)] overflow-y-auto px-[5px] py-[20px]",
-                        showChatId ? 'w-[70px]' : 'w-full'
+                        "flex flex-col gap-y-[30px] overflow-y-auto px-[5px] py-[20px]",
+                        showChatId ? 'w-[70px]  h-[calc(100vh-220px)]' : 'w-full h-[calc(100vh-340px)]'
                     )}>
                         {
                             listChats.map((obj, index: number) => {
