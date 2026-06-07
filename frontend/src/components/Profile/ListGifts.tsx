@@ -2,9 +2,9 @@
 
 import { cn } from "@/lib/utils"
 import { Gift } from "lucide-react"
-import { TGift } from "./PostsGifts"
 import { useState } from "react"
 import DescGift from "./DescGift"
+import { TGift } from "@/store/users/types"
 
 type Props = {
     listGifts: TGift[]
