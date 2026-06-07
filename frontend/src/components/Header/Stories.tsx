@@ -6,9 +6,14 @@ type Props = {
 }
 
 export default function Stories(props: Props) {
+
+    const clickStory = () => {
+        props.setShowRowStories(true)
+    }
+
     return (
         <div className='reltive hover:scale-102 transition-transform duration-300 cursor-pointer'
-            onClick={() => props.setShowRowStories(true)}>
+            onClick={clickStory} >
             <UserCircleIcon size={40} color="white" strokeWidth={1}
                 className="absolute left-0" />
             <UserCircleIcon size={40} color="white" strokeWidth={1}

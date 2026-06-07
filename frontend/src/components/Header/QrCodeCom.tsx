@@ -38,6 +38,7 @@ export default function QrCodeCom(props: Props) {
     const clickQr = () => {
         setShowBigQr(true)
     }
+
     useEffect(() => {
         generateQR()
 

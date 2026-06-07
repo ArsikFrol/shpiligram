@@ -1,7 +1,7 @@
 'use client'
 
 import Posts from "./Posts";
-import SettingsProfile from "../SettingsProfile";
+import SettingsProfile from "./SettingsProfile";
 import useProfile from "@/store/profile/profileStore";
 import PhotoProfile from "./PhotoProfile";
 import DescriptionProfile from "./DescriptionProfile";
