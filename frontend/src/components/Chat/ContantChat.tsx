@@ -94,7 +94,7 @@ export default function ContantChat(props: Props) {
         <div className="flex flex-col gap-y-[15px]">
             <div ref={containerRef} className={cn(
                 'w-[1064px] h-[calc(100vh-405px)] px-[10px] overflow-y-auto',
-                'flex flex-col gap-y-[10px] pt-[90px]'
+                'flex flex-col gap-y-[10px]'
             )} >
                 {listMessages.map((obj, index: number) => (
                     <div key={index} className={cn(

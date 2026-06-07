@@ -3,10 +3,13 @@
 import { JSX } from 'react/jsx-runtime'
 import { TRout } from '@/types/router'
 import { CircleUser, MessageSquare, Settings, UserRoundPen } from 'lucide-react'
-import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { cloneElement, useState } from 'react'
 import { useRouter } from 'next/navigation'
+
+type Props = {
+    activeElem: number
+}
 
 type TElem = {
     id: number,
@@ -22,10 +25,10 @@ const listNav: TElem[] = [
     { id: 4, text: 'Profile', elem: <UserRoundPen color='white' size={25} />, link: '/profile' }
 ]
 
-export default function Navigation() {
+export default function Navigation(props: Props) {
     const router = useRouter()
 
-    const [activeElem, setActiveElem] = useState<number>(1)
+    const [activeElem, setActiveElem] = useState<number>(props.activeElem)
 
     const clickNav = (obj: TElem) => {
         setActiveElem(obj.id)
