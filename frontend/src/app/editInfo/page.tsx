@@ -1,9 +1,9 @@
-import Profile from "@/components/Profile/Profile";
+import EditInfo from "@/components/EditInfo";
 
 export default function page() {
     return (
         <>
-            <Profile />
+            <EditInfo />
         </>
     )
 }
