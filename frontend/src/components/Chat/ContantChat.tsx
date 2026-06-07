@@ -66,7 +66,7 @@ export default function ContantChat(props: Props) {
         const obj: TELemMessage = {
             id: Date.now().toString(),
             text: valueInput,
-            senderId: props.obj.id,
+            senderId: props.obj.userId,
             senderTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
 
@@ -101,7 +101,7 @@ export default function ContantChat(props: Props) {
                 {listMessages.map((obj, index: number) => (
                     <div key={index} className={cn(
                         'w-fit max-w-[500px] p-[10px] rounded-t-2xl',
-                        obj.senderId === props.obj.id
+                        obj.senderId === props.obj.userId
                             ? 'ml-auto text-right bg-active-bg rounded-l-2xl'
                             : 'mr-auto text-left bg-active-bg/50 rounded-r-2xl'
                     )} >
