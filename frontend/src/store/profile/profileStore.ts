@@ -10,7 +10,7 @@ const useProfile = create<TUseProfile>((set, get) => ({
     name: "Анна",
     lastName: "Кузнецова",
     userName: "anna_k",
-    bio: "",
+    bio: "Bio test test test test text",
 
     password: "$2b$10$hashed_password_1",
     email: "anna@example.com",

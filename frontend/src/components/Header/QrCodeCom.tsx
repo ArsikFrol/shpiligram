@@ -63,11 +63,9 @@ export default function QrCodeCom() {
                         'w-[500px] h-[450px] bg-container rounded-2xl',
                         'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
                     )}>
-                        <div className='relative'>
-                            <Image src={qrCode} alt='' width={300} height={300} draggable='false'
-                                className="rounded-2xl mx-auto mt-[50px]" />
-                            <div className='text-center text-white text-[30px] mt-[30px]'>@{userName}</div>
-                        </div>
+                        <Image src={qrCode} alt='' width={300} height={300} draggable='false'
+                            className="rounded-2xl mx-auto mt-[50px]" />
+                        <div className='text-center text-white text-[30px] mt-[30px]'>@{userName}</div>
                         <div className={cn(
                             'w-[50px] h-[50px] rounded-2xl bg-bg flex justify-center items-center',
                             'absolute right-[10px] top-[10px]',

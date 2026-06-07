@@ -1,4 +1,3 @@
-import Header from '@/components/Header/Header'
 import Navigation from '@/components/Navigation'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
@@ -14,8 +13,12 @@ export default function RootLayout({
 }) {
     return (
         <>
-            <Header showQrCode />
             {children}
+            <div className={cn(
+                'absolute bottom-[20px] left-1/2 -translate-x-1/2',
+            )}>
+                <Navigation activeElem={0} />
+            </div>
         </>
     )
 }

@@ -23,7 +23,7 @@ export default function SettingsProfile() {
     const router = useRouter()
 
     return (
-        <div className="flex justify-between w-[600px] mx-auto my-[50px]">
+        <div className="flex justify-between w-[600px] mx-auto mt-[50px]">
             {
                 listElem.map((obj, index: number) => {
                     return (

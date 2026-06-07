@@ -55,7 +55,7 @@ export default function Navigation(props: Props) {
                             }
                             <div className={cn(
                                 'text-white font-semibold text-[15px]',
-                                isActive && 'text-blue-500'
+                                isActive && 'text-blue-400'
                             )}>{obj.text}</div>
                         </div>
                     )
