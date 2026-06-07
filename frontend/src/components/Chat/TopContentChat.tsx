@@ -1,7 +1,10 @@
-import { TElemChat } from "@/app/page"
-import { cn } from "@/lib/utils"
 import { ArrowLeft, CircleUser, EllipsisVertical, Phone } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { Dispatch, SetStateAction, useEffect } from "react"
+
+import { cn } from "@/lib/utils"
+import { TElemChat } from "@/store/chats/types"
+import useUsers from "@/store/users/usersStore"
 
 type Props = {
     setShowChatById: Dispatch<SetStateAction<string>>,
@@ -9,9 +12,18 @@ type Props = {
 }
 
 export default function TopContentChat(props: Props) {
+    const router = useRouter()
+
+    const {
+        listUsers
+    } = useUsers()
 
     const clickToReturn = () => {
         props.setShowChatById('')
+    }
+
+    const clickUser = (useId: string) => {
+        router.push(`/profile/${useId}`)
     }
 
     useEffect(() => {
@@ -37,10 +49,19 @@ export default function TopContentChat(props: Props) {
                 <ArrowLeft color="#ffffff" size={20}
                     className="group-hover:scale-115 transition-transform duration-300" />
             </div>
-            <div className='flex gap-x-[10px]'>
+            <div className={cn(
+                'flex gap-x-[10px] hover:scale-105 transition-transform duration-300 cursor-pointer'
+            )} onClick={() => clickUser(props.obj.userId)}>
                 <CircleUser size={40} strokeWidth={1} color="#ffffff" />
                 <div className=''>
-                    <div className='text-[16px] font-semibold text-white'>{props.obj.nameProfil}</div>
+                    <div className='flex items-center gap-x-[5px]'>
+                        <div className='text-[16px] font-semibold text-white'>
+                            {listUsers.find(obj => obj.userId === props.obj.userId)?.name}
+                        </div>
+                        <div className='text-[16px] font-semibold text-white'>
+                            {listUsers.find(obj => obj.userId === props.obj.userId)?.lastName}
+                        </div>
+                    </div>
                     <div className='text-[14px] font-medium text-gray-500'>{props.obj.recentlyOnline}</div>
                 </div>
             </div>

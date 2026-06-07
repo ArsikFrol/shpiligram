@@ -1,10 +1,8 @@
 import { create } from "zustand";
 import { TUseProfile } from "./types";
 
-
-
 const useProfile = create<TUseProfile>((set, get) => ({
-    userId: "user_0000000000001",
+    userId: "user_0000000000007",
 
     avatar: "https://randomuser.me/api/portraits/women/1.jpg",
     name: "Анна",

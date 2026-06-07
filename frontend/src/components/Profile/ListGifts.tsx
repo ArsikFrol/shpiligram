@@ -29,7 +29,7 @@ export default function ListGifts(props: Props) {
                                 'hover:scale-105 transition-transform duration-300 cursor-pointer',
                                 'w-[180px] h-[200px] mx-auto rounded-2xl relative',
                                 'flex justify-center items-center'
-                            )} style={{ backgroundColor: obj.colorBg }} onClick={() => clickGift(obj.id)}>
+                            )} style={{ backgroundColor: obj.colorBg }} onClick={() => clickGift(obj.id - 1)}>
                                 <Gift color="white" size={60} strokeWidth={1} />
                             </div>
                         )

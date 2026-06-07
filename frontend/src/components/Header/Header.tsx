@@ -13,7 +13,10 @@ type Props = {
     showGroupStories?: boolean
 
     showRowStories?: boolean,
-    setShowRowStories?: Dispatch<SetStateAction<boolean>>
+    setShowRowStories?: Dispatch<SetStateAction<boolean>>,
+
+    userId?: string,
+    userName?: string
 }
 
 export type TStories = {
@@ -65,7 +68,8 @@ export default function Header(props: Props) {
         <div className=''>
             <div className='flex justify-between relative'>
                 {showQrCode
-                    ? <QrCodeCom />
+                    ? <QrCodeCom userId={props.userId?.length ? props.userId : '1'}
+                        userName={props.userName?.length ? props.userName : 'none_none  '} />
                     : <div className=''>
                         {(props.showRowStories === false && props.setShowRowStories) &&
                             <Stories setShowRowStories={props.setShowRowStories} />

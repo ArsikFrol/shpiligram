@@ -49,7 +49,7 @@ export default function DescGift(props: Props) {
                         )}>Date</div>
                         <div className='text-[18px] text-white'>{props.obj.date}</div>
                     </div>
-                    <div className='flex items-center'>
+                    <div className='flex items-center border-b border-gray-400'>
                         <div className={cn(
                             'w-[100px] text-[18px] text-white flex text-left h-[70px] leading-[70px]',
                             'border-r border-r-gray-400 mr-[30px]'
@@ -57,6 +57,17 @@ export default function DescGift(props: Props) {
                         <div className='flex items-center gap-x-[10px]'>
                             <Star fill="yellow" color="yellow" size={25} />
                             <div className='text-[20px] text-white'>{props.obj.priceGift}</div>
+                        </div>
+                    </div>
+                    <div className='flex items-center'>
+                        <div className={cn(
+                            'w-[99px] text-[18px] text-white flex text-left h-[70px] leading-[70px]',
+                        )}>Comment</div>
+                        <div className='flex items-center gap-x-[10px]'>
+                            <div className={cn(
+                                'text-[18px] text-white w-[350px] border-l border-l-gray-400 pl-[30px]',
+                                'min-h-[70px] flex items-center pt-[10px]'
+                            )}>{props.obj.commentGift}</div>
                         </div>
                     </div>
                 </div>

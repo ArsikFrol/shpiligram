@@ -5,18 +5,19 @@ import Image from "next/image"
 import QRCode from 'qrcode'
 import { useEffect, useState } from "react"
 
-export default function QrCodeCom() {
+type Props = {
+    userId: string,
+    userName: string
+}
+
+export default function QrCodeCom(props: Props) {
     const [qrCode, setQrCode] = useState<string>('')
     const [loading, setLoading] = useState(true)
     const [showBigQr, setShowBigQr] = useState<boolean>(false)
 
-    const {
-        userName
-    } = useProfile()
-
     const generateQR = async () => {
         try {
-            const profileUrl = `http://localhost:3000/profile/1`
+            const profileUrl = `http://localhost:3000/profile/${props.userId}`
 
             const qrDataUrl = await QRCode.toDataURL(profileUrl, {
                 width: 300,           // ширина
@@ -65,7 +66,7 @@ export default function QrCodeCom() {
                     )}>
                         <Image src={qrCode} alt='' width={300} height={300} draggable='false'
                             className="rounded-2xl mx-auto mt-[50px]" />
-                        <div className='text-center text-white text-[30px] mt-[30px]'>@{userName}</div>
+                        <div className='text-center text-white text-[30px] mt-[30px]'>@{props.userName}</div>
                         <div className={cn(
                             'w-[50px] h-[50px] rounded-2xl bg-bg flex justify-center items-center',
                             'absolute right-[10px] top-[10px]',
