@@ -54,21 +54,29 @@ export default function Home() {
     const [showChatById, setShowChatById] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
 
+    const [showBtn, setShowBtn] = useState<string>('')
+
+    const [showRowStories, setShowRowStories] = useState<boolean>(false)
+
     return (
         <>
-            <Header />
-            {!showChatById && <Groups />}
+            <Header showRowStories={showRowStories} setShowRowStories={setShowRowStories} />
+            {showChatById === '' &&
+                <Groups setShowRowStories={setShowRowStories} setShowBtn={setShowBtn} />
+            }
             <div className='flex gap-x-[10px]'>
                 {!loading
                     ? <div className={cn(
                         "flex flex-col gap-y-[30px] overflow-y-auto px-[5px] py-[20px]",
-                        showChatById ? 'w-[70px]  h-[calc(100vh-220px)]' : 'w-full h-[calc(100vh-340px)]'
+                        showChatById ? 'w-[70px] h-[calc(100vh-220px)]' : 'w-full h-[calc(100vh-340px)]',
+                        showRowStories && 'h-[calc(100vh-400px)]'
                     )}>
                         {
                             listChats.filter(obj => obj.pinned).map((obj, index: number) => {
                                 return (
                                     <ChatElem key={index} obj={obj} setShowChatById={setShowChatById}
-                                        showChatById={showChatById} />
+                                        showChatById={showChatById} setShowRowStories={setShowRowStories}
+                                        showBtn={showBtn} setShowBtn={setShowBtn} />
                                 )
                             })
                         }
@@ -76,14 +84,16 @@ export default function Home() {
                             listChats.filter(obj => !obj.pinned).map((obj, index: number) => {
                                 return (
                                     <ChatElem key={index} obj={obj} setShowChatById={setShowChatById}
-                                        showChatById={showChatById} />
+                                        showChatById={showChatById} setShowRowStories={setShowRowStories}
+                                        showBtn={showBtn} setShowBtn={setShowBtn} />
                                 )
                             })
                         }
                     </div> : <div className=''>Загрузка</div>
                 }
                 {showChatById
-                    ? <Chat obj={listChats.find((obj) => obj.id === showChatById)!} setShowChatById={setShowChatById} />
+                    ? <Chat obj={listChats.find((obj) => obj.id === showChatById)!}
+                        setShowChatById={setShowChatById} showRowStories={showRowStories} />
                     : undefined}
             </div>
             <div className={cn(

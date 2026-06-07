@@ -6,21 +6,23 @@ import { Dispatch, SetStateAction, useState } from "react"
 type Props = {
     obj: TElemChat,
     setShowChatById: Dispatch<SetStateAction<string>>,
-    showChatById: string
+    showChatById: string,
+    setShowRowStories: Dispatch<SetStateAction<boolean>>
+    setShowBtn: Dispatch<SetStateAction<string>>,
+    showBtn: string,
 }
 
 export default function ChatElem(props: Props) {
 
-    const [showBtn, setShowBtn] = useState<boolean>(false)
-
     const clickChat = () => {
         props.setShowChatById(props.obj.id)
-        setShowBtn(false)
+        props.setShowBtn('')
+        props.setShowRowStories(false)
     }
 
     const clickPKM = (e: any) => {
         e.preventDefault()
-        setShowBtn(true)
+        props.setShowBtn(props.obj.id)
     }
 
     const clickPin = () => {
@@ -28,7 +30,7 @@ export default function ChatElem(props: Props) {
     }
 
     const clickX = () => {
-        setShowBtn(false)
+        props.setShowBtn('')
     }
 
     const clickPinOff = () => {
@@ -51,7 +53,7 @@ export default function ChatElem(props: Props) {
                         </div>
                     </div>
                     <div className='flex items-center gap-x-[20px]'>
-                        {showBtn ?
+                        {props.showBtn === props.obj.id ?
                             <div className='flex items-center gap-x-[20px]'>
                                 <div className={cn(
                                     'w-[45px] h-[45px] rounded-2xl flex justify-center items-center',

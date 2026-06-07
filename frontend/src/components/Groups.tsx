@@ -1,7 +1,12 @@
 'use client'
 
 import { cn } from "@/lib/utils"
-import { useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
+
+type Props = {
+    setShowRowStories: Dispatch<SetStateAction<boolean>>
+    setShowBtn: Dispatch<SetStateAction<string>>
+}
 
 type TElem = {
     id: number,
@@ -13,11 +18,13 @@ const listGroup: TElem[] = [
     { id: 2, titleGroup: 'Study' }
 ]
 
-export default function Groups() {
+export default function Groups(props: Props) {
     const [activeGroup, setActiveGroup] = useState<number>(1)
 
     const clickGroup = (obj: TElem) => {
         setActiveGroup(obj.id)
+        props.setShowRowStories(false)
+        props.setShowBtn('')
     }
 
     return (
