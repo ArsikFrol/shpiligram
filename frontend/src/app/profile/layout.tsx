@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
     return (
         <>
-            <Header />
+            <Header showQrCode />
             {children}
             <div className={cn(
                 'absolute bottom-[20px] left-1/2 -translate-x-1/2',

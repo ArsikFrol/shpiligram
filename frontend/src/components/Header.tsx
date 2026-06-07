@@ -59,7 +59,7 @@ export default function Header(props: Props) {
     return (
         <div className=''>
             <div className='flex justify-between relative'>
-                {showQrCode
+                {!showQrCode
                     ? <div className=''>
                         {!showStories &&
                             <div className='reltive hover:scale-102 transition-transform duration-300 cursor-pointer'
@@ -82,11 +82,11 @@ export default function Header(props: Props) {
                         className="hover:scale-105 transition-transform duration-300 cursor-pointer" />
                 }
                 <div className='flex items-center gap-x-[30px]'>
-                    {showQrCode &&
+                    {!showQrCode ?
                         <Search color='white' size={25} className={cn(
                             'hover:scale-110 transition-transform duration-300 cursor-pointer',
                             hiddenSearch && 'hidden'
-                        )} />
+                        )} /> : undefined
                     }
                     <EllipsisVertical color='white' size={25} onClick={() => clickShowBurger()}
                         className={cn(
