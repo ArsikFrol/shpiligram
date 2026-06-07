@@ -1,8 +1,11 @@
 'use client'
 
 import { cn } from "@/lib/utils";
-import { EllipsisVertical, QrCode, Search, UserCircleIcon } from "lucide-react";
+import { EllipsisVertical, Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import Stories from "./Stories";
+import RowStories from "./RowStories";
+import QrCodeCom from "./QrCodeCom";
 
 type Props = {
     hiddenSearch?: boolean,
@@ -10,7 +13,7 @@ type Props = {
     showStories?: boolean
 }
 
-type TStories = {
+export type TStories = {
     id: string,
 
     icon: string,
@@ -62,15 +65,7 @@ export default function Header(props: Props) {
                 {!showQrCode
                     ? <div className=''>
                         {!showStories &&
-                            <div className='reltive hover:scale-102 transition-transform duration-300 cursor-pointer'
-                                onClick={() => setShowStories(true)}>
-                                <UserCircleIcon size={40} color="white" strokeWidth={1}
-                                    className="absolute left-0" />
-                                <UserCircleIcon size={40} color="white" strokeWidth={1}
-                                    className="absolute left-5 z-10" />
-                                <UserCircleIcon size={40} color="white" strokeWidth={1}
-                                    className="absolute left-10 z-20" />
-                            </div>
+                            <Stories setShowStories={setShowStories} />
                         }
                         <div className={cn(
                             'text-[25px] text-white font-semibold',
@@ -78,8 +73,7 @@ export default function Header(props: Props) {
                         )}>
                             Shpiligram
                         </div>
-                    </div> : <QrCode size={40} color="white" strokeWidth={1}
-                        className="hover:scale-105 transition-transform duration-300 cursor-pointer" />
+                    </div> : <QrCodeCom />
                 }
                 <div className='flex items-center gap-x-[30px]'>
                     {!showQrCode ?
@@ -95,16 +89,7 @@ export default function Header(props: Props) {
                 </div>
             </div>
             {showStories &&
-                <div className='flex gap-x-[20px] my-[10px]'>
-                    {
-                        listStories.slice(0, 5).map((obj, index: number) => {
-                            return (
-                                <UserCircleIcon size={60} color="white" strokeWidth={1} key={index}
-                                    className="hover:scale-105 transition-transform duration-300 cursor-pointer" />
-                            )
-                        })
-                    }
-                </div>
+                <RowStories listStories={listStories} />
             }
         </div>
     )

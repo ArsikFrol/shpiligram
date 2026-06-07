@@ -1,18 +1,31 @@
 import { TElemChat } from "@/app/page"
 import { cn } from "@/lib/utils"
 import { ArrowLeft, CircleUser, EllipsisVertical, Phone } from "lucide-react"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect } from "react"
 
 type Props = {
-    setShowChatId: Dispatch<SetStateAction<string>>,
+    setShowChatById: Dispatch<SetStateAction<string>>,
     obj: TElemChat
 }
 
 export default function TopContentChat(props: Props) {
 
     const clickToReturn = () => {
-        props.setShowChatId('')
+        props.setShowChatById('')
     }
+
+    useEffect(() => {
+
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') props.setShowChatById('')
+        }
+
+        window.addEventListener('keydown', handleEsc)
+        return () => {
+            window.removeEventListener('keydown', handleEsc)
+        }
+
+    }, [])
 
     return (
         <div className={cn(

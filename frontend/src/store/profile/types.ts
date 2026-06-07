@@ -3,7 +3,9 @@ export type TUseProfile = {
 
     avatar: string,
     name: string,
+    lastName: string
     userName: string,
+    bio: string,
 
     password: string,
     email: string,

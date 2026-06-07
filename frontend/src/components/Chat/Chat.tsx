@@ -5,14 +5,14 @@ import ContantChat from "./ContantChat"
 
 type Props = {
     obj: TElemChat,
-    setShowChatId: Dispatch<SetStateAction<string>>
+    setShowChatById: Dispatch<SetStateAction<string>>
 }
 
-export default function Chat({ obj, setShowChatId }: Props) {
+export default function Chat({ obj, setShowChatById }: Props) {
 
     return (
         <div className='w-full bg-bg mt-[10px] rounded-2xl h-[calc(100vh-230px)]'>
-            <TopContentChat setShowChatId={setShowChatId} obj={obj} />
+            <TopContentChat setShowChatById={setShowChatById} obj={obj} />
             <ContantChat obj={obj} />
         </div>
     )

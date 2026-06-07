@@ -1,4 +1,4 @@
-import Header from '@/components/Header'
+import Header from '@/components/Header/Header'
 import HeaderEditorInfo from '@/components/HeaderEditorInfo'
 import Navigation from '@/components/Navigation'
 import { cn } from '@/lib/utils'

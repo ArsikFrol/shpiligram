@@ -1,14 +1,24 @@
 'use client'
 
+import useProfile from "@/store/profile/profileStore"
 import { AtSign, Cake, Phone } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export default function EditInfo() {
-    const [valueInpoutName, setValueInpoutName] = useState<string>('')
-    const [valueInpoutLastName, setValueInpoutLastName] = useState<string>('')
-    const [valueBio, setValueBio] = useState<string>('')
+
+    const {
+        name, lastName, bio,
+        mobile,
+        userName,
+        birthday
+    } = useProfile()
+
+    const [valueInpoutName, setValueInpoutName] = useState<string>(name)
+    const [valueInpoutLastName, setValueInpoutLastName] = useState<string>(lastName)
+    const [valueBio, setValueBio] = useState<string>(bio)
 
     const [countValueBio, setCountValueBio] = useState<number>(80)
+
 
     useEffect(() => {
         setCountValueBio(80 - valueBio.length)
@@ -40,7 +50,7 @@ export default function EditInfo() {
                             <Phone color="white" size={25} />
                         </div>
                         <div className=''>
-                            <div className='text-[20px] text-white'>8 (900) 999-99-99</div>
+                            <div className='text-[20px] text-white'>{mobile}</div>
                             <div className='text-[16px] text-gray-500'>Tap to change phone number</div>
                         </div>
                     </div>
@@ -49,7 +59,7 @@ export default function EditInfo() {
                             <AtSign color="white" size={25} />
                         </div>
                         <div className=''>
-                            <div className='text-[20px] text-white'>@Arsik_frol</div>
+                            <div className='text-[20px] text-white'>@{userName}</div>
                             <div className='text-[16px] text-gray-500'>Username</div>
                         </div>
                     </div>
@@ -58,7 +68,7 @@ export default function EditInfo() {
                             <Cake color="white" size={25} />
                         </div>
                         <div className=''>
-                            <div className='text-[20px] text-white'>August 29</div>
+                            <div className='text-[20px] text-white'>{birthday}</div>
                             <div className='text-[16px] text-gray-500'>Bithday</div>
                         </div>
                     </div>

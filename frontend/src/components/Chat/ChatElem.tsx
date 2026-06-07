@@ -5,8 +5,8 @@ import { Dispatch, SetStateAction, useState } from "react"
 
 type Props = {
     obj: TElemChat,
-    setShowChatId: Dispatch<SetStateAction<string>>,
-    showChatId: string
+    setShowChatById: Dispatch<SetStateAction<string>>,
+    showChatById: string
 }
 
 export default function ChatElem(props: Props) {
@@ -14,7 +14,7 @@ export default function ChatElem(props: Props) {
     const [showBtn, setShowBtn] = useState<boolean>(false)
 
     const clickChat = () => {
-        props.setShowChatId(props.obj.id)
+        props.setShowChatById(props.obj.id)
         setShowBtn(false)
     }
 
@@ -40,7 +40,7 @@ export default function ChatElem(props: Props) {
             'flex items-center justify-between',
             'hover:scale-101 transition-transform duration-300 cursor-pointer'
         )} onClick={clickChat} onContextMenu={(e) => clickPKM(e)}>
-            {props.showChatId
+            {props.showChatById
                 ? <CircleUser size={51} strokeWidth={1} color="#ffffff" />
                 : <>
                     <div className='flex items-center gap-x-[10px]'>

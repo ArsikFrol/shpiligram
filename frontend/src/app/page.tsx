@@ -1,12 +1,13 @@
 'use client'
 
 import { cn } from "@/lib/utils";
-import ChatElem from "../components/Chat/ChatElem";
-import Groups from "../components/Groups";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
 import Chat from "@/components/Chat/Chat";
 import Navigation from "@/components/Navigation";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
+import ChatElem from "../components/Chat/ChatElem";
+import Groups from "../components/Groups";
 
 export type TElemChat = {
     id: string,
@@ -50,39 +51,39 @@ const listChats: TElemChat[] = [
 ]
 
 export default function Home() {
-    const [showChatId, setShowChatId] = useState<string>('')
+    const [showChatById, setShowChatById] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
 
     return (
         <>
             <Header />
-            {!showChatId && <Groups />}
+            {!showChatById && <Groups />}
             <div className='flex gap-x-[10px]'>
                 {!loading
                     ? <div className={cn(
                         "flex flex-col gap-y-[30px] overflow-y-auto px-[5px] py-[20px]",
-                        showChatId ? 'w-[70px]  h-[calc(100vh-220px)]' : 'w-full h-[calc(100vh-340px)]'
+                        showChatById ? 'w-[70px]  h-[calc(100vh-220px)]' : 'w-full h-[calc(100vh-340px)]'
                     )}>
                         {
                             listChats.filter(obj => obj.pinned).map((obj, index: number) => {
                                 return (
-                                    <ChatElem key={index} obj={obj} setShowChatId={setShowChatId}
-                                        showChatId={showChatId} />
+                                    <ChatElem key={index} obj={obj} setShowChatById={setShowChatById}
+                                        showChatById={showChatById} />
                                 )
                             })
                         }
                         {
                             listChats.filter(obj => !obj.pinned).map((obj, index: number) => {
                                 return (
-                                    <ChatElem key={index} obj={obj} setShowChatId={setShowChatId}
-                                        showChatId={showChatId} />
+                                    <ChatElem key={index} obj={obj} setShowChatById={setShowChatById}
+                                        showChatById={showChatById} />
                                 )
                             })
                         }
                     </div> : <div className=''>Загрузка</div>
                 }
-                {showChatId
-                    ? <Chat obj={listChats.find((obj) => obj.id === showChatId)!} setShowChatId={setShowChatId} />
+                {showChatById
+                    ? <Chat obj={listChats.find((obj) => obj.id === showChatById)!} setShowChatById={setShowChatById} />
                     : undefined}
             </div>
             <div className={cn(
