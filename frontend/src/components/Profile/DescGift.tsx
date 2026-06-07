@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from "@/lib/utils";
-import { TGift } from "./PostsGifts";
+import { TGift } from "@/store/users/types";
 import { Gift, Star, UserCircle2, X } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect } from "react";
 

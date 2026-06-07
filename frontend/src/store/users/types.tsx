@@ -1,4 +1,4 @@
-type TGift = {
+export type TGift = {
     id: number,
 
     imageGift: string,
