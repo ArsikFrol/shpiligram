@@ -8,6 +8,7 @@ import { TElemChat } from "@/app/page"
 
 type Props = {
     obj: TElemChat,
+    showRowStories: boolean
 }
 
 type TELemMessage = {
@@ -94,7 +95,8 @@ export default function ContantChat(props: Props) {
         <div className="flex flex-col gap-y-[15px]">
             <div ref={containerRef} className={cn(
                 'w-[1064px] h-[calc(100vh-405px)] px-[10px] overflow-y-auto',
-                'flex flex-col gap-y-[10px]'
+                'flex flex-col gap-y-[10px]',
+                props.showRowStories && 'h-[calc(100vh-485px)]'
             )} >
                 {listMessages.map((obj, index: number) => (
                     <div key={index} className={cn(

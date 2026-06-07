@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { EllipsisVertical, Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Stories from "./Stories";
 import RowStories from "./RowStories";
 import QrCodeCom from "./QrCodeCom";
@@ -10,7 +10,10 @@ import QrCodeCom from "./QrCodeCom";
 type Props = {
     hiddenSearch?: boolean,
     showQrCode?: boolean,
-    showStories?: boolean
+    showGroupStories?: boolean
+
+    showRowStories?: boolean,
+    setShowRowStories?: Dispatch<SetStateAction<boolean>>
 }
 
 export type TStories = {
@@ -40,7 +43,6 @@ const listStories: TStories[] = [
 export default function Header(props: Props) {
     const [showBurger, setShowBurger] = useState<boolean>(false)
     const [showQrCode, setshowQrCode] = useState<boolean>(props.showQrCode || false)
-    const [showStories, setShowStories] = useState<boolean>(props.showStories || false)
 
     const [hiddenSearch, sethiddenSearch] = useState<boolean | undefined>(props.hiddenSearch || false)
 
@@ -50,8 +52,8 @@ export default function Header(props: Props) {
 
     useEffect(() => {
         const handleWheel = (e: WheelEvent) => {
-            if (e.deltaY > 0) {
-                setShowStories(false)
+            if (e.deltaY > 0 && props.setShowRowStories) {
+                props.setShowRowStories(false)
             }
         }
 
@@ -62,18 +64,19 @@ export default function Header(props: Props) {
     return (
         <div className=''>
             <div className='flex justify-between relative'>
-                {!showQrCode
-                    ? <div className=''>
-                        {!showStories &&
-                            <Stories setShowStories={setShowStories} />
+                {showQrCode
+                    ? <QrCodeCom />
+                    : <div className=''>
+                        {(props.showRowStories === false && props.setShowRowStories) &&
+                            <Stories setShowRowStories={props.setShowRowStories} />
                         }
                         <div className={cn(
                             'text-[25px] text-white font-semibold',
-                            showStories ? '' : 'pl-[90px]'
+                            props.showRowStories ? '' : 'pl-[90px]'
                         )}>
                             Shpiligram
                         </div>
-                    </div> : <QrCodeCom />
+                    </div>
                 }
                 <div className='flex items-center gap-x-[30px]'>
                     {!showQrCode ?
@@ -88,7 +91,7 @@ export default function Header(props: Props) {
                         )} />
                 </div>
             </div>
-            {showStories &&
+            {props.showRowStories &&
                 <RowStories listStories={listStories} />
             }
         </div>

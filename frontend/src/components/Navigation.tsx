@@ -3,9 +3,10 @@
 import { JSX } from 'react/jsx-runtime'
 import { TRout } from '@/types/router'
 import { CircleUser, MessageSquare, Settings, UserRoundPen } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { cloneElement, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { cloneElement, useState } from 'react'
+
+import { cn } from '@/lib/utils'
 
 type Props = {
     activeElem: number
@@ -20,7 +21,7 @@ type TElem = {
 
 const listNav: TElem[] = [
     { id: 1, text: 'Chats', elem: <MessageSquare color='white' size={25} />, link: '/' },
-    { id: 2, text: 'Contacts', elem: < CircleUser color='white' size={25} />, link: '/contacts' },
+    { id: 2, text: 'Add friend', elem: < CircleUser color='white' size={25} />, link: '/addFriend' },
     { id: 3, text: 'Settings', elem: <Settings color='white' size={25} />, link: '/settings' },
     { id: 4, text: 'Profile', elem: <UserRoundPen color='white' size={25} />, link: '/profile' }
 ]
