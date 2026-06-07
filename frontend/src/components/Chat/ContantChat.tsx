@@ -1,10 +1,10 @@
 'use client'
 
-import { TElemChat } from "@/app/page"
 import { cn } from "@/lib/utils"
 import { Mic, Paperclip, SendHorizontal, Sticker } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
-import toast from "react-hot-toast"
+
+import { TElemChat } from "@/app/page"
 
 type Props = {
     obj: TElemChat,
