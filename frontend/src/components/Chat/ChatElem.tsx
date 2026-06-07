@@ -1,7 +1,9 @@
-import { TElemChat } from "@/app/page"
+
 import { cn } from "@/lib/utils"
-import { CircleUser, Cross, Music, Pin, PinOff, Trash, Volume2, X } from "lucide-react"
-import { Dispatch, SetStateAction, useState } from "react"
+import { TElemChat } from "@/store/chats/types"
+import { TElemUser } from "@/store/users/types"
+import { CircleUser, Pin, PinOff, Trash, Volume2, X } from "lucide-react"
+import { Dispatch, SetStateAction } from "react"
 
 type Props = {
     obj: TElemChat,
@@ -10,19 +12,21 @@ type Props = {
     setShowRowStories: Dispatch<SetStateAction<boolean>>
     setShowBtn: Dispatch<SetStateAction<string>>,
     showBtn: string,
+
+    listUsers: TElemUser[]
 }
 
 export default function ChatElem(props: Props) {
 
     const clickChat = () => {
-        props.setShowChatById(props.obj.id)
+        props.setShowChatById(props.obj.chatId)
         props.setShowBtn('')
         props.setShowRowStories(false)
     }
 
     const clickPKM = (e: any) => {
         e.preventDefault()
-        props.setShowBtn(props.obj.id)
+        props.setShowBtn(props.obj.chatId)
     }
 
     const clickPin = () => {
@@ -48,12 +52,19 @@ export default function ChatElem(props: Props) {
                     <div className='flex items-center gap-x-[10px]'>
                         <CircleUser size={51} strokeWidth={1} color="#ffffff" />
                         <div className=''>
-                            <div className='text-[18px] font-semibold text-white'>{props.obj.nameProfil}</div>
+                            <div className='flex items-center gap-x-[5px]'>
+                                <div className='text-[18px] font-semibold text-white'>
+                                    {props.listUsers.find(obj => obj.userId === props.obj.userId)?.name}
+                                </div>
+                                <div className='text-[18px] font-semibold text-white'>
+                                    {props.listUsers.find(obj => obj.userId === props.obj.userId)?.lastName}
+                                </div>
+                            </div>
                             <div className='text-[15px] font-medium text-gray-500'>{props.obj.lastMessage}</div>
                         </div>
                     </div>
                     <div className='flex items-center gap-x-[20px]'>
-                        {props.showBtn === props.obj.id ?
+                        {props.showBtn === props.obj.chatId ?
                             <div className='flex items-center gap-x-[20px]'>
                                 <div className={cn(
                                     'w-[45px] h-[45px] rounded-2xl flex justify-center items-center',

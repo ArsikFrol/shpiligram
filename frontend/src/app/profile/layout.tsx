@@ -1,6 +1,3 @@
-import Header from '@/components/Header/Header'
-import Navigation from '@/components/Navigation'
-import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -14,7 +11,6 @@ export default function RootLayout({
 }) {
     return (
         <>
-            <Header showQrCode />
             {children}
         </>
     )
