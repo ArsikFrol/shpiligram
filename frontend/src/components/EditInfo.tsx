@@ -6,6 +6,7 @@ import WarningInput from "./UI/WarningInput"
 import { cn } from "@/lib/utils"
 import useProfile from "@/store/profile/profileStore"
 import { useFetchProfile } from "@/hooks/useFetchProfile"
+import { formatMonthDay } from "@/lib/formatDate"
 
 type Props = {
     valueInpoutName: string,
@@ -104,7 +105,9 @@ export default function EditInfo(props: Props) {
                             <Cake color="white" size={25} />
                         </div>
                         <div className=''>
-                            <div className='text-[20px] text-white'>{objProfile.birthday}</div>
+                            <div className='text-[20px] text-white'>
+                                {formatMonthDay(new Date(objProfile.birthday))}
+                            </div>
                             <div className='text-[16px] text-gray-500'>Tap to change bithday</div>
                         </div>
                     </div>
@@ -120,11 +123,11 @@ export default function EditInfo(props: Props) {
                     setValue={setUserName} value={objProfile.userName}
                     textWarning="Введите новый userName" />
             }
-            {showWarningInputBirthday &&
+            {/* {showWarningInputBirthday &&
                 <WarningInput setShowWarning={setShowWarningInputBirthday}
                     setValue={setBirthday} value={objProfile.birthday}
                     textWarning="Введите новую дату рождения" />
-            }
+            } */}
         </div>
     )
 }

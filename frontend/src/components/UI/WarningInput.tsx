@@ -1,16 +1,16 @@
 'use client'
 
 import { cn } from "@/lib/utils"
-import { Dispatch, SetStateAction, useState } from "react"
+import { useState } from "react"
 import toast from "react-hot-toast"
 
 type Props = {
     textWarning: string,
 
-    value: string,
+    value: string | Date,
     setValue: (newValue: string) => void,
 
-    setShowWarning: Dispatch<SetStateAction<boolean>>
+    setShowWarning: (value: boolean) => void
 }
 
 export default function WarningInput(props: Props) {
@@ -36,7 +36,7 @@ export default function WarningInput(props: Props) {
                         "text-white text-[20px] w-[460px] focus:outline-0 border-b border-gray-500/50",
                         'pb-[10px] px-[10px]'
                     )}
-                    placeholder={props.value} value={value} />
+                    placeholder={String(props.value)} value={value} />
                 <div className='flex items-center gap-x-[50px] w-[350px] mx-auto mt-[50px]'>
                     <div className={cn(
                         'w-[150px] h-[50px] flex justify-center items-center bg-bg rounded-2xl',
