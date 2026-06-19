@@ -1,12 +1,13 @@
 'use client'
 
 import { JSX } from 'react/jsx-runtime'
-import { TRout } from '@/types/router'
 import { CircleUser, MessageSquare, Settings, UserRoundPen } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { cloneElement, useState } from 'react'
 
 import { cn } from '@/lib/utils'
+import { TRout } from '@/types/router'
+import useProfile from '@/store/profile/profileStore'
 
 type Props = {
     activeElem: number
@@ -31,9 +32,14 @@ export default function Navigation(props: Props) {
 
     const [activeElem, setActiveElem] = useState<number>(props.activeElem)
 
+    const {
+        setShowRowStories
+    } = useProfile()
+
     const clickNav = (obj: TElem) => {
-        setActiveElem(obj.id)
         router.push(obj.link)
+        setActiveElem(obj.id)
+        setShowRowStories(false)
     }
 
     return (

@@ -1,9 +1,8 @@
+import { UserModel } from "@/generated/prisma/models";
 import { UserCircle2Icon } from "lucide-react";
 
 type Props = {
-    imageProfile: string,
-    name: string,
-    lastName: string
+    objProfile: UserModel
 }
 
 export default function PhotoProfile(props: Props) {
@@ -11,7 +10,8 @@ export default function PhotoProfile(props: Props) {
         <div className='w-[200px] mx-auto'>
             <UserCircle2Icon size={100} color="white" strokeWidth={1} className="mx-auto" />
             <div className='text-white text-[25px] text-center'>
-                {props.name} {props.lastName}</div>
+                {props.objProfile.firstName} {props.objProfile.lastName}
+            </div>
         </div>
     )
 }

@@ -1,0 +1,22 @@
+model Message {
+    messageId String @id @default(cuid()) @map("message_id") /* message_1 */
+
+    content  String
+    sendTime DateTime @map("send_time")
+
+    isRead   Boolean @default(false) @map("is_read")
+    isEdited Boolean @default(false) @map("is_edited")
+
+    chatId String @map("chat_id") /* chat_1 */
+    chat   Chat   @relation("chatMessages", fields: [chatId], references: [chatId])
+
+    senderId String @map("sender_id") /* user_1 */
+    sender   User   @relation(fields: [senderId], references: [userId])
+
+    lastMessageInChat Chat? @relation("lastMessage")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("messages")
+}

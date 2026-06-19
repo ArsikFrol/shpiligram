@@ -4,3 +4,6 @@ export type TRout =
     | '/settings'
     | '/addFriend'
     | '/editInfo'
+    | '/signIn'
+    | 'signUp'
+    | '/forgotPassword'

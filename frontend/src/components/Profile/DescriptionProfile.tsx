@@ -1,10 +1,9 @@
+import { UserModel } from "@/generated/prisma/models"
+import { calculateAge, formatMonthDay } from "@/lib/formatDate"
 import { cn } from "@/lib/utils"
 
 type Props = {
-    mobile: string,
-    userName: string,
-    birthday: string,
-    bio: string
+    objProfile: UserModel
 }
 
 export default function DescriptionProfile(props: Props) {
@@ -14,21 +13,28 @@ export default function DescriptionProfile(props: Props) {
             'flex flex-col gap-y-[30px] my-[50px]'
         )}>
             <div className=''>
-                <div className='text-[20px] text-white'>{props.mobile}</div>
+                <div className='text-[20px] text-white'>{props.objProfile.mobile}</div>
                 <div className='text-[16px] text-gray-500'>Mobile</div>
             </div>
-            {props.bio &&
+            {props.objProfile.bio &&
                 <div className=''>
-                    <div className='text-[20px] text-white'>{props.bio}</div>
+                    <div className='text-[20px] text-white'>{props.objProfile.bio}</div>
                     <div className='text-[16px] text-gray-500'>Bio</div>
                 </div>
             }
             <div className=''>
-                <div className='text-[20px] text-white'>@{props.userName}</div>
+                <div className='text-[20px] text-white'>@{props.objProfile.userName}</div>
                 <div className='text-[16px] text-gray-500'>Username</div>
             </div>
             <div className=''>
-                <div className='text-[20px] text-white'>{props.birthday}</div>
+                <div className='flex items-center gap-x-[10px]'>
+                    <div className='text-[20px] text-white'>
+                        {formatMonthDay(new Date(props.objProfile.birthday))}
+                    </div>
+                    <div className='text-[18px] text-gray-500'>
+                        ({calculateAge(new Date(props.objProfile.birthday))} years old)
+                    </div>
+                </div>
                 <div className='text-[16px] text-gray-500'>Birthday</div>
             </div>
         </div>

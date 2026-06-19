@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Profile',
+    title: 'Add friend',
 }
 
 export default function RootLayout({

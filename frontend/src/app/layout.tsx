@@ -2,11 +2,16 @@ import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import ToasterProvider from "@/components/Providers/ToasterProvider";
+import { Metadata } from "next";
 
 const nunitoSans = Nunito_Sans({
     variable: "--font-nunito-sans",
     subsets: ["latin"],
 });
+
+export const metadata: Metadata = {
+    title: 'Chats'
+}
 
 export default function RootLayout({
     children,

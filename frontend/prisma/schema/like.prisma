@@ -1,0 +1,17 @@
+model Like {
+    likeId String @id @default(cuid()) @map("like_id") /* like_1 */
+
+    likedAt DateTime @map("liked_at")
+
+    userId String @map("user_id") /* user_1 */
+    user   User   @relation(fields: [userId], references: [userId])
+
+    storyId String @map("story_id") /* story_1 */
+    story   Story  @relation(fields: [storyId], references: [storyId])
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@unique([userId, storyId])
+    @@map("likes")
+}

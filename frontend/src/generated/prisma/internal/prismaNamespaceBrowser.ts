@@ -51,10 +51,13 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User',
   Chat: 'Chat',
-  ChatMember: 'ChatMember',
-  Message: 'Message'
+  Gift: 'Gift',
+  Like: 'Like',
+  Message: 'Message',
+  Story: 'Story',
+  StoryViewed: 'StoryViewed',
+  User: 'User'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -73,28 +76,16 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const UserScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  userName: 'userName',
-  avatar: 'avatar',
-  password: 'password',
-  email: 'email',
-  mobile: 'mobile',
-  birthday: 'birthday',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
 export const ChatScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  type: 'type',
-  avatar: 'avatar',
+  chatId: 'chatId',
+  pinned: 'pinned',
+  folder: 'folder',
+  muteUntil: 'muteUntil',
+  isArchived: 'isArchived',
+  lastMessageAt: 'lastMessageAt',
   lastMessageId: 'lastMessageId',
+  interlocutorId: 'interlocutorId',
+  ownerId: 'ownerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -102,28 +93,93 @@ export const ChatScalarFieldEnum = {
 export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof ChatScalarFieldEnum]
 
 
-export const ChatMemberScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  chatId: 'chatId',
-  role: 'role',
-  joinedAt: 'joinedAt'
+export const GiftScalarFieldEnum = {
+  giftId: 'giftId',
+  imageGift: 'imageGift',
+  bgGift: 'bgGift',
+  message: 'message',
+  date: 'date',
+  value: 'value',
+  senderId: 'senderId',
+  recipientId: 'recipientId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type ChatMemberScalarFieldEnum = (typeof ChatMemberScalarFieldEnum)[keyof typeof ChatMemberScalarFieldEnum]
+export type GiftScalarFieldEnum = (typeof GiftScalarFieldEnum)[keyof typeof GiftScalarFieldEnum]
+
+
+export const LikeScalarFieldEnum = {
+  likeId: 'likeId',
+  likedAt: 'likedAt',
+  userId: 'userId',
+  storyId: 'storyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LikeScalarFieldEnum = (typeof LikeScalarFieldEnum)[keyof typeof LikeScalarFieldEnum]
 
 
 export const MessageScalarFieldEnum = {
-  id: 'id',
+  messageId: 'messageId',
   content: 'content',
-  type: 'type',
-  fileUrl: 'fileUrl',
-  senderId: 'senderId',
+  sendTime: 'sendTime',
+  isRead: 'isRead',
+  isEdited: 'isEdited',
   chatId: 'chatId',
-  sentAt: 'sentAt'
+  senderId: 'senderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const StoryScalarFieldEnum = {
+  storyId: 'storyId',
+  storiesPhoto: 'storiesPhoto',
+  releaseDate: 'releaseDate',
+  isArchined: 'isArchined',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StoryScalarFieldEnum = (typeof StoryScalarFieldEnum)[keyof typeof StoryScalarFieldEnum]
+
+
+export const StoryViewedScalarFieldEnum = {
+  viewId: 'viewId',
+  viewedAt: 'viewedAt',
+  userId: 'userId',
+  storyId: 'storyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StoryViewedScalarFieldEnum = (typeof StoryViewedScalarFieldEnum)[keyof typeof StoryViewedScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  userId: 'userId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  userName: 'userName',
+  lastSeen: 'lastSeen',
+  avatar: 'avatar',
+  isOnline: 'isOnline',
+  role: 'role',
+  password: 'password',
+  email: 'email',
+  mobile: 'mobile',
+  birthday: 'birthday',
+  bio: 'bio',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const SortOrder = {

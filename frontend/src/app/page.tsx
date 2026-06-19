@@ -1,69 +1,75 @@
 'use client'
 
-import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
+import { cn } from "@/lib/utils";
 import Chat from "@/components/Chat/Chat";
 import Navigation from "@/components/Navigation";
 import Header from "@/components/Header/Header";
-import ChatElem from "../components/Chat/ChatElem";
-import Groups from "../components/Groups";
+import Folders from "../components/Folders";
 import useChats from "@/store/chats/chatsStore";
-import useUsers from "@/store/users/usersStore";
+import ListChats from "@/components/Chat/ListChats";
+import useProfile from "@/store/profile/profileStore";
+import SkeletonForListChats from "@/components/Skeletons/SkeletonForListChats";
+import SkeletonFolder from "@/components/Skeletons/SkeletonFolder";
 
 export default function Home() {
-    const [showChatById, setShowChatById] = useState<string>('')
-    const [loading, setLoading] = useState<boolean>(false)
+    const router = useRouter()
 
-    const [showBtn, setShowBtn] = useState<string>('')
-
-    const [showRowStories, setShowRowStories] = useState<boolean>(false)
+    const [showBtnById, setShowBtnById] = useState<string>('')
 
     const {
-        listChats
+        userId
+    } = useProfile()
+
+    const {
+        showChatById,
+        listChats, fetchListChats,
+        loading
     } = useChats()
 
-    const {
-        listUsers
-    } = useUsers()
+    useEffect(() => {
+        if (showChatById.length === 0) fetchListChats(userId)
+
+    }, [userId, showChatById])
 
     return (
         <>
-            <Header showRowStories={showRowStories} setShowRowStories={setShowRowStories} />
-            {showChatById === '' &&
-                <Groups setShowRowStories={setShowRowStories} setShowBtn={setShowBtn} />
+            <Header />
+            {loading
+                ? [...Array(1)].map((_, index) => {
+                    return (
+                        <div className={cn(
+                            'my-[20px]'
+                        )} key={index}>
+                            <SkeletonFolder />
+                        </div>
+                    )
+                })
+                : <Folders setShowBtnById={setShowBtnById} />
             }
-            <div className='flex gap-x-[10px]'>
-                {!loading
-                    ? <div className={cn(
-                        "flex flex-col gap-y-[30px] overflow-y-auto px-[5px] py-[20px]",
-                        showChatById ? 'w-[70px] h-[calc(100vh-220px)]' : 'w-full h-[calc(100vh-340px)]',
-                        showRowStories && 'h-[calc(100vh-400px)]'
-                    )}>
-                        {
-                            listChats.filter(obj => obj.pinned).map((obj, index: number) => {
-                                return (
-                                    <ChatElem key={index} obj={obj} setShowChatById={setShowChatById}
-                                        showChatById={showChatById} setShowRowStories={setShowRowStories}
-                                        showBtn={showBtn} setShowBtn={setShowBtn} listUsers={listUsers} />
-                                )
-                            })
-                        }
-                        {
-                            listChats.filter(obj => !obj.pinned).map((obj, index: number) => {
-                                return (
-                                    <ChatElem key={index} obj={obj} setShowChatById={setShowChatById}
-                                        showChatById={showChatById} setShowRowStories={setShowRowStories}
-                                        showBtn={showBtn} setShowBtn={setShowBtn} listUsers={listUsers} />
-                                )
-                            })
-                        }
-                    </div> : <div className=''>Загрузка</div>
+            <div className={cn(
+                showChatById && 'flex items-center gap-x-[20px]'
+            )}>
+                {loading
+                    ? <div className='w-full flex flex-col gap-y-[20px] h-[calc(100vh-320px)] overflow-y-auto'>
+                        {[...Array(10)].map((_, index) => <SkeletonForListChats key={index} />)}
+                    </div>
+                    : listChats.length
+                        ? <ListChats setShowBtnById={setShowBtnById} showBtnById={showBtnById} />
+                        : <div className={cn(
+                            'text-center text-[25px] text-white h-[calc(100vh-320px)]',
+                            'flex flex-col items-center justify-center'
+                        )}>
+                            <div className=''>Список чатов пуст :(</div>
+                            <div className={cn(
+                                'hover:scale-101 transition-transform duration-300 cursor-pointer',
+                                'text-blue-400'
+                            )} onClick={() => router.push('/addFriend')}>Нашите кому-нибудь</div>
+                        </div>
                 }
-                {showChatById
-                    ? <Chat obj={listChats.find((obj) => obj.chatId === showChatById)!}
-                        setShowChatById={setShowChatById} showRowStories={showRowStories} />
-                    : undefined}
+                {showChatById && <Chat />}
             </div>
             <div className={cn(
                 'absolute bottom-[20px] left-1/2 -translate-x-1/2',

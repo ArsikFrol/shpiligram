@@ -1,0 +1,26 @@
+model Chat {
+    chatId String @id @default(cuid()) @map("chat_id") /* chat_1 */
+
+    pinned     Boolean   @default(false)
+    folder     String    @default("ALL_CHATS")
+    muteUntil  DateTime? @map("mute_until")
+    isArchived Boolean   @default(false) @map("is_archived")
+
+    lastMessageAt DateTime @map("last_message_at")
+
+    lastMessageId String?  @unique @map("last_message_id")
+    lastMessage   Message? @relation("lastMessage", fields: [lastMessageId], references: [messageId])
+
+    interlocutorId String @map("interlocutor_id")
+    interlocutor   User   @relation("interlocutor_chats", fields: [interlocutorId], references: [userId])
+
+    ownerId String @map("owner_id")
+    owner   User   @relation("owner_chats", fields: [ownerId], references: [userId])
+
+    messages Message[] @relation("chatMessages")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("chats")
+}

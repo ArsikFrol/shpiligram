@@ -1,43 +1,68 @@
-import { ArrowLeft, CircleUser, EllipsisVertical, Phone } from "lucide-react"
+'use client'
+
+import { ArrowLeft, CircleUser, Phone } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { Dispatch, SetStateAction, useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import { cn } from "@/lib/utils"
-import { TElemChat } from "@/store/chats/types"
-import useUsers from "@/store/users/usersStore"
+import useChats from "@/store/chats/chatsStore"
+import { Tinterlocutor } from "@/store/chats/types"
 
-type Props = {
-    setShowChatById: Dispatch<SetStateAction<string>>,
-    obj: TElemChat
-}
+import ThreeDots from "../UI/ThreeDots"
+import { formatDateTime } from "@/lib/formatDate"
 
-export default function TopContentChat(props: Props) {
+export default function TopContentChat() {
     const router = useRouter()
 
+    const [showSettings, setShowSettings] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(true)
+    const [objProfile, setObjProfile] = useState<Tinterlocutor>()
+
     const {
-        listUsers
-    } = useUsers()
+        showChatById, setShowChatById,
+        listChats
+    } = useChats()
 
     const clickToReturn = () => {
-        props.setShowChatById('')
+        setShowChatById('')
     }
 
     const clickUser = (useId: string) => {
         router.push(`/profile/${useId}`)
     }
 
+    const clickThreeDots = () => {
+        setShowSettings(!showSettings)
+    }
+
     useEffect(() => {
 
-        const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') props.setShowChatById('')
-        }
+        const interlocutor: Tinterlocutor = listChats.find(chat => chat.chatId === showChatById)!.interlocutor
 
-        window.addEventListener('keydown', handleEsc)
-        return () => {
-            window.removeEventListener('keydown', handleEsc)
+        if (interlocutor) {
+            setObjProfile({
+                userId: interlocutor.userId,
+                avatar: interlocutor.avatar,
+                firstName: interlocutor.firstName,
+                lastName: interlocutor.lastName,
+                lastSeen: interlocutor.lastSeen
+            })
+        } else {
+            setObjProfile({
+                userId: 'null',
+                avatar: 'null',
+                firstName: 'null',
+                lastName: 'null',
+                lastSeen: new Date()
+            })
+            console.log('Чат не найден')
         }
+        setLoading(false)
 
-    }, [])
+    }, [listChats, setLoading, setObjProfile, showChatById])
+
+    if (loading) return <div className='h-[65px]'>Загрузка</div>
+    if (!objProfile) return <div className='h-[65px]'>лдывоа</div>
 
     return (
         <div className={cn(
@@ -51,18 +76,20 @@ export default function TopContentChat(props: Props) {
             </div>
             <div className={cn(
                 'flex gap-x-[10px] hover:scale-105 transition-transform duration-300 cursor-pointer'
-            )} onClick={() => clickUser(props.obj.userId)}>
+            )} onClick={() => clickUser(objProfile.userId)}>
                 <CircleUser size={40} strokeWidth={1} color="#ffffff" />
                 <div className=''>
                     <div className='flex items-center gap-x-[5px]'>
                         <div className='text-[16px] font-semibold text-white'>
-                            {listUsers.find(obj => obj.userId === props.obj.userId)?.name}
+                            {objProfile.firstName}
                         </div>
                         <div className='text-[16px] font-semibold text-white'>
-                            {listUsers.find(obj => obj.userId === props.obj.userId)?.lastName}
+                            {objProfile.lastName}
                         </div>
                     </div>
-                    <div className='text-[14px] font-medium text-gray-500'>{props.obj.recentlyOnline}</div>
+                    <div className='text-[14px] font-medium text-gray-500'>
+                        {formatDateTime(new Date(objProfile.lastSeen))}
+                    </div>
                 </div>
             </div>
             <div className='flex gap-x-[20px] items-center'>
@@ -71,8 +98,7 @@ export default function TopContentChat(props: Props) {
                         className="group-hover:scale-115 transition-transform duration-300" />
                 </div>
                 <div className='w-[35px] h-[35px] flex justify-center items-center group cursor-pointer'>
-                    <EllipsisVertical color="#ffffff" size={25}
-                        className="group-hover:scale-115 transition-transform duration-300" />
+                    <ThreeDots onClick={clickThreeDots} />
                 </div>
 
             </div>

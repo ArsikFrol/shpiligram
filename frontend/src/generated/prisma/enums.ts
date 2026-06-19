@@ -9,29 +9,9 @@
 * 🟢 You can import this file directly.
 */
 
-export const ChatType = {
-  DIALOG: 'DIALOG',
-  GROUP: 'GROUP'
+export const UserRole = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
 } as const
 
-export type ChatType = (typeof ChatType)[keyof typeof ChatType]
-
-
-export const MemberRole = {
-  OWNER: 'OWNER',
-  ADMIN: 'ADMIN',
-  MEMBER: 'MEMBER'
-} as const
-
-export type MemberRole = (typeof MemberRole)[keyof typeof MemberRole]
-
-
-export const MessageType = {
-  TEXT: 'TEXT',
-  IMAGE: 'IMAGE',
-  VIDEO: 'VIDEO',
-  AUDIO: 'AUDIO',
-  FILE: 'FILE'
-} as const
-
-export type MessageType = (typeof MessageType)[keyof typeof MessageType]
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]

@@ -1,20 +1,65 @@
 import { create } from "zustand";
-import { TUseProfile } from "./types";
+import { TFolder, TUseProfile } from "./types";
+import { StoryModel, UserModel } from "@/generated/prisma/models";
+
+const defaultObjProfile: UserModel = {
+    userId: '',
+    avatar: '',
+    firstName: '',
+    lastName: '',
+    userName: '',
+    bio: '',
+
+    lastSeen: new Date(),
+    isOnline: false,
+
+    role: 'USER',
+
+    password: '',
+    email: '',
+
+    mobile: '',
+    birthday: new Date(),
+
+    createdAt: new Date(),
+    updatedAt: new Date(),
+}
 
 const useProfile = create<TUseProfile>((set, get) => ({
-    userId: "user_0000000000007",
 
-    avatar: "https://randomuser.me/api/portraits/women/1.jpg",
-    name: "Анна",
-    lastName: "Кузнецова",
-    userName: "anna_k",
-    bio: "Bio test test test test text",
+    userId: 'user_1',
+    setUserId: (newValue) => set({ userId: newValue }),
 
-    password: "$2b$10$hashed_password_1",
-    email: "anna@example.com",
+    objProfile: defaultObjProfile,
+    setObjProfile: (newValue: UserModel) => set({ objProfile: newValue }),
 
-    mobile: "+7 999 111-22-33",
-    birthday: "August 29",
+    listStories: [],
+    setListStories: (newValue: StoryModel[]) => set({ listStories: newValue }),
+
+    setFirstName: (newValue: string) => set((state) => ({
+        objProfile: { ...state.objProfile, firstName: newValue }
+    })),
+    setLastName: (newValue: string) => set((state) => ({
+        objProfile: { ...state.objProfile, lastName: newValue }
+    })),
+    setUserName: (newValue: string) => set((state) => ({
+        objProfile: { ...state.objProfile, userName: newValue }
+    })),
+    setBio: (newValue: string) => set((state) => ({
+        objProfile: { ...state.objProfile, Bio: newValue }
+    })),
+    setMobile: (newValue: string) => set((state) => ({
+        objProfile: { ...state.objProfile, mobile: newValue }
+    })),
+    setBirthday: (newValue: Date) => set((state) => ({
+        objProfile: { ...state.objProfile, birthday: newValue }
+    })),
+
+    activeFolder: 'ALL_CHATS',
+    setActiveFolder: (newValue: TFolder) => set({ activeFolder: newValue }),
+
+    showRowStories: false,
+    setShowRowStories: (newValue: boolean) => set({ showRowStories: newValue })
 }))
 
 export default useProfile;

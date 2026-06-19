@@ -8,8 +8,11 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/User'
 export type * from './models/Chat'
-export type * from './models/ChatMember'
+export type * from './models/Gift'
+export type * from './models/Like'
 export type * from './models/Message'
+export type * from './models/Story'
+export type * from './models/StoryViewed'
+export type * from './models/User'
 export type * from './commonInputTypes'

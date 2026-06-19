@@ -1,0 +1,19 @@
+model Story {
+    storyId String @id @unique @default(cuid()) @map("story_id") /* story_1 */
+
+    storiesPhoto String   @map("stories_photo")
+    releaseDate  DateTime @map("release_date")
+
+    isArchined Boolean @default(false) @map("is_archined")
+
+    userId String @map("user_id") /* user_1 */
+    owner  User   @relation(fields: [userId], references: [userId])
+
+    likes        Like[]
+    storyVieweds StoryViewed[]
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("stories")
+}

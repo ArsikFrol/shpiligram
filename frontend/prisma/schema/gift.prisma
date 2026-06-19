@@ -1,0 +1,21 @@
+model Gift {
+    giftId String @id @default(cuid()) @map("gift_id")
+
+    imageGift String @map("image_gift")
+    bgGift    String @map("bg_gift")
+
+    message String
+    date    DateTime
+    value   Int
+
+    senderId String @map("sender_id")
+    sender   User   @relation("senderGifts", fields: [senderId], references: [userId])
+
+    recipientId String @map("recipient_id")
+    owner       User   @relation("recipientGifts", fields: [recipientId], references: [userId])
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("gifts")
+}

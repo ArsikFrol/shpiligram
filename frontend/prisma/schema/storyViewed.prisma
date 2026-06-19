@@ -1,0 +1,17 @@
+model StoryViewed {
+    viewId String @id @default(cuid()) @map("view_id")
+
+    viewedAt DateTime @default(now()) @map("viewed_at")
+
+    userId String @map("user_id")
+    owner  User   @relation(fields: [userId], references: [userId])
+
+    storyId String @map("story_id")
+    story   Story  @relation(fields: [storyId], references: [storyId])
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@unique([userId, storyId])
+    @@map("stories_viewed")
+}
