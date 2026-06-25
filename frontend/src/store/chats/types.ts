@@ -13,21 +13,23 @@ type TLastMessage = {
     sendTime: Date
 }
 
-export type TGetChat = ChatModel & {
+export type TChat = ChatModel & {
     interlocutor: Tinterlocutor
     lastMessage: TLastMessage
 }
 
 export type TUseChat = {
     loading: boolean,
+    setLoadingChats: (value: boolean) => void,
+
     error: boolean,
 
-    listChats: TGetChat[],
+    listChats: TChat[],
     listInterlocutorsId: string[]
 
-    fetchListChats: (userId: string) => Promise<void>,
-    deleteChat: (chatId: string) => Promise<void>,
+    deleteFromStoreAllChats: () => void,
 
-    showChatById: string,
-    setShowChatById: (activeId: string) => void
+    fetchListChats: (userId: string) => Promise<void>,
+    createChat: (ownerId: string, interlocutorId: string) => Promise<{ chat: TChat, message: string }>,
+    deleteChat: (chatId: string) => Promise<void>,
 }

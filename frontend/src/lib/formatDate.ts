@@ -20,7 +20,8 @@ export function formatMonthDay(date: Date): string {
         return ''
     }
 
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December']
     const day = dateObj.getDate()
 
     return `${months[dateObj.getMonth()]} ${day}`
@@ -33,7 +34,8 @@ export function formatMonthDayTime(date: Date): string {
         return ''
     }
 
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+        'October', 'November', 'December']
     const day = dateObj.getDate()
     const hours = dateObj.getHours().toString().padStart(2, '0')
     const minutes = dateObj.getMinutes().toString().padStart(2, '0')

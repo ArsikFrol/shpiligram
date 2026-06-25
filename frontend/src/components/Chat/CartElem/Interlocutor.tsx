@@ -1,11 +1,14 @@
-import { TGetChat } from "@/store/chats/types"
 import { CircleUser, PinOff } from "lucide-react"
+
 import Btn from "./Btn"
+
+import { TChat } from "@/store/chats/types"
+
 import { formatDateTime } from "@/lib/formatDate"
 import { cn } from "@/lib/utils"
 
 type Props = {
-    objChat: TGetChat,
+    objChat: TChat,
 
     showBtnById: string,
     setShowBtnById: (value: string) => void
@@ -31,7 +34,12 @@ export default function Interlocutor(props: Props) {
                         </div>
                     </div>
                     <div className='text-[15px] font-medium text-gray-500'>
-                        {props.objChat.lastMessage.content}
+                        {props.objChat.lastMessage
+                            ? props.objChat.lastMessage.content
+                            : <div className={cn(
+                                ''
+                            )}>Отправте первое сообщение</div>
+                        }
                     </div>
                 </div>
             </div>

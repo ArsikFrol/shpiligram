@@ -6,14 +6,18 @@ export type TRole = 'USER' | 'ADMIN'
 
 export type TUseProfile = {
 
+    loading: boolean,
+    error: boolean,
+
     userId: string,
     setUserId: (newValue: string) => void,
 
     objProfile: UserModel
-    setObjProfile: (newValue: UserModel) => void,
 
     listStories: StoryModel[],
     setListStories: (newValue: StoryModel[]) => void,
+
+    fetchProfile: (userId: string) => Promise<void>,
 
     setFirstName: (newValue: string) => void,
     setLastName: (newValue: string) => void,

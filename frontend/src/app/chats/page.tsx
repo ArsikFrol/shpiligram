@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import Chat from "@/components/Chat/Chat";
 import Navigation from "@/components/Navigation";
 import Header from "@/components/Header/Header";
-import Folders from "../components/Folders";
+import Folders from "../../components/Folders";
 import useChats from "@/store/chats/chatsStore";
 import ListChats from "@/components/Chat/ListChats";
 import useProfile from "@/store/profile/profileStore";
 import SkeletonForListChats from "@/components/Skeletons/SkeletonForListChats";
 import SkeletonFolder from "@/components/Skeletons/SkeletonFolder";
+import usePossibleChats from "@/store/possibleChats/possibleChatsStore";
 
 export default function Home() {
     const router = useRouter()
@@ -24,15 +24,15 @@ export default function Home() {
     } = useProfile()
 
     const {
-        showChatById,
         listChats, fetchListChats,
         loading
     } = useChats()
 
     useEffect(() => {
-        if (showChatById.length === 0) fetchListChats(userId)
 
-    }, [userId, showChatById])
+        fetchListChats(userId)
+
+    }, [userId])
 
     return (
         <>
@@ -49,9 +49,7 @@ export default function Home() {
                 })
                 : <Folders setShowBtnById={setShowBtnById} />
             }
-            <div className={cn(
-                showChatById && 'flex items-center gap-x-[20px]'
-            )}>
+            <div className='w-full'>
                 {loading
                     ? <div className='w-full flex flex-col gap-y-[20px] h-[calc(100vh-320px)] overflow-y-auto'>
                         {[...Array(10)].map((_, index) => <SkeletonForListChats key={index} />)}
@@ -69,11 +67,11 @@ export default function Home() {
                             )} onClick={() => router.push('/addFriend')}>Нашите кому-нибудь</div>
                         </div>
                 }
-                {showChatById && <Chat />}
             </div>
             <div className={cn(
-                'absolute bottom-[20px] left-1/2 -translate-x-1/2',
-            )}>
+                'absolute bottom-[20px] left-1/2 -translate-x-1/2 z-0',
+            )}
+                style={{ zIndex: 0 }}>
                 <Navigation activeElem={1} />
             </div>
         </>

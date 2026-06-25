@@ -4,10 +4,14 @@ import { Api } from "@/services/api-client";
 
 const useStories = create<TUseStories>((set) => ({
     loading: true,
+    setLoadingStories: (value: boolean) => set({ loading: value }),
+
     error: false,
 
     listStoriesProfile: [],
+
     listStoriesInterlocutors: [],
+    deleteFromStoreAllStoriesInterlocutors: () => set({ listStoriesInterlocutors: [] }),
 
     fetchListStoriesProfile: async (userId: string) => {
         try {

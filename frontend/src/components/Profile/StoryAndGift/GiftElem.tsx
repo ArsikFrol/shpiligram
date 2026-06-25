@@ -1,11 +1,12 @@
-import { GiftModel } from "@/generated/prisma/models"
-import { cn } from "@/lib/utils"
 import { Gift } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { TGetGift } from "@/store/gifts/types"
 
 type Props = {
     clickGift: (giftId: string) => void,
 
-    obj: GiftModel
+    obj: TGetGift
 }
 
 export default function GiftElem(props: Props) {

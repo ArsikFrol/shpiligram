@@ -1,6 +1,6 @@
 'use client'
 
-import { EllipsisVertical, Search, X } from "lucide-react"
+import { Search, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import Stories from "./Stories"
@@ -12,6 +12,7 @@ import ThreeDots from "../UI/ThreeDots"
 import useChats from "@/store/chats/chatsStore"
 import useStories from "@/store/stories/storiesStore"
 import SkeletonStories from "../Skeletons/SkeletonStories"
+import SearchHeader from "../SearchHeader"
 
 type Props = {
     hiddenSearch?: boolean,
@@ -25,8 +26,6 @@ export default function Header(props: Props) {
     const [showBurger, setShowBurger] = useState<boolean>(false)
 
     const [hiddenSearch, sethiddenSearch] = useState<boolean | undefined>(props.hiddenSearch || false)
-    const [activeSearch, setActiveSearch] = useState<boolean>(false)
-    const [valueSearch, setValueSearch] = useState<string>('')
 
     const [showBigStories, setShowBigStories] = useState<boolean>(false)
     const [idStoriesShow, setIdStoriesShow] = useState<string>('')
@@ -81,27 +80,7 @@ export default function Header(props: Props) {
                     </div>
                 </div>
                 <div className='flex items-center gap-x-[30px] ml-auto'>
-                    {activeSearch
-                        ? <div className='relative'>
-                            <input type="text" placeholder="Иван Иванович" value={valueSearch}
-                                onChange={e => setValueSearch(e.target.value)} spellCheck="false"
-                                className={cn(
-                                    'w-[400px] h-[37px] bg-bg rounded-2xl pl-[40px] focus:outline-0',
-                                    'text-[16px] text-white'
-                                )} />
-                            <X color='white' size={20} onClick={() => setActiveSearch(false)}
-                                className={cn(
-                                    "absolute left-[10px] top-[9px] opacity-50",
-                                    'hover:scale-105 transition-transform duration-300 cursor-pointer'
-                                )} />
-                        </div>
-                        : listChats.length
-                            ? <Search color='white' size={25} className={cn(
-                                'hover:scale-110 transition-transform duration-300 cursor-pointer',
-                                hiddenSearch && 'hidden'
-                            )} onClick={() => setActiveSearch(true)} />
-                            : undefined
-                    }
+                    <SearchHeader hiddenSearch={hiddenSearch} lengthChat={listChats.length} />
                     <ThreeDots onClick={clickShowBurger} />
                 </div>
             </div>

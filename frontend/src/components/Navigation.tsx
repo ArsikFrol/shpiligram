@@ -8,6 +8,8 @@ import { cloneElement, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { TRout } from '@/types/router'
 import useProfile from '@/store/profile/profileStore'
+import useChats from '@/store/chats/chatsStore'
+import useStories from '@/store/stories/storiesStore'
 
 type Props = {
     activeElem: number
@@ -21,8 +23,8 @@ type TElem = {
 }
 
 const listNav: TElem[] = [
-    { id: 1, text: 'Chats', elem: <MessageSquare color='white' size={25} />, link: '/' },
-    { id: 2, text: 'Add friend', elem: < CircleUser color='white' size={25} />, link: '/addFriend' },
+    { id: 1, text: 'Chats', elem: <MessageSquare color='white' size={25} />, link: '/chats' },
+    { id: 2, text: 'Add Chat', elem: < CircleUser color='white' size={25} />, link: '/addChat' },
     { id: 3, text: 'Settings', elem: <Settings color='white' size={25} />, link: '/settings' },
     { id: 4, text: 'Profile', elem: <UserRoundPen color='white' size={25} />, link: '/profile' }
 ]
@@ -36,10 +38,28 @@ export default function Navigation(props: Props) {
         setShowRowStories
     } = useProfile()
 
+    const {
+        setLoadingChats,
+        deleteFromStoreAllChats
+    } = useChats()
+
+    const {
+        deleteFromStoreAllStoriesInterlocutors,
+        setLoadingStories
+    } = useStories()
+
     const clickNav = (obj: TElem) => {
         router.push(obj.link)
         setActiveElem(obj.id)
         setShowRowStories(false)
+
+        if (obj.link === '/chats') {
+            deleteFromStoreAllChats()
+            setLoadingChats(true)
+
+            deleteFromStoreAllStoriesInterlocutors()
+            setLoadingStories(true)
+        }
     }
 
     return (

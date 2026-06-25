@@ -25,10 +25,14 @@ export type TGetStory = StoryModel & {
 
 export type TUseStories = {
     loading: boolean,
+    setLoadingStories: (value: boolean) => void,
+
     error: boolean,
 
     listStoriesProfile: TGetStoryProfile[]
+
     listStoriesInterlocutors: TGetStory[]
+    deleteFromStoreAllStoriesInterlocutors: () => void,
 
     fetchListStoriesProfile: (userId: string) => Promise<void>,
     fetchListStoriesInterlocutors: (userId: string, InterlocutorsId: string[]) => Promise<void>

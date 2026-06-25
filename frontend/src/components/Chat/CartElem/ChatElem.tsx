@@ -1,14 +1,14 @@
-import { CircleUser } from "lucide-react"
+'use client'
+
+import { useRouter } from "next/navigation"
 
 import { cn } from "@/lib/utils"
-import { TGetChat } from "@/store/chats/types"
+import { TChat } from "@/store/chats/types"
 import Interlocutor from "./Interlocutor"
+import useChats from "@/store/chats/chatsStore"
 
 type Props = {
-    objChat: TGetChat,
-
-    setShowChatById: (activeId: string) => void,
-    showChatById: string,
+    objChat: TChat,
 
     setShowRowStories: (activeId: boolean) => void
 
@@ -17,18 +17,23 @@ type Props = {
 }
 
 export default function ChatElem(props: Props) {
+    const router = useRouter()
+
+    const {
+        deleteFromStoreAllChats,
+        setLoadingChats
+    } = useChats()
 
     const clickChat = () => {
-        props.setShowChatById(props.objChat.chatId)
-        props.setShowBtnById('')
-        props.setShowRowStories(false)
+        router.push(`/chats/${props.objChat.chatId}`)
+
+        deleteFromStoreAllChats()
+        setLoadingChats(true)
     }
 
     const clickPKM = (e: any) => {
-        if (!props.showChatById) {
-            e.preventDefault()
-            props.setShowBtnById(props.objChat.chatId)
-        }
+        e.preventDefault()
+        props.setShowBtnById(props.objChat.chatId)
     }
 
     return (
@@ -36,11 +41,8 @@ export default function ChatElem(props: Props) {
             'flex items-center justify-between',
             'hover:scale-101 transition-transform duration-300 cursor-pointer'
         )} onClick={clickChat} onContextMenu={(e) => clickPKM(e)}>
-            {props.showChatById
-                ? <CircleUser size={51} strokeWidth={1} color="#ffffff" />
-                : <Interlocutor objChat={props.objChat} showBtnById={props.showBtnById}
-                    setShowBtnById={props.setShowBtnById} />
-            }
+            <Interlocutor objChat={props.objChat} showBtnById={props.showBtnById}
+                setShowBtnById={props.setShowBtnById} />
         </div>
     )
 }

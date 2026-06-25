@@ -1,13 +1,15 @@
 'use client'
 
-import { ArrowLeft, ArrowLeftToLine, EllipsisVertical } from "lucide-react";
-import QrCodeCom from "./QrCodeCom";
-import { cn } from "@/lib/utils";
+import { ArrowLeft, ArrowLeftToLine } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { UserModel } from "@/generated/prisma/models";
 import { JSX, useState } from "react";
+
+import { cn } from "@/lib/utils";
+import { UserModel } from "@/generated/prisma/models";
 import { TRout } from "@/types/router";
+
 import ThreeDots from "../UI/ThreeDots";
+import QrCodeCom from "./QrCodeCom";
 
 type Props = {
     isPageUserProfile: boolean,
@@ -40,7 +42,7 @@ export default function HeaderProfile(props: Props) {
     }
 
     return (
-        <div className="flex justify-between items-center">
+        <div className="fixed flex justify-between items-center w-[1150px] bg-container">
             {props.isPageUserProfile &&
                 <div className={cn(
                     'group flex justify-center items-center w-[50px] h-[50px] bg-bg rounded-2xl cursor-pointer'

@@ -23,7 +23,7 @@ export default function NotFound() {
                     'w-[200px] h-[60px] mx-auto bg-bg rounded-2xl flex justify-center items-center',
                     'hover:scale-105 transition-transform duration-300 cursor-pointer',
                     'text-[20px] text-white mt-[50px]'
-                )} onClick={() => router.push('/')}>Back to Chats</div>
+                )} onClick={() => router.push('/chats')}>Back to Chats</div>
             </div>
         </div>
     )

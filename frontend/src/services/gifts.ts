@@ -1,9 +1,9 @@
-import { GiftModel } from "@/generated/prisma/models";
 import { axiosInstance } from "./instance";
 import { ApiRoutes } from "./constants";
+import { TGetGift } from "@/store/gifts/types";
 
-export const gifts = async (recipientId: string): Promise<GiftModel[]> => {
-    const { data } = await axiosInstance.get<GiftModel[]>(ApiRoutes.GIFTS, { params: { recipientId } })
+export const gifts = async (recipientId: string): Promise<TGetGift[]> => {
+    const { data } = await axiosInstance.get<TGetGift[]>(ApiRoutes.GIFTS, { params: { recipientId } })
 
     return data
 }

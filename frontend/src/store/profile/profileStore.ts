@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { TFolder, TUseProfile } from "./types";
 import { StoryModel, UserModel } from "@/generated/prisma/models";
+import { Api } from "@/services/api-client";
 
 const defaultObjProfile: UserModel = {
     userId: '',
@@ -27,14 +28,29 @@ const defaultObjProfile: UserModel = {
 
 const useProfile = create<TUseProfile>((set, get) => ({
 
+    loading: true,
+    error: false,
+
     userId: 'user_1',
     setUserId: (newValue) => set({ userId: newValue }),
 
     objProfile: defaultObjProfile,
-    setObjProfile: (newValue: UserModel) => set({ objProfile: newValue }),
 
     listStories: [],
     setListStories: (newValue: StoryModel[]) => set({ listStories: newValue }),
+
+    fetchProfile: async (userId: string) => {
+        try {
+            set({ loading: true, error: false })
+            const data = await Api.profile.getProfile(userId)
+            set({ objProfile: data })
+        } catch (error) {
+            console.log(error)
+            set({ error: true })
+        } finally {
+            set({ loading: false })
+        }
+    },
 
     setFirstName: (newValue: string) => set((state) => ({
         objProfile: { ...state.objProfile, firstName: newValue }

@@ -2,11 +2,11 @@
 
 import { cn } from "@/lib/utils"
 import useChats from "@/store/chats/chatsStore"
-import { TGetChat } from "@/store/chats/types"
+import { TChat } from "@/store/chats/types"
 import { Pin, PinOff, Trash, Volume2, VolumeOff, X } from "lucide-react"
 
 type Props = {
-    objChat: TGetChat,
+    objChat: TChat,
 
     setShowBtnById: (value: string) => void,
 

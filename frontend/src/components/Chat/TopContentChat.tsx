@@ -1,30 +1,40 @@
 'use client'
 
 import { ArrowLeft, CircleUser, Phone } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { useState } from "react"
 
 import { cn } from "@/lib/utils"
 import useChats from "@/store/chats/chatsStore"
-import { Tinterlocutor } from "@/store/chats/types"
 
 import ThreeDots from "../UI/ThreeDots"
 import { formatDateTime } from "@/lib/formatDate"
+import { useFetchProfile } from "@/hooks/useFetchProfile"
+import { useFetchChat } from "@/hooks/useFetchChat"
+import { useEscape } from "@/hooks/useEscape"
+import SkeletonAddChats from "../Skeletons/SkeletonAddChats"
+import LoadingTopContent from "./LoadingTopContent"
 
 export default function TopContentChat() {
     const router = useRouter()
+    const pathName = usePathname()
 
     const [showSettings, setShowSettings] = useState<boolean>(false)
-    const [loading, setLoading] = useState<boolean>(true)
-    const [objProfile, setObjProfile] = useState<Tinterlocutor>()
+
+    const { objChat } = useFetchChat(pathName.split('/')[2])
+
+    const { objProfile, loading } = useFetchProfile(objChat?.interlocutorId || '')
 
     const {
-        showChatById, setShowChatById,
-        listChats
+        deleteFromStoreAllChats,
+        setLoadingChats
     } = useChats()
 
     const clickToReturn = () => {
-        setShowChatById('')
+        deleteFromStoreAllChats()
+        setLoadingChats(true)
+
+        router.push('/chats')
     }
 
     const clickUser = (useId: string) => {
@@ -35,34 +45,15 @@ export default function TopContentChat() {
         setShowSettings(!showSettings)
     }
 
-    useEffect(() => {
+    useEscape(() => {
+        router.push('/chats')
 
-        const interlocutor: Tinterlocutor = listChats.find(chat => chat.chatId === showChatById)!.interlocutor
+        deleteFromStoreAllChats()
+        setLoadingChats(true)
+    })
 
-        if (interlocutor) {
-            setObjProfile({
-                userId: interlocutor.userId,
-                avatar: interlocutor.avatar,
-                firstName: interlocutor.firstName,
-                lastName: interlocutor.lastName,
-                lastSeen: interlocutor.lastSeen
-            })
-        } else {
-            setObjProfile({
-                userId: 'null',
-                avatar: 'null',
-                firstName: 'null',
-                lastName: 'null',
-                lastSeen: new Date()
-            })
-            console.log('Чат не найден')
-        }
-        setLoading(false)
-
-    }, [listChats, setLoading, setObjProfile, showChatById])
-
-    if (loading) return <div className='h-[65px]'>Загрузка</div>
-    if (!objProfile) return <div className='h-[65px]'>лдывоа</div>
+    if (!objChat) return;
+    if (!objProfile) return <LoadingTopContent />
 
     return (
         <div className={cn(
@@ -100,7 +91,6 @@ export default function TopContentChat() {
                 <div className='w-[35px] h-[35px] flex justify-center items-center group cursor-pointer'>
                     <ThreeDots onClick={clickThreeDots} />
                 </div>
-
             </div>
         </div>
     )

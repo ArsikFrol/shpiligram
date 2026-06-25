@@ -1,14 +1,14 @@
 'use client'
 
-import { GiftModel } from "@/generated/prisma/models";
-import { useEscape } from "@/hooks/useEscape";
-import { useFetchProfile } from "@/hooks/useFetchProfile";
-import { cn } from "@/lib/utils";
-import { Gift, Star, UserCircle2, X } from "lucide-react";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Gift, Star, UserCircle2, X } from "lucide-react"
+import { Dispatch, SetStateAction } from "react"
+
+import { useEscape } from "@/hooks/useEscape"
+import { cn } from "@/lib/utils"
+import { TGetGift } from "@/store/gifts/types"
 
 type Props = {
-    obj: GiftModel,
+    obj: TGetGift,
 
     setShowDescGift: Dispatch<SetStateAction<boolean>>
 }
@@ -16,11 +16,6 @@ type Props = {
 export default function DescGift(props: Props) {
 
     useEscape(() => props.setShowDescGift(false))
-
-    const { profile, loading, error } = useFetchProfile(props.obj.senderId)
-
-    if (loading) return <div className=''>Загрузка...</div>
-    if (!profile) return <div className=''>Данных нет</div>
 
     return (
         <div className='fixed left-0 top-0 w-full h-screen bg-bg z-50'>
@@ -41,8 +36,8 @@ export default function DescGift(props: Props) {
                         <div className='flex items-center gap-x-[10px]'>
                             <UserCircle2 strokeWidth={1} color="white" size={30} />
                             <div className='flex gap-x-[5px] items-center'>
-                                <div className='text-[20px] text-white'>{profile.firstName}</div>
-                                <div className='text-[20px] text-white'>{profile.lastName}</div>
+                                <div className='text-[20px] text-white'>{props.obj.sender.firstName}</div>
+                                <div className='text-[20px] text-white'>{props.obj.sender.lastName}</div>
                             </div>
                         </div>
                     </div>

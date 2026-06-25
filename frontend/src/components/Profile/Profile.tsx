@@ -8,32 +8,30 @@ import useProfile from "@/store/profile/profileStore";
 import PhotoProfile from "./PhotoProfile";
 import DescriptionProfile from "./DescriptionProfile";
 import HeaderProfile from "./HeaderProfile";
-import { useFetchProfile } from "@/hooks/useFetchProfile";
 
 export default function Profile() {
 
     const {
-        setObjProfile,
-        userId
+        userId,
+        fetchProfile,
+        objProfile,
+        loading,
     } = useProfile()
 
-    const { objProfile, loading } = useFetchProfile(userId)
-
     useEffect(() => {
-        if (objProfile) setObjProfile(objProfile)
-    }, [objProfile, setObjProfile])
+        fetchProfile(userId)
+    }, [])
 
-    if (loading) return <div className=''>Загрузка</div>
     if (!objProfile) return <div className=''>Нет данных профиля</div>
 
     return (
-        <div className='h-[calc(100vh-200px)] overflow-y-auto'>
+        <div className='h-[calc(100vh-190px)] overflow-y-auto'>
             <HeaderProfile isPageUserProfile={false} profile={objProfile} />
-            <div className='pt-[20px]'>
-                <div className='h-[calc(100vh-260px)] overflow-y-auto scrollbar'>
-                    <PhotoProfile objProfile={objProfile} />
+            <div className='pt-[50px]'>
+                <div className='h-[calc(100vh-240px)] overflow-y-auto scrollbar'>
+                    <PhotoProfile objProfile={objProfile} loading={loading} />
                     <SettingsProfile />
-                    <DescriptionProfile objProfile={objProfile} />
+                    <DescriptionProfile objProfile={objProfile} loading={loading} />
                     <Stories />
                 </div>
             </div>

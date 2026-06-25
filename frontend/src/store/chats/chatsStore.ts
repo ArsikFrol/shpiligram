@@ -1,13 +1,20 @@
 import { create } from "zustand";
+
 import { TUseChat } from "./types";
 import { Api } from "@/services/api-client";
 
 const useChats = create<TUseChat>((set) => ({
     loading: true,
+    setLoadingChats: (value: boolean) => set({ loading: value }),
+
     error: false,
 
     listChats: [],
     listInterlocutorsId: [],
+
+    deleteFromStoreAllChats: () => set({
+        listChats: []
+    }),
 
     fetchListChats: async (userId: string) => {
         try {
@@ -20,6 +27,26 @@ const useChats = create<TUseChat>((set) => ({
         } catch (error) {
             console.log(error)
             set({ error: true })
+        } finally {
+            set({ loading: false })
+        }
+    },
+
+    createChat: async (ownerId: string, interlocutorId: string) => {
+        try {
+            set({ loading: true, error: false })
+            const data = await Api.chats.createChat(ownerId, interlocutorId)
+            set((state) => ({
+                listChats: [data.chat, ...state.listChats]
+            }))
+
+            console.log(data)
+
+            return data
+        } catch (error) {
+            console.log(error)
+            set({ error: true })
+            throw error
         } finally {
             set({ loading: false })
         }
@@ -38,10 +65,7 @@ const useChats = create<TUseChat>((set) => ({
         } finally {
             set({ loading: false })
         }
-    },
-
-    showChatById: '',
-    setShowChatById: (activeId: string) => set({ showChatById: activeId })
+    }
 }))
 
 export default useChats;

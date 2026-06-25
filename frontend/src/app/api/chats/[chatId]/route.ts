@@ -39,3 +39,19 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ c
         )
     }
 }
+
+export async function GET(req: NextRequest, { params }: { params: Promise<{ chatId: string }> }) {
+    try {
+        const { chatId } = await params
+
+        const chat = await prisma.chat.findFirst({
+            where: {
+                chatId
+            }
+        })
+
+        return NextResponse.json(chat)
+    } catch (error) {
+        console.log('Ошибка!', error)
+    }
+}

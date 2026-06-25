@@ -57,7 +57,7 @@ export default function page() {
     }
 
     const clickSingIn = () => {
-        router.push('/')
+        router.push('/chats')
         setUserId('user_2')
     }
 
