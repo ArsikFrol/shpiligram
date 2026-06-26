@@ -1,6 +1,5 @@
 'use client'
 
-import { Search, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import Stories from "./Stories"

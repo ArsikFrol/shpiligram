@@ -1,0 +1,82 @@
+'use client'
+
+import { BellRing, CircleUser, FolderCog, Languages, MessageCircleMore, Search, UserRoundKey } from "lucide-react";
+import ThreeDots from "../UI/ThreeDots";
+import PhotoProfile from "../Profile/PhotoProfile";
+import { useFetchProfile } from "@/hooks/useFetchProfile";
+import useProfile from "@/store/profile/profileStore";
+import { TRout } from "@/types/router";
+import { JSX } from "react/jsx-runtime";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+
+type TElem = {
+    id: number,
+    title: string,
+    link: TRout,
+    desc: string,
+    elem: JSX.Element,
+    bgColor: string,
+}
+
+const listElem: TElem[] = [
+    { id: 1, elem: <CircleUser color="white" size={35} strokeWidth={1.5} />, title: 'Account', link: '/editInfo', desc: 'Number, UserName, Bio', bgColor: '#60A5FA' },
+    { id: 2, elem: <MessageCircleMore color="white" size={35} strokeWidth={1.5} />, title: 'Chat Settings', link: '/', desc: 'Night Mode, wallpaper', bgColor: '#34D399' },
+    { id: 3, elem: <UserRoundKey color="white" size={35} strokeWidth={1.5} />, title: 'Privacy', link: '/', desc: 'Last seen, ', bgColor: '#A78BFA' },
+    { id: 4, elem: <BellRing color="white" size={35} strokeWidth={1.5} />, title: 'Notifications', link: '/', desc: '', bgColor: '#FB923C' },
+    { id: 5, elem: <FolderCog color="white" size={35} strokeWidth={1.5} />, title: 'Chat Folders', link: '/', desc: '', bgColor: '#2DD4BF' },
+    { id: 6, elem: <Languages color="white" size={35} strokeWidth={1.5} />, title: 'Language', link: '/', desc: '', bgColor: '#F472B6' },
+]
+
+export default function Settings () {
+    const router = useRouter()
+    
+    const {
+        userId
+    } = useProfile()
+
+    /* const {objProfile, loading} = useFetchProfile(userId) */
+
+    const loading = true
+    const objProfile: any = []
+
+    const clickElem = (link: TRout) => {
+        router.push(link)
+    }
+
+    return(
+        <div className="h-[calc(100vh-190px)] overflow-y-auto">
+            <div className="flex items-center gap-x-[10px] w-[60px] ml-auto">
+                <Search color="white"  size={25} />
+                <ThreeDots onClick={() => {}}/>
+            </div>
+            <PhotoProfile loading={loading} objProfile={objProfile}/>
+            <div className={cn(
+                "w-[600px] rounded-2xl mx-auto bg-bg p-[20px] mt-[30px]",
+                'flex flex-col gap-y-[20px] '
+            )}>
+                {
+                listElem.map((obj: TElem, index) => {
+                    return(
+                        <div className={cn(
+                            "flex items-center gap-x-[20px]",
+                            ''
+                        )} 
+                            key={index} onClick={() => clickElem(obj.link)}>
+                            <div className="w-[50px] h-[50px] rounded-2xl flex items-center justify-center"
+                                style={{background: `${obj.bgColor}`}}>
+                                {obj.elem}
+                            </div>
+                            <div className="flex flex-col gap-x-[10px]">
+                                <div className="text-[18px] font-semibold text-white">{obj.title}</div>
+                                <div className="text-[16px] font-medium text-gray-500">{obj.desc}</div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+            </div>
+            
+        </div>
+    )
+}

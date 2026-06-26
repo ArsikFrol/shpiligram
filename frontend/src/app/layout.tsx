@@ -20,10 +20,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={`${nunitoSans.variable}`}>
-            <body className="bg-bg w-full h-screen">
+            <body className="bg-bg w-full h-[calc(100vh-40px)]">
                 <div className={cn(
                     "bg-container rounded-2xl shadow py-[20px] px-[30px]",
-                    'w-[1200px] rounded-2xl h-[calc(100vh-150px)] mx-auto mt-[20px]',
+                    'rounded-2xl h-[calc(100vh-150px)] mx-auto mt-[20px] mx-[20px]',
                 )}>
                     {children}
                 </div>

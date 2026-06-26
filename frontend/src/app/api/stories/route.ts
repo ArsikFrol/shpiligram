@@ -5,8 +5,6 @@ export async function GET(req: NextRequest) {
     const userId = req.nextUrl.searchParams.get('userId')
 
     if (!userId) {
-        console.log('userId обязательные поля!')
-
         return NextResponse.json(
             { error: 'userId обязателен' },
             { status: 400 }

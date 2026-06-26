@@ -12,13 +12,6 @@ export async function GET(req: NextRequest) {
             )
         }
 
-        if (!ownerId.match(/^user_\d+$/)) {
-            return NextResponse.json(
-                { error: 'Неправильный формат ownerId' },
-                { status: 400 }
-            )
-        }
-
         const chats = await prisma.chat.findMany({
             where: {
                 OR: [
@@ -75,23 +68,9 @@ export async function POST(req: NextRequest) {
             )
         }
 
-        if (!ownerId.match(/^user_\d+$/)) {
-            return NextResponse.json(
-                { error: 'Неправильный формат ownerId' },
-                { status: 400 }
-            )
-        }
-
         if (!interlocutorId) {
             return NextResponse.json(
                 { error: 'interlocutorId не прописан' },
-                { status: 400 }
-            )
-        }
-
-        if (!interlocutorId.match(/^user_\d+$/)) {
-            return NextResponse.json(
-                { error: 'Неправильный формат interlocutorId' },
                 { status: 400 }
             )
         }

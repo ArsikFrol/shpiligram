@@ -19,7 +19,9 @@ export default function Profile() {
     } = useProfile()
 
     useEffect(() => {
-        fetchProfile(userId)
+        if (!userId) fetchProfile(userId)
+
+            console.log(userId)
     }, [])
 
     if (!objProfile) return <div className=''>Нет данных профиля</div>
@@ -28,7 +30,7 @@ export default function Profile() {
         <div className='h-[calc(100vh-190px)] overflow-y-auto'>
             <HeaderProfile isPageUserProfile={false} profile={objProfile} />
             <div className='pt-[50px]'>
-                <div className='h-[calc(100vh-240px)] overflow-y-auto scrollbar'>
+                <div className='h-[calc(100vh-220px)] overflow-y-auto scrollbar'>
                     <PhotoProfile objProfile={objProfile} loading={loading} />
                     <SettingsProfile />
                     <DescriptionProfile objProfile={objProfile} loading={loading} />

@@ -8,3 +8,4 @@ export type TRout =
     | '/signUp'
     | '/forgotPassword'
     | '/chats'
+    | '/chatSettings'

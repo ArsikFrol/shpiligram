@@ -55,8 +55,10 @@ export default function ListStories(props: Props) {
     useEscape(() => setShowStory(false))
 
     useEffect(() => {
-        fetchListStoriesProfile(userId)
-        fetchListGifts(userId)
+        if (!userId) {
+            fetchListStoriesProfile(userId)
+            fetchListGifts(userId)
+        }
     }, [userId])
 
     if (loading) return (

@@ -42,7 +42,7 @@ export default function HeaderProfile(props: Props) {
     }
 
     return (
-        <div className="fixed flex justify-between items-center w-[1150px] bg-container">
+        <div className="fixed flex justify-between items-center bg-container">
             {props.isPageUserProfile &&
                 <div className={cn(
                     'group flex justify-center items-center w-[50px] h-[50px] bg-bg rounded-2xl cursor-pointer'
@@ -56,11 +56,13 @@ export default function HeaderProfile(props: Props) {
             }
             <div className={cn(
                 'flex items-center',
-                props.isPageUserProfile ? 'gap-x-[20px]' : 'w-full justify-between'
+                props.isPageUserProfile ? 'gap-x-[20px]' : ''
             )}>
                 <QrCodeCom userId={props.profile.userId}
                     userName={props.profile.userName} />
-                <div className='relative'>
+                <div className={cn(
+                    'relative',
+                )}> 
                     <ThreeDots onClick={() => setShowSettings(!showSettings)} />
                     {showSettings &&
                         <div className={cn(
