@@ -5,7 +5,7 @@ type Props = {
     setValue: (newValue: string) => void
 }
 
-export default function SearchAddFriend(props: Props) {
+export default function SearchAddChat(props: Props) {
 
     return (
         <div className='relative'>

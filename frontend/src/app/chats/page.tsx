@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import Navigation from "@/components/Navigation";
-import Header from "@/components/Header/Header";
-import Folders from "../../components/Folders";
+import Header from "@/components/HeaderRoot/Header";
+import Folders from "../../components/Folders/Folders";
 import useChats from "@/store/chats/chatsStore";
 import ListChats from "@/components/Chat/ListChats";
 import useProfile from "@/store/profile/profileStore";
@@ -64,7 +64,7 @@ export default function Home() {
                             <div className={cn(
                                 'hover:scale-101 transition-transform duration-300 cursor-pointer',
                                 'text-blue-400'
-                            )} onClick={() => router.push('/addFriend')}>Нашите кому-нибудь</div>
+                            )} onClick={() => router.push('/addChat')}>Нашите кому-нибудь</div>
                         </div>
                 }
             </div>

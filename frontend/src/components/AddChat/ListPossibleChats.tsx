@@ -3,11 +3,10 @@
 import { CircleUser } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-import { UserModel } from "@/generated/prisma/models"
 import { formatDateTime } from "@/lib/formatDate"
 import { cn } from "@/lib/utils"
 import usePossibleChats from "@/store/possibleChats/possibleChatsStore"
-import SkeletonAddChats from "./Skeletons/SkeletonAddChats"
+import SkeletonAddChats from "../Skeletons/SkeletonAddChats"
 
 export default function ListPossibleChats() {
     const router = useRouter()

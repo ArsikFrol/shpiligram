@@ -2,14 +2,13 @@
 
 import { JSX } from 'react/jsx-runtime'
 import { CircleUser, MessageSquare, Settings, UserRoundPen } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { cloneElement, useState } from 'react'
 
 import { cn } from '@/lib/utils'
-import { TRout } from '@/types/router'
 import useProfile from '@/store/profile/profileStore'
 import useChats from '@/store/chats/chatsStore'
 import useStories from '@/store/stories/storiesStore'
+import { TypeRoutes, useTypedRouter } from '@/hooks/useTypedRouter'
 
 type Props = {
     activeElem: number
@@ -19,7 +18,7 @@ type TElem = {
     id: number,
     text: string,
     elem: JSX.Element,
-    link: TRout
+    link: TypeRoutes
 }
 
 const listNav: TElem[] = [
@@ -30,7 +29,7 @@ const listNav: TElem[] = [
 ]
 
 export default function Navigation(props: Props) {
-    const router = useRouter()
+    const router = useTypedRouter()
 
     const [activeElem, setActiveElem] = useState<number>(props.activeElem)
 

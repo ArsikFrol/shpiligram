@@ -1,20 +1,20 @@
 'use client'
 
 import { cn } from "@/lib/utils"
-import { TRout } from "@/types/router"
 import { Pencil, Settings, SwitchCamera } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { JSX } from "react/jsx-runtime"
+import { TypeRoutes } from "../../../.next/dev/types/routes"
 
 type TElem = {
     id: number,
     text: string,
     elem: JSX.Element,
-    link: TRout
+    link: TypeRoutes
 }
 
 const listElem: TElem[] = [
-    { id: 1, link: '/', text: 'Set Photo', elem: <SwitchCamera color="white" strokeWidth={1.5} size={30} /> },
+    { id: 1, link: '/profile', text: 'Set Photo', elem: <SwitchCamera color="white" strokeWidth={1.5} size={30} /> },
     { id: 2, link: '/editInfo', text: 'Edit info', elem: <Pencil color="white" strokeWidth={1.5} size={30} /> },
     { id: 3, link: '/settings', text: 'Settings', elem: <Settings color="white" strokeWidth={1.5} size={30} /> }
 ]

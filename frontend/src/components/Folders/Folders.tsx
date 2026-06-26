@@ -27,7 +27,7 @@ export default function Folders(props: Props) {
 
     const {
         listChats,
-        showChatById
+        
     } = useChats()
 
     const {
@@ -37,7 +37,7 @@ export default function Folders(props: Props) {
     return (
         <div className={cn(
             'bg-[#202D3D] rounded-4xl flex items-center gap-x-[10px] shadow'
-        )} style={(!showChatById && listChats.length)
+        )} style={(listChats.length)
             ? { height: '52px', padding: '7px', marginTop: '20px', marginBottom: '20px' }
             : { display: 'none' }}>
             {

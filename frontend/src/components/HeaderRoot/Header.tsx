@@ -11,7 +11,7 @@ import ThreeDots from "../UI/ThreeDots"
 import useChats from "@/store/chats/chatsStore"
 import useStories from "@/store/stories/storiesStore"
 import SkeletonStories from "../Skeletons/SkeletonStories"
-import SearchHeader from "../SearchHeader"
+import SearchHeader from "./SearchHeader"
 
 type Props = {
     hiddenSearch?: boolean,

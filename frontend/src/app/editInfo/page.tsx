@@ -1,7 +1,7 @@
 'use client'
 
-import EditInfo from "@/components/EditInfo";
-import HeaderEditorInfo from "@/components/HeaderEditorInfo";
+import EditInfo from "@/components/EditInfo/EditInfo";
+import HeaderEditorInfo from "@/components/Headers/HeaderEditorInfo";
 import WarningText from "@/components/UI/WarningText";
 import { useFetchProfile } from "@/hooks/useFetchProfile";
 import useProfile from "@/store/profile/profileStore";

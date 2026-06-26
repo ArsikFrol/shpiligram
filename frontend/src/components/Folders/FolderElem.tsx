@@ -1,7 +1,7 @@
 'use client'
 
 import { TFolder } from "@/store/profile/types"
-import { TElemFolder } from "./Folders"
+import { TElemFolder } from "./Folders/Folders"
 import { cn } from "@/lib/utils"
 import useProfile from "@/store/profile/profileStore"
 import useChats from "@/store/chats/chatsStore"

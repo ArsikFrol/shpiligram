@@ -6,10 +6,10 @@ import { JSX, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { UserModel } from "@/generated/prisma/models";
-import { TRout } from "@/types/router";
 
 import ThreeDots from "../UI/ThreeDots";
 import QrCodeCom from "./QrCodeCom";
+import { TypeRoutes } from "@/hooks/useTypedRouter";
 
 type Props = {
     isPageUserProfile: boolean,
@@ -20,7 +20,7 @@ type TSetting = {
     id: number,
     text: string
     elem?: JSX.Element,
-    link: TRout
+    link: TypeRoutes
 }
 
 const listSettings: TSetting[] = [
@@ -37,7 +37,7 @@ export default function HeaderProfile(props: Props) {
         router.back()
     }
 
-    const clickElem = (link: TRout) => {
+    const clickElem = (link: TypeRoutes) => {
         router.push(link)
     }
 

@@ -4,7 +4,7 @@ import { formatMonthDay } from "@/lib/formatDate";
 import { cn } from "@/lib/utils";
 import { AtSign, Cake, Phone } from "lucide-react";
 import { useState } from "react";
-import WarningInput from "./UI/WarningInput";
+import WarningInput from "../UI/WarningInput";
 import useProfile from "@/store/profile/profileStore";
 
 type Props = {

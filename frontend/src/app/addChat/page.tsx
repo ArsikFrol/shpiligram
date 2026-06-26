@@ -1,9 +1,9 @@
-import AddFriend from "@/components/AddFriend";
+import AddChat from "@/components/AddChat/AddChat";
 
 export default function page() {
     return (
         <>
-            <AddFriend />
+            <AddChat />
         </>
     )
 }

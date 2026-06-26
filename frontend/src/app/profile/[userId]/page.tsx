@@ -5,16 +5,16 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import DescriptionProfile from "@/components/Profile/DescriptionProfile";
 import PhotoProfile from "@/components/Profile/PhotoProfile";
 import StoriesGifts from "@/components/Profile/StoryAndGift/StoriesGifts";
-import { TRout } from "@/types/router";
 import HeaderProfile from "@/components/Profile/HeaderProfile";
 import { useFetchProfile } from "@/hooks/useFetchProfile";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import useChats from "@/store/chats/chatsStore";
 import useProfile from "@/store/profile/profileStore";
+import { TypeRoutes } from "@/hooks/useTypedRouter";
 
 export default function page() {
-    const pathName: TRout = usePathname() as TRout
+    const pathName: TypeRoutes = usePathname() as TypeRoutes
     const router = useRouter()
 
     const searchParams = useSearchParams()
@@ -60,7 +60,7 @@ export default function page() {
             {objProfile &&
                 <div className='h-[calc(100vh-200px)] overflow-y-auto' >
                     <HeaderProfile isPageUserProfile profile={objProfile} />
-                    <PhotoProfile objProfile={objProfile} />
+                    <PhotoProfile objProfile={objProfile} loading={loading} />
                     {createNewChat &&
                         <div className={cn(
                             'w-[600px] mx-auto text-center bg-bg rounded-2xl text-white text-[20px] mt-[20px] py-[10px]',
@@ -69,7 +69,7 @@ export default function page() {
                             Написать сообщенение
                         </div>
                     }
-                    <DescriptionProfile objProfile={objProfile} />
+                    <DescriptionProfile objProfile={objProfile} loading={loading}/>
                     <StoriesGifts obj={objProfile} />
                 </div >
             }
