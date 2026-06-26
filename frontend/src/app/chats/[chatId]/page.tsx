@@ -1,17 +1,16 @@
 'use client'
 
 import { useEffect } from "react";
-import { CircleUser } from "lucide-react";
-import { useRouter } from "next/navigation";
+import ContentLoader from "react-content-loader";
 
 import Chat from "@/components/Chat/Chat";
 import { cn } from "@/lib/utils";
 import useChats from "@/store/chats/chatsStore";
 import useProfile from "@/store/profile/profileStore";
 import SkeletonForLogoChats from "@/components/Skeletons/SkeletonForLogoChats";
+import ElemChatForChatId from "@/components/Chat/ElemChatForChatId";
 
 export default function page() {
-    const router = useRouter()
 
     const {
         loading,
@@ -31,22 +30,34 @@ export default function page() {
     return (
         <>
             <div className={cn(
-                'grid grid-cols-[50px_auto] gap-x-[20px]'
+                'grid grid-cols-[50px_auto] gap-x-[20px]',
+                'min-xl:grid-cols-[250px_auto]'
             )}>
                 <div className={cn(
-                    'flex flex-col items-center gap-y-[30px] w-[60px] h-[calc(100vh-240px)] overflow-y-auto mt-[20px]',
+                    'flex flex-col gap-y-[30px] h-[calc(100vh-240px)] overflow-y-auto mt-[20px]',
                     showRowStories && 'h-[calc(100vh-320px)]'
                 )}>
                     {loading
-                        ? [...Array(10)].map((_, index) => <SkeletonForLogoChats key={index} />)
+                        ? [...Array(10)].map((_, index) => {
+                            return (
+                                <div className='' key={index}>
+                                    <div className='min-xl:hidden'>
+                                        <SkeletonForLogoChats key={index} />
+                                    </div>
+                                    <div className='max-xl:hidden'>
+                                        <ContentLoader speed={2} width={300} height={50} viewBox="0 0 300 50"
+                                            backgroundColor="#3f3f46" foregroundColor="#52525b" >
+                                            <circle cx="25" cy="25" r="25" />
+                                            <rect x="55" y="0" rx="6" ry="6" width="140" height="20" />
+                                            <rect x="55" y="25" rx="6" ry="6" width="150" height="20" />
+                                        </ContentLoader>
+                                    </div>
+                                </div>
+                            )
+                        })
                         : listChats.map((obj, index) => {
                             return (
-                                <CircleUser key={index} size={50} strokeWidth={1} color="#ffffff"
-                                    onClick={() => router.push(`/chats/${obj.chatId}`)}
-                                    className={cn(
-                                        "w-[50px] h-[50px] flex-shrink-0",
-                                        'hover:scale-105 transition-transform duration-300 cursor-pointer'
-                                    )} />
+                                <ElemChatForChatId obj={obj} key={index} />
                             )
                         })
                     }

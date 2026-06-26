@@ -57,7 +57,7 @@ export default function TopContentChat() {
 
     return (
         <div className={cn(
-            'w-[1050px] bg-container my-[10px] mx-auto py-[10px]',
+            'mx-[10px] bg-container my-[10px] py-[10px]',
             'flex justify-between items-center px-[40px] rounded-2xl'
         )}>
             <div className='w-[35px] h-[35px] flex justify-center items-center group  cursor-pointer'

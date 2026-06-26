@@ -79,7 +79,7 @@ export default function ContantChat() {
     return (
         <div className="flex flex-col gap-y-[15px]">
             <div ref={containerRef} className={cn(
-                'w-[1064px] h-[calc(100vh-400px)] px-[10px] overflow-y-auto',
+                'h-[calc(100vh-400px)] px-[10px] overflow-y-auto',
                 'flex flex-col gap-y-[10px] scrollbar',
                 showRowStories && 'h-[calc(100vh-505px)]'
             )}>

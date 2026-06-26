@@ -8,6 +8,7 @@ import { JSX } from "react/jsx-runtime";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { TypeRoutes, useTypedRouter } from "@/hooks/useTypedRouter";
+import { useFetchProfile } from "@/hooks/useFetchProfile";
 
 type TElem = {
     id: number,
@@ -27,57 +28,56 @@ const listElem: TElem[] = [
     { id: 6, elem: <Languages color="white" size={35} strokeWidth={1.5} />, title: 'Language', link: '/settings/language', desc: '', bgColor: '#F472B6' }
 ]
 
-export default function Settings () {
+export default function Settings() {
     const router = useTypedRouter()
-    
+
     const {
         userId
     } = useProfile()
 
-    /* const {objProfile, loading} = useFetchProfile(userId) */
-
-    const loading = true
-    const objProfile: any = []
+    const { objProfile, loading } = useFetchProfile(userId)
 
     const clickElem = (link: TypeRoutes) => {
         router.push(link)
     }
 
-    return(
+    if (!objProfile) return;
+
+    return (
         <div className="h-[calc(100vh-190px)] overflow-y-auto">
             <div className="flex items-center gap-x-[10px] w-[60px] ml-auto">
-                <Search color="white"  size={25} />
-                <ThreeDots onClick={() => {}}/>
+                <Search color="white" size={25} />
+                <ThreeDots onClick={() => { }} />
             </div>
             <div className="h-[calc(100vh-235px)] mt-[20px] overflow-y-auto scrollbar">
-                <PhotoProfile loading={loading} objProfile={objProfile}/>
+                <PhotoProfile loading={loading} objProfile={objProfile} />
                 <div className={cn(
-                    "w-[600px] rounded-2xl mx-auto bg-bg p-[20px] mt-[30px]",
+                    "w-[600px] rounded-2xl mx-auto bg-bg p-[20px] mt-[50px]",
                     'flex flex-col gap-y-[20px] '
                 )}>
                     {
-                    listElem.map((obj: TElem, index) => {
-                        return(
-                            <div className={cn(
-                                "flex items-center gap-x-[20px]",
-                                ''
-                            )} 
-                                key={index} onClick={() => clickElem(obj.link)}>
-                                <div className="w-[50px] h-[50px] rounded-2xl flex items-center justify-center"
-                                    style={{background: `${obj.bgColor}`}}>
-                                    {obj.elem}
+                        listElem.map((obj: TElem, index) => {
+                            return (
+                                <div className={cn(
+                                    "flex items-center gap-x-[20px]",
+                                    'hover:scale-101 transition-transform duration-300 cursor-pointer'
+                                )}
+                                    key={index} onClick={() => clickElem(obj.link)}>
+                                    <div className="w-[50px] h-[50px] rounded-2xl flex items-center justify-center"
+                                        style={{ background: `${obj.bgColor}` }}>
+                                        {obj.elem}
+                                    </div>
+                                    <div className="flex flex-col gap-x-[10px]">
+                                        <div className="text-[18px] font-semibold text-white">{obj.title}</div>
+                                        <div className="text-[16px] font-medium text-gray-500">{obj.desc}</div>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col gap-x-[10px]">
-                                    <div className="text-[18px] font-semibold text-white">{obj.title}</div>
-                                    <div className="text-[16px] font-medium text-gray-500">{obj.desc}</div>
-                                </div>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
                 </div>
             </div>
-            
+
         </div>
     )
 }

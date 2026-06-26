@@ -1,10 +1,11 @@
 'use client'
 
+import { Mic, Paperclip, SendHorizontal, Sticker } from "lucide-react"
+import { RefObject, useState } from "react"
+
 import { MessageModel } from "@/generated/prisma/models"
 import { cn } from "@/lib/utils"
 import { TChat } from "@/store/chats/types"
-import { Mic, Paperclip, SendHorizontal, Sticker } from "lucide-react"
-import { RefObject, useState } from "react"
 
 type Props = {
     userId: string,
@@ -47,39 +48,37 @@ export default function InputFolder(props: Props) {
 
 
     return (
-        <div className='relative'>
-            <div className='absolute bottom-[-65px] left-1/2 transform -translate-x-1/2 w-[1050px]'>
+        <div className='relative w-full'>
+            <div className='absolute bottom-[-65px] left-1/2 transform -translate-x-1/2 w-[99%] min-w-[300px]'>
                 <div className={cn(
-                    'flex justify-between items-center gap-2 shadow-xl rounded-2xl',
-                    'bg-[#202D3D] p-[10px]'
+                    'flex items-center gap-x-[20px] shadow-xl rounded-2xl',
+                    'bg-[#202D3D] p-[10px] w-full'
                 )}>
                     <Sticker color="white" size={28} strokeWidth={1.5} className={cn(
-                        'hover:scale-105 transition-transform duration-300 cursor-pointer'
+                        'hover:scale-105 transition-transform duration-300 cursor-pointer flex-shrink-0'
                     )} />
-                    <div className="w-[850px]">
-                        <textarea ref={props.textareaRef} placeholder="Message" value={valueInput} autoFocus
-                            className={cn(
-                                'w-full text-white px-[10px] py-[7px] border border-white/30 rounded-xl',
-                                'resize-none overflow-y-auto bg-transparent overflow-hidden',
-                                'focus:outline-none focus:border-white/50 transition-colors',
-                                'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20'
-                            )} onChange={(e) => {
-                                setValueInput(e.target.value)
-                                e.target.style.height = 'auto'
-                                const newHeight = Math.min(e.target.scrollHeight, 100)
-                                e.target.style.height = `${newHeight}px`
-                            }} onKeyDown={(e) => {
-                                if (e.key === 'Enter' && !e.shiftKey) {
-                                    e.preventDefault()
-                                    if (valueInput.trim()) {
-                                        clickSent()
-                                    }
+                    <textarea ref={props.textareaRef} placeholder="Message" value={valueInput} autoFocus
+                        className={cn(
+                            'flex-1 text-white px-[10px] py-[7px] border border-white/30 rounded-xl',
+                            'resize-none overflow-y-auto bg-transparent overflow-hidden',
+                            'focus:outline-none focus:border-white/50 transition-colors',
+                            'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20'
+                        )} onChange={(e) => {
+                            setValueInput(e.target.value)
+                            e.target.style.height = 'auto'
+                            const newHeight = Math.min(e.target.scrollHeight, 100)
+                            e.target.style.height = `${newHeight}px`
+                        }} onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault()
+                                if (valueInput.trim()) {
+                                    clickSent()
                                 }
-                            }} rows={1} style={{ minHeight: '40px', maxHeight: '100px' }} />
-                    </div>
+                            }
+                        }} rows={1} style={{ minHeight: '40px', maxHeight: '100px' }} />
                     <div className='flex items-center gap-x-[15px]'>
                         <Paperclip color="white" strokeWidth={1.5} size={20} className={cn(
-                            'hover:scale-105 transition-transform duration-300 cursor-pointer'
+                            'hover:scale-105 transition-transform duration-300 cursor-pointer flex-shrink-0'
                         )} />
                         <div className={cn(
                             'bg-blue-500/40 w-[40px] h-[40px] flex justify-center',
