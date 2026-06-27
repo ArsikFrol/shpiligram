@@ -17,6 +17,7 @@ export type TypeRoutes =
     | '/settings/notifications'
     | '/settings/chatsFolder'
     | '/settings/language'
+    | `/settings/privacy/${string}`
 
 type TypedRouter = Omit<AppRouterInstance, 'push' | 'replace'> & {
   push: (path: TypeRoutes) => ReturnType<AppRouterInstance['push']>;

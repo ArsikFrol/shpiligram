@@ -9,6 +9,10 @@
     --color-active-text: #2239EF;
 }
 
+*:focus {
+  outline: none !important;
+}
+
 ::-webkit-scrollbar {
     width: 0;
 }

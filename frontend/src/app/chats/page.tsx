@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import Navigation from "@/components/Navigation";
@@ -12,10 +11,10 @@ import ListChats from "@/components/Chat/ListChats";
 import useProfile from "@/store/profile/profileStore";
 import SkeletonForListChats from "@/components/Skeletons/SkeletonForListChats";
 import SkeletonFolder from "@/components/Skeletons/SkeletonFolder";
-import usePossibleChats from "@/store/possibleChats/possibleChatsStore";
+import { useTypedRouter } from "@/hooks/useTypedRouter";
 
 export default function Home() {
-    const router = useRouter()
+    const router = useTypedRouter()
 
     const [showBtnById, setShowBtnById] = useState<string>('')
 

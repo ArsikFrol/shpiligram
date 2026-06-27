@@ -35,13 +35,14 @@ export default function Settings() {
         userId
     } = useProfile()
 
-    const { objProfile, loading } = useFetchProfile(userId)
+    /* const { objProfile, loading } = useFetchProfile(userId) */
 
     const clickElem = (link: TypeRoutes) => {
         router.push(link)
     }
 
-    if (!objProfile) return;
+    const loading = true    
+    const objProfile: any = []
 
     return (
         <div className="h-[calc(100vh-190px)] overflow-y-auto">

@@ -14,11 +14,6 @@ export default function RootLayout({
     return (
         <>
             {children}
-            <div className={cn(
-                'absolute bottom-[20px] left-1/2 -translate-x-1/2',
-            )}>
-                <Navigation activeElem={3} />
-            </div>
         </>
     )
 }

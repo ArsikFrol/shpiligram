@@ -32,8 +32,39 @@ model User {
     messages     Message[]
     storyVieweds StoryViewed[]
 
+    settings UserSettings? 
+
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")
 
     @@map("users")
+}
+
+enum howSee {
+    EVERYBODY
+    SELECT_LIST
+    NOBODY
+}
+
+model UserSettings {
+    userSettingsId String @id @default(cuid()) @map("user_settings_id")
+
+    howSeeMobilePhone howSee @default(EVERYBODY)  @map("how_see_mobile_phone")
+    howSeeLastSeen howSee @default(EVERYBODY) @map("how_see_last_seen")
+    howSeeBirthday howSee @default(EVERYBODY) @map("how_see_birthday")
+    howSeeGifts howSee @default(EVERYBODY) @map("how_see_gifts")
+    howSeeBio howSee @default(EVERYBODY) @map("how_see_bio")
+
+    howCanCall howSee @default(EVERYBODY) @map("how_can_call")
+    howCanSentVoice howSee @default(EVERYBODY) @map("how_can_sent_voice")
+    howCanSentMessages howSee @default(EVERYBODY) @map("how_can_sent_messages")
+    howCanForwardedMessages howSee @default(EVERYBODY) @map("how_can_forwarded_messages")
+
+    userId String @unique @map("user_id")
+    owner User @relation(fields: [userId], references: [userId])
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("users_settings")
 }
