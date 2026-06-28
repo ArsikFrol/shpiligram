@@ -4,6 +4,27 @@ export type TFolder = 'ALL_CHATS' | 'STUDY'
 
 export type TRole = 'USER' | 'ADMIN'
 
+type TypeHowSee = 'EVERYBODY' | 'SELECT_LIST' | 'NOBODY'
+
+type TSettings = {
+    userSettingsId: string,
+
+    howSeeMobilePhone: TypeHowSee
+    howSeeLastSeen: TypeHowSee
+    howSeeBirthday: TypeHowSee
+    howSeeGifts: TypeHowSee
+    howSeeBio: TypeHowSee
+
+    howCanCall: TypeHowSee
+    howCanSentVoice: TypeHowSee
+    howCanSentMessages: TypeHowSee
+    howCanForwardedMessages: TypeHowSee
+}
+
+export type TGetUser = UserModel & {
+    settings: TSettings 
+}
+
 export type TUseProfile = {
 
     loading: boolean,

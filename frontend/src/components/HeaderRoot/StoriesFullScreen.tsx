@@ -1,6 +1,6 @@
 'use client'
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { ChevronLeft, ChevronRight, Heart, SendHorizontal, Share2, UserCircleIcon, X } from "lucide-react"
 import { useRouter } from "next/navigation"
 
@@ -11,7 +11,7 @@ import { formatDateTime } from "@/lib/formatDate"
 type Props = {
     obj: TGetStory,
 
-    setShowBigStories: Dispatch<SetStateAction<boolean>>
+    setShowBigStories: (value: boolean) => void
 }
 
 export default function StoriesFullScreen(props: Props) {

@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import DescriptionProfile from "@/components/Profile/DescriptionProfile";
 import PhotoProfile from "@/components/Profile/PhotoProfile";
-import StoriesGifts from "@/components/Profile/StoryAndGift/StoriesGifts";
+import StoriesGifts from "@/components/Profile/StoryAndGift/SortStoryAndGiftInUser";
 import HeaderProfile from "@/components/Profile/HeaderProfile";
 import { useFetchProfile } from "@/hooks/useFetchProfile";
 import { useEffect, useState } from "react";
@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import useChats from "@/store/chats/chatsStore";
 import useProfile from "@/store/profile/profileStore";
 import { TypeRoutes } from "@/hooks/useTypedRouter";
+import HeaderProfileUser from "@/components/Profile/HeaderProfileUser";
 
 export default function page() {
     const pathName: TypeRoutes = usePathname() as TypeRoutes
@@ -59,7 +60,7 @@ export default function page() {
         <>
             {objProfile &&
                 <div className='h-[calc(100vh-200px)] overflow-y-auto' >
-                    <HeaderProfile isPageUserProfile profile={objProfile} />
+                    <HeaderProfileUser profile={objProfile} />
                     <PhotoProfile objProfile={objProfile} loading={loading} />
                     {createNewChat &&
                         <div className={cn(

@@ -1,4 +1,4 @@
-import { ClipLoader } from 'react-spinners'
+import { ClipLoader } from "react-spinners"
 
 import { MessageModel } from "@/generated/prisma/models"
 import { formatDateTime } from "@/lib/formatDate"

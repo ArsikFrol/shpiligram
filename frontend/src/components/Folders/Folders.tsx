@@ -1,7 +1,5 @@
 'use client'
 
-import { Dispatch, SetStateAction } from "react"
-
 import { cn } from "@/lib/utils"
 import useChats from "@/store/chats/chatsStore"
 import useProfile from "@/store/profile/profileStore"
@@ -9,7 +7,7 @@ import { TFolder } from "@/store/profile/types"
 import FolderElem from "./FolderElem"
 
 type Props = {
-    setShowBtnById: Dispatch<SetStateAction<string>>
+    setShowBtnById: (value: string) => void
 }
 
 export type TElemFolder = {
@@ -26,8 +24,7 @@ const listFolder: TElemFolder[] = [
 export default function Folders(props: Props) {
 
     const {
-        listChats,
-        
+        listChats,        
     } = useChats()
 
     const {

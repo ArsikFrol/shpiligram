@@ -8,7 +8,7 @@ type Props = {
     clickStory: (storyId: string) => void
 }
 
-export default function PostElem(props: Props) {
+export default function StoryElem(props: Props) {
     return (
         <div className={cn(
             'hover:scale-105 transition-transform duration-300 cursor-pointer',

@@ -1,9 +1,10 @@
 'use client'
 
+import { Pin, PinOff, Trash, Volume2, VolumeOff, X } from "lucide-react"
+
 import { cn } from "@/lib/utils"
 import useChats from "@/store/chats/chatsStore"
 import { TChat } from "@/store/chats/types"
-import { Pin, PinOff, Trash, Volume2, VolumeOff, X } from "lucide-react"
 
 type Props = {
     objChat: TChat,

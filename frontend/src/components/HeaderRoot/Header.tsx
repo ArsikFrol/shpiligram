@@ -11,20 +11,10 @@ import ThreeDots from "../UI/ThreeDots"
 import useChats from "@/store/chats/chatsStore"
 import useStories from "@/store/stories/storiesStore"
 import SkeletonStories from "../Skeletons/SkeletonStories"
-import SearchHeader from "./SearchHeader"
+import SearchUI from "../UI/SearchUI"
 
-type Props = {
-    hiddenSearch?: boolean,
-    showGroupStories?: boolean
-
-    userId?: string,
-    userName?: string
-}
-
-export default function Header(props: Props) {
+export default function Header() {
     const [showBurger, setShowBurger] = useState<boolean>(false)
-
-    const [hiddenSearch, sethiddenSearch] = useState<boolean | undefined>(props.hiddenSearch || false)
 
     const [showBigStories, setShowBigStories] = useState<boolean>(false)
     const [idStoriesShow, setIdStoriesShow] = useState<string>('')
@@ -64,12 +54,11 @@ export default function Header(props: Props) {
 
     return (
         <>
-            <div className='flex relative'>
+            <div className='flex'>
                 <div className=''>
                     {loading
                         ? [...Array(3)].map((_, index) => <SkeletonStories index={index} key={index} />)
-                        : !showRowStories
-                        && <Stories setShowRowStories={setShowRowStories} listStories={listStoriesInterlocutors} />
+                        : !showRowStories && <Stories setShowRowStories={setShowRowStories} listStories={listStoriesInterlocutors} />
                     }
                     <div className={cn(
                         'text-[25px] text-white font-semibold',
@@ -79,7 +68,7 @@ export default function Header(props: Props) {
                     </div>
                 </div>
                 <div className='flex items-center gap-x-[30px] ml-auto'>
-                    <SearchHeader hiddenSearch={hiddenSearch} lengthChat={listChats.length} />
+                    <SearchUI hiddenSearch={!Boolean(listChats.length)} width={400} />
                     <ThreeDots onClick={clickShowBurger} />
                 </div>
             </div>

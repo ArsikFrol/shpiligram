@@ -1,14 +1,14 @@
 'use client'
 
-import { BellRing, CircleUser, FolderCog, Languages, MessageCircleMore, Search, UserRoundKey } from "lucide-react";
+import { BellRing, CircleUser, FolderCog, Languages, MessageCircleMore, UserRoundKey } from "lucide-react";
+
 import ThreeDots from "../UI/ThreeDots";
 import PhotoProfile from "../Profile/PhotoProfile";
 import useProfile from "@/store/profile/profileStore";
 import { JSX } from "react/jsx-runtime";
-import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { TypeRoutes, useTypedRouter } from "@/hooks/useTypedRouter";
-import { useFetchProfile } from "@/hooks/useFetchProfile";
+import SearchUI from "../UI/SearchUI";
 
 type TElem = {
     id: number,
@@ -46,15 +46,16 @@ export default function Settings() {
 
     return (
         <div className="h-[calc(100vh-190px)] overflow-y-auto">
-            <div className="flex items-center gap-x-[10px] w-[60px] ml-auto">
-                <Search color="white" size={25} />
+            <div className="flex items-center justify-end h-[40px] gap-x-[10px] ml-auto">
+                <SearchUI width={400} />
                 <ThreeDots onClick={() => { }} />
             </div>
             <div className="h-[calc(100vh-235px)] mt-[20px] overflow-y-auto scrollbar">
                 <PhotoProfile loading={loading} objProfile={objProfile} />
                 <div className={cn(
-                    "w-[600px] rounded-2xl mx-auto bg-bg p-[20px] mt-[50px]",
-                    'flex flex-col gap-y-[20px] '
+                    "rounded-2xl mx-auto bg-bg p-[20px] mt-[50px]",
+                    'flex flex-col gap-y-[20px]',
+                    'min-lg:w-[800px] max-lg:mx-[30px]'
                 )}>
                     {
                         listElem.map((obj: TElem, index) => {

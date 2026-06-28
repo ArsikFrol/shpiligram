@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react"
 
-import { TActiveBtn } from "./Stories"
-import StoryElem from "./StoryElem"
-import GiftElem from "./GiftElem"
-import StoryProfile from "./StoryProfile"
-import DescGift from "./DescGift"
+import { TActiveBtn } from "./SelectStoryAndGift"
+import StoryElem from "./Story/StoryElem"
+import GiftElem from "./Gift/GiftElem"
+import ShowStoryFromProfile from "./ShowStoryFromProfile"
+import DescGift from "./Gift/DescGift"
 import SkeletStoryAndGift from "../../Skeletons/SkeletStoryAndGift"
 
 import { cn } from "@/lib/utils"
@@ -19,7 +19,7 @@ type Props = {
     activeBtn: TActiveBtn
 }
 
-export default function ListStories(props: Props) {
+export default function SortStoryAndGiftProfile(props: Props) {
 
     const [showStory, setShowStory] = useState<boolean>(false)
     const [showIdSroty, setShowIdSroty] = useState<string>('')
@@ -99,7 +99,7 @@ export default function ListStories(props: Props) {
                 }
             </div>
             {showStory &&
-                <StoryProfile listStoriesProfile={listStoriesProfile} showIdSroty={showIdSroty}
+                <ShowStoryFromProfile listStoriesProfile={listStoriesProfile} showIdSroty={showIdSroty}
                     setShowStory={setShowStory} />
             }
             {showGift &&

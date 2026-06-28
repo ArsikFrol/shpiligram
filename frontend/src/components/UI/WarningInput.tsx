@@ -27,8 +27,9 @@ export default function WarningInput(props: Props) {
     return (
         <div className='fixed w-full h-screen top-0 left-0 bg-black/50 z-10'>
             <div className={cn(
-                'w-[500px] bg-container rounded-2xl p-[20px]',
-                'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+                'bg-container rounded-2xl p-[20px]',
+                'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+                'min-lg:w-[600px] max-lg:w-[500px]'
             )}>
                 <div className='text-white text-[20px] text-center mb-[40px]'>{props.textWarning}</div>
                 <input autoFocus type="text" onChange={e => setValue(e.target.value)}

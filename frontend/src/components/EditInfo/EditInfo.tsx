@@ -24,7 +24,10 @@ export default function EditInfo(props: Props) {
     }, [props.valueBio])
 
     return (
-        <div className='w-[800px] mx-auto h-[calc(100vh-240px)] overflow-y-auto mt-[20px]'>
+        <div className={cn(
+            'mx-auto h-[calc(100vh-240px)] overflow-y-auto mt-[20px]',
+            'min-lg:w-[800px] max-lg:mx-[30px]'
+        )}>
             <div className='bg-bg rounded-2xl p-[20px] mb-[20px]'>
                 <div className='text-blue-400 text-[20px] pb-[20px]'>Your name</div>
                 <input type="text" value={props.valueInpoutName}

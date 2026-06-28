@@ -3,14 +3,13 @@
 import useProfile from "@/store/profile/profileStore";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
 
 type Props = {
     valueInpoutName: string,
     valueInpoutLastName: string,
     valueBio: string,
 
-    setShowWarning: Dispatch<SetStateAction<boolean>>
+    setShowWarning: (value: boolean) => void,
 }
 
 export default function HeaderEditorInfo(props: Props) {

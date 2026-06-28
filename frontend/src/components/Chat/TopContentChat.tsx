@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowLeft, CircleUser, Phone } from "lucide-react"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useState } from "react"
 
 import { cn } from "@/lib/utils"
@@ -12,12 +12,12 @@ import { formatDateTime } from "@/lib/formatDate"
 import { useFetchProfile } from "@/hooks/useFetchProfile"
 import { useFetchChat } from "@/hooks/useFetchChat"
 import { useEscape } from "@/hooks/useEscape"
-import SkeletonAddChats from "../Skeletons/SkeletonAddChats"
 import LoadingTopContent from "./LoadingTopContent"
+import { TypeRoutes, useTypedRouter } from "@/hooks/useTypedRouter"
 
 export default function TopContentChat() {
-    const router = useRouter()
-    const pathName = usePathname()
+    const router = useTypedRouter()
+    const pathName: TypeRoutes = usePathname() as TypeRoutes
 
     const [showSettings, setShowSettings] = useState<boolean>(false)
 

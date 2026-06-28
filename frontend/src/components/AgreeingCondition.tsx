@@ -1,7 +1,7 @@
 import * as Checkbox from '@radix-ui/react-checkbox'
+import { CheckIcon } from 'lucide-react'
 
 import { cn } from "@/lib/utils"
-import { CheckIcon } from 'lucide-react'
 
 type Props = {
     checked: boolean,

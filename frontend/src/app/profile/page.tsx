@@ -1,11 +1,11 @@
 import Navigation from "@/components/Navigation";
-import Profile from "@/components/Profile/Profile";
+import ProfilePage from "@/components/Profile/ProfilePage";
 import { cn } from "@/lib/utils";
 
 export default function page() {
     return (
         <>
-            <Profile />
+            <ProfilePage />
             <div className={cn(
                 'absolute bottom-[20px] left-1/2 -translate-x-1/2',
             )}>

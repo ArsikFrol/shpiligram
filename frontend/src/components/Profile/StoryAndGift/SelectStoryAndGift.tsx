@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
-import ListStories from "./ListStories";
+import SortStoryAndGiftProfile from "./SortStoryAndGiftProfile";
 
 export type TActiveBtn = 'stories' | 'arshinedStories' | 'gifts'
 
@@ -19,7 +19,7 @@ const listPostBtn: TPostBtn[] = [
     { id: 3, type: 'gifts', text: 'Gifts' }
 ]
 
-export default function Stories() {
+export default function SelectStoryAndGift() {
 
     const [activeBtn, setActiveBtn] = useState<TActiveBtn>('stories')
 
@@ -41,7 +41,7 @@ export default function Stories() {
                     })
                 }
             </div>
-            <ListStories activeBtn={activeBtn} />
+            <SortStoryAndGiftProfile activeBtn={activeBtn} />
         </div>
     )
 }

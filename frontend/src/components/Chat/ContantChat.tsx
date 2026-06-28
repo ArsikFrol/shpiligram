@@ -12,9 +12,10 @@ import { cn } from "@/lib/utils"
 import { useFetchChat } from "@/hooks/useFetchChat"
 import Dialogue from "./Dialogue"
 import InputFolder from "./InputFolder"
+import { TypeRoutes } from "@/hooks/useTypedRouter"
 
 export default function ContantChat() {
-    const pathName = usePathname()
+    const pathName: TypeRoutes = usePathname() as TypeRoutes 
 
     const { loading, objChat } = useFetchChat(pathName.split('/')[2])
 

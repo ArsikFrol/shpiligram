@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import useChats from "@/store/chats/chatsStore";
 import useProfile from "@/store/profile/profileStore";
 import SkeletonForLogoChats from "@/components/Skeletons/SkeletonForLogoChats";
-import ElemChatForChatId from "@/components/Chat/ElemChatForChatId";
+import ElemChatForChatIdPage from "@/components/Chat/ElemChatForChatIdPage";
 
 export default function page() {
 
@@ -57,7 +57,7 @@ export default function page() {
                         })
                         : listChats.map((obj, index) => {
                             return (
-                                <ElemChatForChatId obj={obj} key={index} />
+                                <ElemChatForChatIdPage obj={obj} key={index} />
                             )
                         })
                     }

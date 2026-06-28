@@ -1,10 +1,9 @@
 'use client'
 
 import { TFolder } from "@/store/profile/types"
-import { TElemFolder } from "./Folders/Folders"
 import { cn } from "@/lib/utils"
 import useProfile from "@/store/profile/profileStore"
-import useChats from "@/store/chats/chatsStore"
+import { TElemFolder } from "./Folders"
 
 type Props = {
     obj: TElemFolder,
@@ -30,8 +29,7 @@ export default function FolderElem(props: Props) {
 
     return (
         <div className={cn(
-            'text-white font-semibold text-[15px] w-[100px] py-[10px] text-center',
-            'flex-1',
+            'text-white font-semibold text-[15px] w-[100px] py-[10px] text-center flex-1',
             !isActive && 'hover:scale-110 transition-transform duration-300 cursor-pointer',
             isActive && 'bg-active-bg rounded-4xl',
             isActive && 'text-blue-500/80'

@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils"
-import useProfile from "@/store/profile/profileStore"
 import { QrCode, X } from "lucide-react"
 import Image from "next/image"
 import QRCode from 'qrcode'
@@ -20,11 +19,11 @@ export default function QrCodeCom(props: Props) {
             const profileUrl = `http://localhost:3000/profile/${props.userId}`
 
             const qrDataUrl = await QRCode.toDataURL(profileUrl, {
-                width: 300,           // ширина
-                margin: 2,            // отступ
+                width: 300,
+                margin: 2,
                 color: {
-                    dark: '#3B82F6',  // цвет точек (синий)
-                    light: '#FFFFFF'  // цвет фона (белый)
+                    dark: '#3B82F6',
+                    light: '#FFFFFF'
                 }
             })
             setQrCode(qrDataUrl)
@@ -72,8 +71,7 @@ export default function QrCodeCom(props: Props) {
                             'w-[50px] h-[50px] rounded-2xl bg-bg flex justify-center items-center',
                             'absolute right-[10px] top-[10px]',
                             'hover:scale-105 transition-transform duration-300 cursor-pointer'
-                        )}
-                            onClick={() => setShowBigQr(false)}>
+                        )} onClick={() => setShowBigQr(false)}>
                             <X size={30} color="white" />
                         </div>
                     </div>

@@ -1,11 +1,12 @@
 'use client'
 
+import { Eye, Heart, X } from "lucide-react"
+import { useState } from "react"
+
 import ThreeDots from "@/components/UI/ThreeDots"
 import { formatMonthDayTime } from "@/lib/formatDate"
 import { cn } from "@/lib/utils"
 import { TGetStoryProfile } from "@/store/stories/types"
-import { Eye, Heart, X } from "lucide-react"
-import { useState } from "react"
 
 type Props = {
     listStoriesProfile: TGetStoryProfile[],
@@ -25,7 +26,7 @@ const listSettings: TElem[] = [
     { id: 2, text: 'Посмотреть статистику' }
 ]
 
-export default function StoryProfile(props: Props) {
+export default function ShowStoryFromProfile(props: Props) {
     const [showSettings, setShowSettings] = useState<boolean>(false)
 
     const chat = props.listStoriesProfile.find(story => story.storyId === props.showIdSroty)

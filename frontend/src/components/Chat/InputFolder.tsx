@@ -46,6 +46,34 @@ export default function InputFolder(props: Props) {
         }
     }
 
+    const handleSend = () => {
+        if (!valueInput.trim()) return;
+        
+        console.log('Сообщение отправлено:', valueInput);
+        setValueInput('');
+        
+        if (props.textareaRef.current) {
+        props.textareaRef.current.style.height = 'auto';
+        }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setValueInput(e.target.value);
+        adjustTextareaHeight(e.target);
+    };
+
+    const adjustTextareaHeight = (element: HTMLTextAreaElement) => {
+        element.style.height = 'auto';
+        const newHeight = Math.min(element.scrollHeight, 100);
+        element.style.height = `${newHeight}px`;
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSend();
+        }
+    };
 
     return (
         <div className='relative w-full'>
@@ -63,19 +91,8 @@ export default function InputFolder(props: Props) {
                             'resize-none overflow-y-auto bg-transparent overflow-hidden',
                             'focus:outline-none focus:border-white/50 transition-colors',
                             'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20'
-                        )} onChange={(e) => {
-                            setValueInput(e.target.value)
-                            e.target.style.height = 'auto'
-                            const newHeight = Math.min(e.target.scrollHeight, 100)
-                            e.target.style.height = `${newHeight}px`
-                        }} onKeyDown={(e) => {
-                            if (e.key === 'Enter' && !e.shiftKey) {
-                                e.preventDefault()
-                                if (valueInput.trim()) {
-                                    clickSent()
-                                }
-                            }
-                        }} rows={1} style={{ minHeight: '40px', maxHeight: '100px' }} />
+                        )} onChange={handleChange} onKeyDown={handleKeyDown} rows={1} 
+                        style={{ minHeight: '40px', maxHeight: '100px' }} />
                     <div className='flex items-center gap-x-[15px]'>
                         <Paperclip color="white" strokeWidth={1.5} size={20} className={cn(
                             'hover:scale-105 transition-transform duration-300 cursor-pointer flex-shrink-0'

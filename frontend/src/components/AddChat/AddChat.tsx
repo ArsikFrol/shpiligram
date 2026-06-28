@@ -7,6 +7,7 @@ import SearchAddChat from "./SearchAddChat";
 import usePossibleChats from "@/store/possibleChats/possibleChatsStore";
 import useProfile from "@/store/profile/profileStore";
 import useChats from "@/store/chats/chatsStore";
+import { cn } from "@/lib/utils";
 
 export default function AddChat() {
 
@@ -31,7 +32,10 @@ export default function AddChat() {
     }, [value])
 
     return (
-        <div className="w-[600px] mx-auto">
+        <div className={cn(
+                "mx-auto",
+                'min-lg:w-[800px] max-lg:mx-[30px]'
+            )}>
             <SearchAddChat setValue={setValue} value={value} />
             <ListPossibleChats />
         </div>

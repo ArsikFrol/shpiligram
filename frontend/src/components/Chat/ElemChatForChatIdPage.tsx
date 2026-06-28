@@ -9,7 +9,7 @@ type Props = {
     obj: TChat
 }
 
-export default function ElemChatForChatId(props: Props) {
+export default function ElemChatForChatIdPage(props: Props) {
     const router = useTypedRouter()
 
     return (

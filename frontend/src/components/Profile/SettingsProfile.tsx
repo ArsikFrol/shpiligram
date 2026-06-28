@@ -1,10 +1,9 @@
 'use client'
 
+import { TypeRoutes, useTypedRouter } from "@/hooks/useTypedRouter"
 import { cn } from "@/lib/utils"
 import { Pencil, Settings, SwitchCamera } from "lucide-react"
-import { useRouter } from "next/navigation"
 import { JSX } from "react/jsx-runtime"
-import { TypeRoutes } from "../../../.next/dev/types/routes"
 
 type TElem = {
     id: number,
@@ -20,7 +19,7 @@ const listElem: TElem[] = [
 ]
 
 export default function SettingsProfile() {
-    const router = useRouter()
+    const router = useTypedRouter()
 
     return (
         <div className="flex justify-between w-[600px] mx-auto mt-[50px]">

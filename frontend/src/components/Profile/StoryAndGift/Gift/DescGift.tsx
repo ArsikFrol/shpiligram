@@ -1,7 +1,6 @@
 'use client'
 
 import { Gift, Star, UserCircle2, X } from "lucide-react"
-import { Dispatch, SetStateAction } from "react"
 
 import { useEscape } from "@/hooks/useEscape"
 import { cn } from "@/lib/utils"
@@ -10,7 +9,7 @@ import { TGetGift } from "@/store/gifts/types"
 type Props = {
     obj: TGetGift,
 
-    setShowDescGift: Dispatch<SetStateAction<boolean>>
+    setShowDescGift: (value: boolean) => void
 }
 
 export default function DescGift(props: Props) {
@@ -21,7 +20,8 @@ export default function DescGift(props: Props) {
         <div className='fixed left-0 top-0 w-full h-screen bg-bg z-50'>
             <div className={cn(
                 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
-                'w-[600px] bg-container rounded-2xl p-[20px]'
+                'bg-container rounded-2xl p-[20px]',
+                'min-lg:w-[800px] max-lg:mx-[30px]'
             )}>
                 <div className='w-[300px] h-[200px] rounded-2xl mx-auto flex justify-center items-center mb-[30px]'
                     style={{ background: props.obj.bgGift }}>

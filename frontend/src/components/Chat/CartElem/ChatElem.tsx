@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { TChat } from "@/store/chats/types"
 import Interlocutor from "./Interlocutor"
 import useChats from "@/store/chats/chatsStore"
+import { useTypedRouter } from "@/hooks/useTypedRouter"
 
 type Props = {
     objChat: TChat,
@@ -17,7 +18,7 @@ type Props = {
 }
 
 export default function ChatElem(props: Props) {
-    const router = useRouter()
+    const router = useTypedRouter()
 
     const {
         deleteFromStoreAllChats,

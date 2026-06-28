@@ -3,9 +3,9 @@
 import { useState } from "react"
 
 import { cn } from "@/lib/utils"
-import ListStories from "./ListStories"
-import ListGifts from "./ListGifts"
+import ListGifts from "./Gift/ListGifts"
 import { UserModel } from "@/generated/prisma/models"
+import ListStories from "./Story/ListStories"
 
 type Props = {
     obj: UserModel
@@ -21,8 +21,8 @@ const listPostBtn: TPostBtn[] = [
     { id: 2, text: 'Gifts' }
 ]
 
-export default function StoriesGifts(props: Props) {
-    const [activeBtn, setactiveBtn] = useState<number>(1)
+export default function SortStoryAndGiftInUser(props: Props) {
+    const [activeBtn, setActiveBtn] = useState<number>(1)
 
     return (
         <div className=''>
@@ -35,13 +35,13 @@ export default function StoriesGifts(props: Props) {
                                 activeBtn === obj.id
                                     ? 'bg-active-bg text-blue-400 rounded-2xl'
                                     : 'hover:scale-105 transition-transform duration-300 cursor-pointer'
-                            )} onClick={() => setactiveBtn(obj.id)}>{obj.text}</div>
+                            )} onClick={() => setActiveBtn(obj.id)}>{obj.text}</div>
                         )
                     })
                 }
             </div>
             {activeBtn === 1
-                ? <ListStories userId={props.obj.userId} activeBtn="stories" />
+                ? <ListStories recipientId={props.obj.userId}/>
                 : <ListGifts recipientId={props.obj.userId} />
             }
         </div>

@@ -13,8 +13,9 @@ type Props = {
 export default function DescriptionProfile(props: Props) {
     return (
         <div className={cn(
-            'w-[600px] mx-auto bg-bg rounded-2xl p-[20px]',
-            'flex flex-col gap-y-[30px] mt-[10px]'
+            'mx-auto bg-bg rounded-2xl p-[20px]',
+            'flex flex-col gap-y-[30px] mt-[10px]',
+            'min-lg:w-[800px] max-lg:mx-[30px]'
         )}>
             <div className=''>
                 <div className='text-[20px] text-white'>
