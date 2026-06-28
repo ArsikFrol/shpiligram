@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { JSX, useEffect, useState } from "react"
 
 import Stories from "./Stories"
 import RowStories from "./RowStories"
@@ -12,15 +12,31 @@ import useChats from "@/store/chats/chatsStore"
 import useStories from "@/store/stories/storiesStore"
 import SkeletonStories from "../Skeletons/SkeletonStories"
 import SearchUI from "../UI/SearchUI"
+import { TypeRoutes, useTypedRouter } from "@/hooks/useTypedRouter"
+import { BookMarked, Moon, Sun } from "lucide-react"
+
+type TElemSettings = {
+    id: number,
+    text: string,
+    link?: TypeRoutes,
+    elem?: JSX.Element
+}
+
+const listSettings: TElemSettings[] = [
+    {id: 1, text: 'Day mode'},
+    {id: 2, elem: <BookMarked size={25} color="white" />, text: 'Seved messages', link: '/chats/savedMessages'}
+]
 
 export default function Header() {
-    const [showBurger, setShowBurger] = useState<boolean>(false)
+    const router = useTypedRouter()
 
     const [showBigStories, setShowBigStories] = useState<boolean>(false)
     const [idStoriesShow, setIdStoriesShow] = useState<string>('')
 
+    const [showSettings, setShowSettings] = useState<boolean>(false)
+
     const clickShowBurger = () => {
-        setShowBurger(!showBurger)
+        setShowSettings(!showSettings)
     }
 
     const {
@@ -39,6 +55,10 @@ export default function Header() {
         listInterlocutorsId
     } = useChats()
 
+    const clickSettings = (link: TypeRoutes | undefined) => {
+        router.push(link ? link : '/chats')
+    }
+
     useEffect(() => {
         if (listInterlocutorsId.length > 0) {
             fetchListStoriesInterlocutors(userId, listInterlocutorsId)
@@ -52,10 +72,12 @@ export default function Header() {
         return () => window.removeEventListener('wheel', handleWheel)
     }, [userId, listInterlocutorsId])
 
+    const dayMode = 'sun'
+
     return (
         <>
             <div className='flex'>
-                <div className=''>
+                <div className='relative'>
                     {loading
                         ? [...Array(3)].map((_, index) => <SkeletonStories index={index} key={index} />)
                         : !showRowStories && <Stories setShowRowStories={setShowRowStories} listStories={listStoriesInterlocutors} />
@@ -69,7 +91,34 @@ export default function Header() {
                 </div>
                 <div className='flex items-center gap-x-[30px] ml-auto'>
                     <SearchUI hiddenSearch={!Boolean(listChats.length)} width={400} />
-                    <ThreeDots onClick={clickShowBurger} />
+                    <div className="relative">
+                        <ThreeDots onClick={clickShowBurger} />
+                        <div className={cn(
+                            "absolute top-[30px] right-[0px] bg-bg rounded-2xl p-[20px] w-[250px]",
+                            'flex flex-col gap-y-[10px]'
+                        )} style={showSettings ? {} : {display: 'none'}}>
+                            {showSettings &&
+                                listSettings.map((obj, index) => {
+                                    return(
+                                        <div key={index} className={cn(
+                                            'h-[30px] leading-[30px] text-[18px] text-white',
+                                            'flex items-center justify-between',
+                                            'hover:scale-101 transition-transform duration-300 cursor-pointer'
+                                        )}
+                                            onClick={() => clickSettings(obj.link)}>
+                                            <div className="">{obj.text}</div>
+                                            {obj.id === 1 
+                                                ? dayMode === 'sun'
+                                                    ? <Sun size={25} color="white" />
+                                                    : <Moon size={25} color="white" />
+                                                : obj.elem
+                                            }
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
             {showRowStories &&
