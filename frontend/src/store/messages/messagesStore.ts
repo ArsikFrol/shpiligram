@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { Api } from "@/services/api-client";
-import { TUseMessage } from "./types";
-import { MessageModel } from "@/generated/prisma/models";
+import { TGetMessage, TUseMessage } from "./types";
 
 const useMessages = create<TUseMessage>((set) => ({
     loading: true,
@@ -22,7 +21,7 @@ const useMessages = create<TUseMessage>((set) => ({
         }
     },
 
-    addMessageInChat: async (chatId: string, message: MessageModel) => {
+    addMessageInChat: async (chatId: string, message: TGetMessage) => {
         try {
             set({ loading: true, error: false })
 

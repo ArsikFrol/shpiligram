@@ -1,5 +1,16 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from '@/lib/prisma'
 import { NextRequest, NextResponse } from "next/server";
+
+export async function OPTIONS() {
+    return new NextResponse(null, {
+        status: 204,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept',
+        },
+    })
+}
 
 export async function GET(req: NextRequest) {
     try {
@@ -7,8 +18,13 @@ export async function GET(req: NextRequest) {
 
         if (!ownerId) {
             return NextResponse.json(
-                { error: 'ownerId не прописан' },
-                { status: 400 }
+                { error: 'ownerId обязателен' },
+                {
+                    status: 400,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }
             )
         }
 
@@ -44,21 +60,37 @@ export async function GET(req: NextRequest) {
             }
         })
 
-        return NextResponse.json(chats)
+        return NextResponse.json(chats, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept',
+            }
+        })
 
     } catch (error) {
         console.error('[API] Ошибка: ', error)
         return NextResponse.json(
             { error: 'Ошибка сервера' },
-            { status: 500 }
+            {
+                status: 500,
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }
         )
     }
 
 }
 
+interface CreateChatBody {
+    ownerId: string
+    interlocutorId: string
+}
+
 export async function POST(req: NextRequest) {
     try {
-        const body = await req.json()
+        const body: CreateChatBody = await req.json() as CreateChatBody
         const { ownerId, interlocutorId } = body
 
         if (!ownerId) {

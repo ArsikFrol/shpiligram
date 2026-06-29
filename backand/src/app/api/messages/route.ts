@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from '@/lib/prisma'
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -13,9 +13,17 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(gifts)
 }
 
+interface CreateMessageBody {
+    content: string
+    chatId: string
+    senderId: string
+}
+
+
 export async function POST(req: NextRequest) {
     try {
-        const { content, chatId, senderId } = await req.json()
+        const body = await req.json() as CreateMessageBody
+        const { content, chatId, senderId } = body
 
         if (!content || !chatId || !senderId) {
             return NextResponse.json(

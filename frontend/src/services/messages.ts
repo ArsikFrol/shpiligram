@@ -1,17 +1,17 @@
-import { MessageModel } from "@/generated/prisma/models";
 import { axiosInstance } from "./instance";
 import { ApiRoutes } from "./constants";
+import { TGetMessage } from "@/store/messages/types";
 
-export const messages = async (chatId: string): Promise<MessageModel[]> => {
-    const { data } = await axiosInstance.get<MessageModel[]>(ApiRoutes.MESSAGES, {
+export const messages = async (chatId: string): Promise<TGetMessage[]> => {
+    const { data } = await axiosInstance.get<TGetMessage[]>(ApiRoutes.MESSAGES, {
         params: { chatId }
     })
 
     return data
 }
 
-export const createMessage = async (content: string, chatId: string, senderId: string): Promise<MessageModel> => {
-    const { data } = await axiosInstance.post<MessageModel>(ApiRoutes.MESSAGES, {
+export const createMessage = async (content: string, chatId: string, senderId: string): Promise<TGetMessage> => {
+    const { data } = await axiosInstance.post<TGetMessage>(ApiRoutes.MESSAGES, {
         content,
         chatId,
         senderId
