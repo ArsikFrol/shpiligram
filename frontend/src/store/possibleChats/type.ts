@@ -1,11 +1,11 @@
-import { UserModel } from "@/generated/prisma/models"
+import { TGetUser } from "../profile/types"
 
 
 export type TUsePossibleChats = {
     loading: boolean,
     error: boolean,
 
-    listPossibleChats: UserModel[],
+    listPossibleChats: TGetUser[],
 
     fetchPossibleChats: (name: string, userId: string, listInterlocutorsId: string[]) => Promise<void>
 }

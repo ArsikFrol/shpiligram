@@ -1,10 +1,11 @@
 import { UserCircle2Icon } from "lucide-react";
 import ContentLoader from "react-content-loader"
 
-import { UserModel } from "@/generated/prisma/models";
+import { TGetUser } from "@/store/profile/types";
+
 
 type Props = {
-    objProfile: UserModel
+    objProfile: TGetUser
 
     loading: boolean
 }
@@ -14,9 +15,9 @@ export default function PhotoProfile(props: Props) {
         <div className='w-[300px] mx-auto'>
             {props.loading
                 ? <ContentLoader speed={2} width={100} height={100} viewBox="0 0 100 100"
-                        backgroundColor="#3f3f46" foregroundColor="#52525b" className="mx-auto mb-[5px]" >
-                        <circle cx="50" cy="50" r="45" />
-                    </ContentLoader>
+                    backgroundColor="#3f3f46" foregroundColor="#52525b" className="mx-auto mb-[5px]" >
+                    <circle cx="50" cy="50" r="45" />
+                </ContentLoader>
                 : <UserCircle2Icon size={100} color="white" strokeWidth={1} className="mx-auto" />
             }
             <div className='text-white text-[25px] text-center'>

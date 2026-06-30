@@ -4,15 +4,15 @@ import { ArrowLeftToLine } from "lucide-react";
 import { JSX, useState } from "react";
 
 import { cn } from "@/lib/utils";
-import { UserModel } from "@/generated/prisma/models";
 
 import ThreeDots from "../UI/ThreeDots";
 import QrCodeCom from "./QrCodeCom";
 import { TypeRoutes, useTypedRouter } from "@/hooks/useTypedRouter";
 import SideProfile from "./SideProfile";
+import { TGetUser } from "@/store/profile/types";
 
 type Props = {
-    profile: UserModel,
+    profile: TGetUser,
 
     profileSide: boolean
     setProfileSide: (value: boolean) => void,

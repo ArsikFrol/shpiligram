@@ -2,19 +2,19 @@
 
 import { CircleUser } from "lucide-react";
 
-import { UserModel } from "@/generated/prisma/models";
 import { useTypedRouter } from "@/hooks/useTypedRouter";
 import { formatDateTime } from "@/lib/formatDate";
 import { cn } from "@/lib/utils";
+import { TGetUser } from "@/store/profile/types";
 
 type Props = {
-    profile: UserModel
+    profile: TGetUser
 }
 
 export default function PossibleElem(props: Props) {
     const router = useTypedRouter()
-    
-    return(
+
+    return (
         <div className={cn(
             'flex items-center gap-x-[10px]',
             'hover:scale-101 transition-transform duration-300 cursor-pointer'
