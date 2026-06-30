@@ -3,8 +3,6 @@
 import { useEffect, useRef } from "react"
 import { usePathname } from "next/navigation"
 
-import { MessageModel } from "@/generated/prisma/models"
-
 import useMessages from "@/store/messages/messagesStore"
 import useProfile from "@/store/profile/profileStore"
 
@@ -13,9 +11,10 @@ import { useFetchChat } from "@/hooks/useFetchChat"
 import Dialogue from "./Dialogue"
 import InputFolder from "./InputFolder"
 import { TypeRoutes } from "@/hooks/useTypedRouter"
+import { TGetMessage } from "@/store/messages/types"
 
 export default function ContantChat() {
-    const pathName: TypeRoutes = usePathname() as TypeRoutes 
+    const pathName: TypeRoutes = usePathname() as TypeRoutes
 
     const { loading, objChat } = useFetchChat(pathName.split('/')[2])
 
@@ -47,7 +46,7 @@ export default function ContantChat() {
 
     const clickSentHello = async () => {
         const tempId = `temp_${Date.now()}`
-        const obj: MessageModel = {
+        const obj: TGetMessage = {
             messageId: tempId,
             content: 'Привет!',
             senderId: userId,

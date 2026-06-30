@@ -1,12 +1,12 @@
 import { ClipLoader } from "react-spinners"
 
-import { MessageModel } from "@/generated/prisma/models"
 import { formatDateTime } from "@/lib/formatDate"
 import { cn } from "@/lib/utils"
+import { TGetMessage } from "@/store/messages/types"
 
 
 type Props = {
-    listMessages: MessageModel[],
+    listMessages: TGetMessage[],
 
     userId: string,
     loading: boolean,
