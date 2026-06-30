@@ -1,4 +1,5 @@
-import { GiftModel } from "@/generated/prisma/models";
+import { GiftModel } from "../../../../backand/src/generated/prisma/models"
+
 
 type TSender = {
     userId: string,
