@@ -22,10 +22,10 @@ type TElem = {
 }
 
 const listNav: TElem[] = [
-    { id: 1, text: 'Chats', elem: <MessageSquare color='white' size={25} />, link: '/chats' },
-    { id: 2, text: 'Add Chat', elem: < CircleUser color='white' size={25} />, link: '/addChat' },
-    { id: 3, text: 'Settings', elem: <Settings color='white' size={25} />, link: '/settings' },
-    { id: 4, text: 'Profile', elem: <UserRoundPen color='white' size={25} />, link: '/profile' }
+    { id: 1, text: 'Chats', elem: <MessageSquare color='white' />, link: '/chats' },
+    { id: 2, text: 'Add Chat', elem: < CircleUser color='white' />, link: '/addChat' },
+    { id: 3, text: 'Settings', elem: <Settings color='white' />, link: '/settings' },
+    { id: 4, text: 'Profile', elem: <UserRoundPen color='white' />, link: '/profile' }
 ]
 
 export default function Navigation(props: Props) {
@@ -62,7 +62,10 @@ export default function Navigation(props: Props) {
     }
 
     return (
-        <div className='bg-[#202D3D] rounded-4xl flex items-center gap-x-[10px] px-[10px] py-[10px] shadow'>
+        <div className={cn(
+            'bg-[#202D3D] rounded-4xl flex items-center gap-x-[10px] shadow',
+            'min-md:p-[10px] max-md:p-[5px]',
+        )}>
             {
                 listNav.map((obj, index: number) => {
                     const isActive = activeElem === obj.id
@@ -70,8 +73,9 @@ export default function Navigation(props: Props) {
 
                     return (
                         <div className={cn(
-                            "flex flex-col items-center gap-y-[5px] w-[150px] py-[10px]",
+                            "flex flex-col items-center gap-y-[5px] py-[10px]",
                             'hover:scale-105 transition-transform duration-300 cursor-pointer',
+                            'min-md:w-[150px] max-md:w-[120px]',
                             isActive && 'bg-active-bg rounded-4xl'
                         )} key={index} onClick={() => clickNav(obj)}>
                             {isActive

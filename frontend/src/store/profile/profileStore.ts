@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { TFolder, TUseProfile } from "./types";
-import { StoryModel, UserModel } from "@/generated/prisma/models";
+import { TFolder, TGetUser, TUseProfile } from "./types";
 import { Api } from "@/services/api-client";
+import { StoryModel } from "../../../../backand/src/generated/prisma/models";
 
-const defaultObjProfile: UserModel = {
+const defaultObjProfile: TGetUser = {
     userId: '',
     avatar: '',
     firstName: '',
@@ -24,6 +24,21 @@ const defaultObjProfile: UserModel = {
 
     createdAt: new Date(),
     updatedAt: new Date(),
+
+    settings: {
+        userSettingsId: '',
+
+        howSeeMobilePhone: 'EVERYBODY',
+        howSeeLastSeen: 'EVERYBODY',
+        howSeeBirthday: 'EVERYBODY',
+        howSeeGifts: 'EVERYBODY',
+        howSeeBio: 'EVERYBODY',
+
+        howCanCall: 'EVERYBODY',
+        howCanSentVoice: 'EVERYBODY',
+        howCanSentMessages: 'EVERYBODY',
+        howCanForwardedMessages: 'EVERYBODY',
+    }
 }
 
 const useProfile = create<TUseProfile>((set, get) => ({

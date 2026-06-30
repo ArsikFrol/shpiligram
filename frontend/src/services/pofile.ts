@@ -1,9 +1,9 @@
-import { UserModel } from "@/generated/prisma/models"
 import { axiosInstance } from "./instance"
 import { ApiRoutes } from "./constants"
+import { TGetUser } from "@/store/profile/types"
 
-export const getProfile = async (userId: string): Promise<UserModel> => {
-    const { data } = await axiosInstance.get<UserModel>(ApiRoutes.PROFILE, {
+export const getProfile = async (userId: string): Promise<TGetUser> => {
+    const { data } = await axiosInstance.get<TGetUser>(ApiRoutes.PROFILE, {
         params: {
             userId
         }
@@ -12,8 +12,8 @@ export const getProfile = async (userId: string): Promise<UserModel> => {
     return data
 }
 
-export const getBySearch = async (userName: string, userId: string): Promise<UserModel[]> => {
-    const { data } = await axiosInstance.get<UserModel[]>(ApiRoutes.PROFILE + '/search', {
+export const getBySearch = async (userName: string, userId: string): Promise<TGetUser[]> => {
+    const { data } = await axiosInstance.get<TGetUser[]>(ApiRoutes.PROFILE + '/search', {
         params: {
             userName,
             userId

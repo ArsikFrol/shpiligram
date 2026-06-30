@@ -4,11 +4,11 @@ import { useState } from "react"
 
 import { cn } from "@/lib/utils"
 import ListGifts from "./Gift/ListGifts"
-import { UserModel } from "@/generated/prisma/models"
 import ListStories from "./Story/ListStories"
+import { TGetUser } from "@/store/profile/types"
 
 type Props = {
-    obj: UserModel
+    obj: TGetUser
 }
 
 type TPostBtn = {
@@ -41,7 +41,7 @@ export default function SortStoryAndGiftInUser(props: Props) {
                 }
             </div>
             {activeBtn === 1
-                ? <ListStories recipientId={props.obj.userId}/>
+                ? <ListStories recipientId={props.obj.userId} />
                 : <ListGifts recipientId={props.obj.userId} />
             }
         </div>

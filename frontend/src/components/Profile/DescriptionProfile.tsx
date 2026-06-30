@@ -1,11 +1,11 @@
 import ContentLoader from "react-content-loader"
 
-import { UserModel } from "@/generated/prisma/models"
 import { calculateAge, formatMonthDay } from "@/lib/formatDate"
 import { cn } from "@/lib/utils"
+import { TGetUser } from "@/store/profile/types"
 
 type Props = {
-    objProfile: UserModel,
+    objProfile: TGetUser,
 
     loading: boolean
 }

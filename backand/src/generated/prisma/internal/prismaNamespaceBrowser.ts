@@ -57,7 +57,8 @@ export const ModelName = {
   Message: 'Message',
   Story: 'Story',
   StoryViewed: 'StoryViewed',
-  User: 'User'
+  User: 'User',
+  UserSettings: 'UserSettings'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -180,6 +181,25 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UserSettingsScalarFieldEnum = {
+  userSettingsId: 'userSettingsId',
+  howSeeMobilePhone: 'howSeeMobilePhone',
+  howSeeLastSeen: 'howSeeLastSeen',
+  howSeeBirthday: 'howSeeBirthday',
+  howSeeGifts: 'howSeeGifts',
+  howSeeBio: 'howSeeBio',
+  howCanCall: 'howCanCall',
+  howCanSentVoice: 'howCanSentVoice',
+  howCanSentMessages: 'howCanSentMessages',
+  howCanForwardedMessages: 'howCanForwardedMessages',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserSettingsScalarFieldEnum = (typeof UserSettingsScalarFieldEnum)[keyof typeof UserSettingsScalarFieldEnum]
 
 
 export const SortOrder = {

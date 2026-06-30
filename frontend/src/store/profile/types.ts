@@ -1,4 +1,4 @@
-import { StoryModel, UserModel } from "@/generated/prisma/models"
+import { StoryModel, UserModel } from "../../../../backand/src/generated/prisma/models"
 
 export type TFolder = 'ALL_CHATS' | 'STUDY'
 
@@ -22,7 +22,7 @@ type TSettings = {
 }
 
 export type TGetUser = UserModel & {
-    settings: TSettings 
+    settings: TSettings
 }
 
 export type TUseProfile = {
@@ -33,7 +33,7 @@ export type TUseProfile = {
     userId: string,
     setUserId: (newValue: string) => void,
 
-    objProfile: UserModel
+    objProfile: TGetUser
 
     listStories: StoryModel[],
     setListStories: (newValue: StoryModel[]) => void,

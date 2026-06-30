@@ -1,14 +1,15 @@
 'use client'
 
 import { BellRing, CircleUser, FolderCog, Languages, MessageCircleMore, UserRoundKey } from "lucide-react";
+import { JSX } from "react/jsx-runtime";
 
 import ThreeDots from "../UI/ThreeDots";
 import PhotoProfile from "../Profile/PhotoProfile";
 import useProfile from "@/store/profile/profileStore";
-import { JSX } from "react/jsx-runtime";
 import { cn } from "@/lib/utils";
 import { TypeRoutes, useTypedRouter } from "@/hooks/useTypedRouter";
 import SearchUI from "../UI/SearchUI";
+import { useFetchProfile } from "@/hooks/useFetchProfile";
 
 type TElem = {
     id: number,

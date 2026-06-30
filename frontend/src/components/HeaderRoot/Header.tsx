@@ -1,6 +1,7 @@
 'use client'
 
 import { JSX, useEffect, useState } from "react"
+import { BookMarked, Moon, Sun } from "lucide-react"
 
 import Stories from "./Stories"
 import RowStories from "./RowStories"
@@ -11,9 +12,8 @@ import ThreeDots from "../UI/ThreeDots"
 import useChats from "@/store/chats/chatsStore"
 import useStories from "@/store/stories/storiesStore"
 import SkeletonStories from "../Skeletons/SkeletonStories"
-import SearchUI from "../UI/SearchUI"
 import { TypeRoutes, useTypedRouter } from "@/hooks/useTypedRouter"
-import { BookMarked, Moon, Sun } from "lucide-react"
+import SearchUI from "../UI/SearchUI"
 
 type TElemSettings = {
     id: number,
@@ -23,11 +23,19 @@ type TElemSettings = {
 }
 
 const listSettings: TElemSettings[] = [
-    {id: 1, text: 'Day mode'},
-    {id: 2, elem: <BookMarked size={25} color="white" />, text: 'Seved messages', link: '/chats/savedMessages'}
+    { id: 1, text: 'Day mode' },
+    { id: 2, elem: <BookMarked size={25} color="white" />, text: 'Seved messages', link: '/chats/savedMessages' }
 ]
 
-export default function Header() {
+type Props = {
+    hiddenSearch?: boolean,
+    showGroupStories?: boolean
+
+    userId?: string,
+    userName?: string
+}
+
+export default function Header(props: Props) {
     const router = useTypedRouter()
 
     const [showBigStories, setShowBigStories] = useState<boolean>(false)
@@ -35,9 +43,6 @@ export default function Header() {
 
     const [showSettings, setShowSettings] = useState<boolean>(false)
 
-    const clickShowBurger = () => {
-        setShowSettings(!showSettings)
-    }
 
     const {
         listStoriesInterlocutors,
@@ -55,9 +60,15 @@ export default function Header() {
         listInterlocutorsId
     } = useChats()
 
+
+    const clickShowBurger = () => {
+        setShowSettings(!showSettings)
+    }
+
     const clickSettings = (link: TypeRoutes | undefined) => {
         router.push(link ? link : '/chats')
     }
+
 
     useEffect(() => {
         if (listInterlocutorsId.length > 0) {
@@ -76,11 +87,12 @@ export default function Header() {
 
     return (
         <>
-            <div className='flex'>
-                <div className='relative'>
+            <div className='flex relative'>
+                <div className=''>
                     {loading
                         ? [...Array(3)].map((_, index) => <SkeletonStories index={index} key={index} />)
-                        : !showRowStories && <Stories setShowRowStories={setShowRowStories} listStories={listStoriesInterlocutors} />
+                        : !showRowStories
+                        && <Stories setShowRowStories={setShowRowStories} listStories={listStoriesInterlocutors} />
                     }
                     <div className={cn(
                         'text-[25px] text-white font-semibold',
@@ -96,10 +108,10 @@ export default function Header() {
                         <div className={cn(
                             "absolute top-[30px] right-[0px] bg-bg rounded-2xl p-[20px] w-[250px]",
                             'flex flex-col gap-y-[10px]'
-                        )} style={showSettings ? {} : {display: 'none'}}>
+                        )} style={showSettings ? {} : { display: 'none' }}>
                             {showSettings &&
                                 listSettings.map((obj, index) => {
-                                    return(
+                                    return (
                                         <div key={index} className={cn(
                                             'h-[30px] leading-[30px] text-[18px] text-white',
                                             'flex items-center justify-between',
@@ -107,7 +119,7 @@ export default function Header() {
                                         )}
                                             onClick={() => clickSettings(obj.link)}>
                                             <div className="">{obj.text}</div>
-                                            {obj.id === 1 
+                                            {obj.id === 1
                                                 ? dayMode === 'sun'
                                                     ? <Sun size={25} color="white" />
                                                     : <Moon size={25} color="white" />

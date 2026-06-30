@@ -3,9 +3,10 @@
 import { Mic, Paperclip, SendHorizontal, Sticker } from "lucide-react"
 import { RefObject, useState } from "react"
 
-import { MessageModel } from "@/generated/prisma/models"
+
 import { cn } from "@/lib/utils"
 import { TChat } from "@/store/chats/types"
+import { TGetMessage } from "@/store/messages/types"
 
 type Props = {
     userId: string,
@@ -13,7 +14,7 @@ type Props = {
     objChat: TChat,
     textareaRef: RefObject<HTMLTextAreaElement | null>,
 
-    addMessageInChat: (chatId: string, message: MessageModel) => void,
+    addMessageInChat: (chatId: string, message: TGetMessage) => void,
 }
 
 export default function InputFolder(props: Props) {
@@ -25,7 +26,7 @@ export default function InputFolder(props: Props) {
 
         if (valueInput.trim()) {
             const tempId = `temp_${Date.now()}`
-            const obj: MessageModel = {
+            const obj: TGetMessage = {
                 messageId: tempId,
                 content: valueInput,
                 senderId: props.userId,
@@ -46,14 +47,29 @@ export default function InputFolder(props: Props) {
         }
     }
 
-    const handleSend = () => {
+    const handleSend = async () => {
         if (!valueInput.trim()) return;
-        
-        console.log('Сообщение отправлено:', valueInput);
-        setValueInput('');
-        
-        if (props.textareaRef.current) {
-        props.textareaRef.current.style.height = 'auto';
+
+        if (valueInput.trim()) {
+            const tempId = `temp_${Date.now()}`
+            const obj: TGetMessage = {
+                messageId: tempId,
+                content: valueInput,
+                senderId: props.userId,
+                sendTime: new Date(),
+                chatId: props.objChat?.chatId || '',
+                updatedAt: new Date(),
+                createdAt: new Date(),
+                isRead: false,
+                isEdited: false,
+            }
+
+            await props.addMessageInChat(props.objChat?.chatId || '', obj)
+            setValueInput('')
+
+            if (props.textareaRef.current) {
+                props.textareaRef.current.style.height = 'auto'
+            }
         }
     };
 
@@ -70,8 +86,8 @@ export default function InputFolder(props: Props) {
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        handleSend();
+            e.preventDefault();
+            handleSend();
         }
     };
 
@@ -91,7 +107,7 @@ export default function InputFolder(props: Props) {
                             'resize-none overflow-y-auto bg-transparent overflow-hidden',
                             'focus:outline-none focus:border-white/50 transition-colors',
                             'scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20'
-                        )} onChange={handleChange} onKeyDown={handleKeyDown} rows={1} 
+                        )} onChange={handleChange} onKeyDown={handleKeyDown} rows={1}
                         style={{ minHeight: '40px', maxHeight: '100px' }} />
                     <div className='flex items-center gap-x-[15px]'>
                         <Paperclip color="white" strokeWidth={1.5} size={20} className={cn(

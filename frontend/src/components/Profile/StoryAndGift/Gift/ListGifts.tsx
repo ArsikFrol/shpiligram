@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import DescGift from "./DescGift"
 import GiftElem from "./GiftElem"
 import useGifts from "@/store/gifts/giftsStore"
+import { cn } from "@/lib/utils"
 
 type Props = {
     recipientId: string
@@ -34,7 +35,10 @@ export default function ListGifts(props: Props) {
 
     return (
         <div className=''>
-            <div className='w-[600px] bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px]'>
+            <div className={cn(
+                'bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px]',
+                'min-lg:w-[800px] max-lg:mx-[30px]'
+            )}>
                 {
                     listGifts.map((obj, index: number) => {
                         return (

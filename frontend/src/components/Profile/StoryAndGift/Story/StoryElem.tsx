@@ -12,7 +12,8 @@ export default function StoryElem(props: Props) {
     return (
         <div className={cn(
             'hover:scale-105 transition-transform duration-300 cursor-pointer',
-            'w-[180px] h-[200px] mx-auto bg-container rounded-2xl relative',
+            'mx-auto bg-container rounded-2xl relative',
+            'min-lg:w-[210px] min-lg:h-[230px] max-lg:w-[180px] max-lg:h-[230px]'
         )} onClick={() => props.clickStory(props.obj.storyId)}>
             <div className='absolute right-[10px] bottom-[5px] flex gap-x-[5px] items-center'>
                 <div className='text-[12px] font-medium text-white'>{props.obj._countViewed}</div>

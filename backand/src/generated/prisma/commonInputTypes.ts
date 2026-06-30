@@ -192,6 +192,23 @@ export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumUserRoleFilter<$PrismaModel>
 }
 
+export type EnumhowSeeFilter<$PrismaModel = never> = {
+  equals?: $Enums.howSee | Prisma.EnumhowSeeFieldRefInput<$PrismaModel>
+  in?: $Enums.howSee[] | Prisma.ListEnumhowSeeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.howSee[] | Prisma.ListEnumhowSeeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumhowSeeFilter<$PrismaModel> | $Enums.howSee
+}
+
+export type EnumhowSeeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.howSee | Prisma.EnumhowSeeFieldRefInput<$PrismaModel>
+  in?: $Enums.howSee[] | Prisma.ListEnumhowSeeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.howSee[] | Prisma.ListEnumhowSeeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumhowSeeWithAggregatesFilter<$PrismaModel> | $Enums.howSee
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumhowSeeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumhowSeeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -381,6 +398,23 @@ export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumUserRoleFilter<$PrismaModel>
   _max?: Prisma.NestedEnumUserRoleFilter<$PrismaModel>
+}
+
+export type NestedEnumhowSeeFilter<$PrismaModel = never> = {
+  equals?: $Enums.howSee | Prisma.EnumhowSeeFieldRefInput<$PrismaModel>
+  in?: $Enums.howSee[] | Prisma.ListEnumhowSeeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.howSee[] | Prisma.ListEnumhowSeeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumhowSeeFilter<$PrismaModel> | $Enums.howSee
+}
+
+export type NestedEnumhowSeeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.howSee | Prisma.EnumhowSeeFieldRefInput<$PrismaModel>
+  in?: $Enums.howSee[] | Prisma.ListEnumhowSeeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.howSee[] | Prisma.ListEnumhowSeeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumhowSeeWithAggregatesFilter<$PrismaModel> | $Enums.howSee
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumhowSeeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumhowSeeFilter<$PrismaModel>
 }
 
 

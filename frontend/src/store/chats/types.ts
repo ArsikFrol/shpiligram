@@ -1,4 +1,4 @@
-import { ChatModel } from "../../../../backand/src/generated/prisma/models/Chat"
+import { ChatModel } from "../../../../backand/src/generated/prisma/models"
 
 export type Tinterlocutor = {
     userId: string,

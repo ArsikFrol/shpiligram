@@ -55,25 +55,25 @@ export default function page() {
     }, [searchParams])
 
     if (loading) return <div className=''>Загрузка...</div>
+    if (!objProfile) return <div className=''>Нет данныех о профиле</div>
 
     return (
         <>
-            {objProfile &&
-                <div className='h-[calc(100vh-200px)] overflow-y-auto' >
-                    <HeaderProfileUser profile={objProfile} />
-                    <PhotoProfile objProfile={objProfile} loading={loading} />
-                    {createNewChat &&
-                        <div className={cn(
-                            'w-[600px] mx-auto text-center bg-bg rounded-2xl text-white text-[20px] mt-[20px] py-[10px]',
-                            'hover:scale-101 transition-transform duration-300 cursor-pointer'
-                        )} onClick={clickWriteMessage}>
-                            Написать сообщенение
-                        </div>
-                    }
-                    <DescriptionProfile objProfile={objProfile} loading={loading}/>
-                    <StoriesGifts obj={objProfile} />
-                </div >
-            }
+            <div className='h-[calc(100vh-200px)] overflow-y-auto' >
+                <HeaderProfileUser profile={objProfile} />
+                <PhotoProfile objProfile={objProfile} loading={loading} />
+                {createNewChat &&
+                    <div className={cn(
+                        'w-[600px] mx-auto text-center bg-bg rounded-2xl text-white text-[20px] mt-[20px] py-[10px]',
+                        'hover:scale-101 transition-transform duration-300 cursor-pointer'
+                    )} onClick={clickWriteMessage}>
+                        Написать сообщенение
+                    </div>
+                }
+                <DescriptionProfile objProfile={objProfile} loading={loading} />
+                <StoriesGifts obj={objProfile} />
+            </div >
+
         </>
     )
 }

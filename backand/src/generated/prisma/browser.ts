@@ -52,3 +52,8 @@ export type StoryViewed = Prisma.StoryViewedModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model UserSettings
+ * 
+ */
+export type UserSettings = Prisma.UserSettingsModel

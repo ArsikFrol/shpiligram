@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
+
 import { Api } from '@/services/api-client'
-import { UserModel } from '@/generated/prisma/models'
+import { TGetUser } from '@/store/profile/types'
 
 type TReturn = {
-    objProfile: UserModel | undefined,
+    objProfile: TGetUser | undefined,
     loading: boolean,
     error: Error | undefined
 }
 
 export function useFetchProfile(userId: string): TReturn {
-    const [objProfile, setObjProfile] = useState<UserModel>()
+    const [objProfile, setObjProfile] = useState<TGetUser>()
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<Error>()
 

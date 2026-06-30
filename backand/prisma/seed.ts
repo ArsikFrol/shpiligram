@@ -1,11 +1,15 @@
-import { prisma } from "@/lib/prisma"
-import { chats, likes, messages, stories, users, gifts, storiesViewed } from "./constants"
+import { prisma } from "../src/lib/prisma"
+import { chats, likes, messages, stories, users, gifts, storiesViewed, userSettings } from "./constants"
 
 async function up() {
     console.log('Начинаем заполнение базы данных...')
 
     await prisma.user.createMany({
         data: users
+    })
+
+    await prisma.userSettings.createMany({
+        data: userSettings
     })
 
     const chatWithoutMessageId = chats.map(({ lastMessageId, ...chat }) => chat)
@@ -54,6 +58,7 @@ async function down() {
     await prisma.story.deleteMany()
     await prisma.message.deleteMany()
     await prisma.chat.deleteMany()
+    await prisma.userSettings.deleteMany()
 
     await prisma.user.deleteMany()
 

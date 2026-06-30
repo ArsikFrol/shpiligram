@@ -11,11 +11,14 @@ export async function GET(req: NextRequest) {
         )
     }
 
-    const user = await prisma.user.findMany({
+    const user = await prisma.user.findUnique({
         where: {
             userId: userId
+        },
+        include: {
+            settings: true
         }
     })
 
-    return NextResponse.json(user[0])
+    return NextResponse.json(user)
 }

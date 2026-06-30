@@ -55,16 +55,14 @@ export default function SortStoryAndGiftProfile(props: Props) {
     useEscape(() => setShowStory(false))
 
     useEffect(() => {
-        if (!userId) {
-            fetchListStoriesProfile(userId)
-            fetchListGifts(userId)
-        }
+        fetchListStoriesProfile(userId)
+        fetchListGifts(userId)
     }, [userId])
 
     if (loading) return (
         <div className={cn(
-            'w-[600px] bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px]',
-            'justify-items-center'
+            'bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px] justify-items-center',
+            'min-lg:w-[800px] max-lg:mx-[30px]'
         )}>
             {
                 [...Array(12)].map((_, index) => <SkeletStoryAndGift key={index} />)
@@ -75,7 +73,10 @@ export default function SortStoryAndGiftProfile(props: Props) {
 
     return (
         <>
-            <div className='w-[600px] bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px]'>
+            <div className={cn(
+                'bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px]',
+                'min-lg:w-[800px] max-lg:mx-[30px]'
+            )}>
                 {props.activeBtn === 'stories' &&
                     listStoriesProfile.filter(obj => !obj.isArchined).map((obj, index: number) => {
                         return (

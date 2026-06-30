@@ -15,3 +15,12 @@ export const UserRole = {
 } as const
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const howSee = {
+  EVERYBODY: 'EVERYBODY',
+  SELECT_LIST: 'SELECT_LIST',
+  NOBODY: 'NOBODY'
+} as const
+
+export type howSee = (typeof howSee)[keyof typeof howSee]

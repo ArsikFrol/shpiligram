@@ -1,4 +1,5 @@
-import { StoryModel } from "@/generated/prisma/models"
+import { StoryModel } from "../../../../backand/src/generated/prisma/models";
+
 
 export type TGetStoryProfile = StoryModel & {
     _countViewed: number,
