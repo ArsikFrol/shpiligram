@@ -1,3 +1,4 @@
+import Header from '@/components/HeaderRoot/Header'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ export default function Layout({
 }) {
     return (
         <>
+            <Header />
             {children}
         </>
     )

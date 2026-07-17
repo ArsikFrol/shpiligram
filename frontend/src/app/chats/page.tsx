@@ -35,7 +35,6 @@ export default function Home() {
 
     return (
         <>
-            <Header />
             {loading
                 ? [...Array(1)].map((_, index) => {
                     return (

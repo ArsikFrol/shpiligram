@@ -1,9 +1,11 @@
 import { cn } from "@/lib/utils"
+import { JSX } from "react/jsx-runtime"
 
 type Props = {
     functionYes: () => void,
     functionNo: () => void,
-    textWarning: string
+
+    textWarning: string | JSX.Element
 }
 
 export default function WarningText(props: Props) {

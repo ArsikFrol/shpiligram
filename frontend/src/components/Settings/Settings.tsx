@@ -42,16 +42,16 @@ export default function Settings() {
         router.push(link)
     }
 
-    if (!objProfile) return;
+    /* TODO: добавить <PhotoProfile loading={loading} objProfile={objProfile} /> */
 
     return (
         <div className="h-[calc(100vh-190px)] overflow-y-auto">
             <div className="flex items-center justify-end h-[40px] gap-x-[10px] ml-auto">
                 <SearchUI width={400} />
-                <ThreeDots onClick={() => { }} />
+                <ThreeDots onClick={() => { }} onClose={() => { }}/>
             </div>
             <div className="h-[calc(100vh-235px)] mt-[20px] overflow-y-auto scrollbar">
-                <PhotoProfile loading={loading} objProfile={objProfile} />
+                
                 <div className={cn(
                     "rounded-2xl mx-auto bg-bg p-[20px] mt-[50px]",
                     'flex flex-col gap-y-[20px]',
@@ -79,7 +79,6 @@ export default function Settings() {
                     }
                 </div>
             </div>
-
         </div>
     )
 }

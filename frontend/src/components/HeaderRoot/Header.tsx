@@ -27,15 +27,7 @@ const listSettings: TElemSettings[] = [
     { id: 2, elem: <BookMarked size={25} color="white" />, text: 'Seved messages', link: '/chats/savedMessages' }
 ]
 
-type Props = {
-    hiddenSearch?: boolean,
-    showGroupStories?: boolean
-
-    userId?: string,
-    userName?: string
-}
-
-export default function Header(props: Props) {
+export default function Header() {
     const router = useTypedRouter()
 
     const [showBigStories, setShowBigStories] = useState<boolean>(false)
@@ -61,12 +53,17 @@ export default function Header(props: Props) {
     } = useChats()
 
 
-    const clickShowBurger = () => {
+    const clickBurger = () => {
         setShowSettings(!showSettings)
+    }
+
+    const closeBurger = () => {
+        setShowSettings(false)
     }
 
     const clickSettings = (link: TypeRoutes | undefined) => {
         router.push(link ? link : '/chats')
+        setShowSettings(false)
     }
 
 
@@ -104,7 +101,7 @@ export default function Header(props: Props) {
                 <div className='flex items-center gap-x-[30px] ml-auto'>
                     <SearchUI hiddenSearch={!Boolean(listChats.length)} width={400} />
                     <div className="relative">
-                        <ThreeDots onClick={clickShowBurger} />
+                        <ThreeDots onClick={clickBurger} onClose={closeBurger} />
                         <div className={cn(
                             "absolute top-[30px] right-[0px] bg-bg rounded-2xl p-[20px] w-[250px]",
                             'flex flex-col gap-y-[10px]'
@@ -114,7 +111,7 @@ export default function Header(props: Props) {
                                     return (
                                         <div key={index} className={cn(
                                             'h-[30px] leading-[30px] text-[18px] text-white',
-                                            'flex items-center justify-between',
+                                            'flex items-center justify-between z-10',
                                             'hover:scale-101 transition-transform duration-300 cursor-pointer'
                                         )}
                                             onClick={() => clickSettings(obj.link)}>

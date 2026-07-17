@@ -47,7 +47,7 @@ export default function ShowStoryFromProfile(props: Props) {
                             </div>
                         </div>
                         <div className=''>
-                            <ThreeDots onClick={() => setShowSettings(!showSettings)} />
+                            <ThreeDots onClick={() => setShowSettings(!showSettings)} onClose={() => setShowSettings(false)} />
                             {showSettings &&
                                 <div className={cn(
                                     "absolute right-0 top-[30px] flex flex-col gap-y-[10px] bg-container rounded-2xl w-[180px]",

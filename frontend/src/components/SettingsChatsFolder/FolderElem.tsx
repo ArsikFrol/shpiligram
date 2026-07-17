@@ -12,6 +12,8 @@ type Props = {
 export default function FolderElem(props: Props) {
         
     const [showSettingsElem, setShowSettingsElem] = useState<string>('')
+    const [value, setValue] = useState<string>(props.obj.nameFolder)
+    const [placeholder, setPlaceholder] = useState<string>(props.obj.nameFolder)
 
 
     const clickShowsettings = (typeFolder: string) => {
@@ -24,7 +26,7 @@ export default function FolderElem(props: Props) {
     }
 
     const clickRename = () => {
-
+        setValue('')
     }
 
     return(
@@ -34,10 +36,11 @@ export default function FolderElem(props: Props) {
         )}>
             <div className="flex items-center gap-x-[20px]">
                 <ChevronsLeftRight size={20} color="white" className="rotate-90" />
-                <span>{props.obj.nameFolder}</span>
+                <input type="text" placeholder={placeholder} value={value} 
+                    onChange={e => setValue(e.target.value)} readOnly={!Boolean(showSettingsElem)}/>
             </div>
             {props.obj.typeFolder !== 'ALL_CHATS' &&
-                <ThreeDots onClick={() => clickShowsettings(props.obj.typeFolder)}/>
+                <ThreeDots onClick={() => clickShowsettings(props.obj.typeFolder)} onClose={() => setShowSettingsElem('')}/>
             }
             {props.obj.typeFolder === showSettingsElem &&
                 <div className={cn(

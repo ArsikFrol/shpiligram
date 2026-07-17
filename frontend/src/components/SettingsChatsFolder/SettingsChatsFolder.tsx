@@ -35,12 +35,12 @@ export default function SettingsChatsFolder() {
                 <TitleSettings title="Chat Folders" />
                 <div className="flex flex-col gap-y-[10px] my-[20px]">
                     {
-                        listFolder.map((obj, index) => <FolderElem obj={obj}/>)
+                        listFolder.map((obj, index) => <FolderElem key={index} obj={obj}/>)
                     }
                 </div>
                 <div className="h-[1px] flex-1 bg-container mb-[20px]"></div>
                 {showNewFolder
-                    ?<div className={cn(
+                    ? <div className={cn(
                         "flex-1 bg-container rounded-2xl text-white text-[16px] p-[10px] relative",
                         'flex items-center'
                     )}>
@@ -48,12 +48,12 @@ export default function SettingsChatsFolder() {
                             placeholder="Name folder..." value={valueFolder} onChange={e => setValueFolder(e.target.value)}/>
                         <Trash size={25} color="red" className="mr-[20px]" onClick={() => setShowNewFolder(false)} />
                     </div>
-                    :<div className="flex items-center gap-x-[10px]" onClick={clickNewFolder}>
-                    <div className="w-[25px] h-[25px] bg-blue-300 rounded-[9999px] flex items-center justify-center">
-                        <Plus color="white" size={20}/>
+                    : <div className="flex items-center gap-x-[10px]" onClick={clickNewFolder}>
+                        <div className="w-[25px] h-[25px] bg-blue-300 rounded-[9999px] flex items-center justify-center">
+                            <Plus color="white" size={20}/>
+                        </div>
+                        <div className="text-blue-300">Create new folder</div>
                     </div>
-                    <div className="text-blue-300">Create new folder</div>
-                </div>
                 }
             </div>
         </>

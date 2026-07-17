@@ -50,7 +50,7 @@ export default function HeaderProfile(props: Props) {
                     'relative flex items-center gap-x-[20px]',
                 )}>
                     <SideProfile setProfileSide={props.setProfileSide} profileSide={props.profileSide} />
-                    <ThreeDots onClick={() => setShowSettings(!showSettings)} />
+                    <ThreeDots onClick={() => setShowSettings(!showSettings)} onClose={() => setShowSettings(false)}/>
                     {showSettings &&
                         <div className={cn(
                             "absolute w-[150px] top-[30px] left-[-70px] bg-bg rounded-2xl p-[20px]",

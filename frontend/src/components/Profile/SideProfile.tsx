@@ -8,7 +8,8 @@ type Props = {
 
 export default function SideProfile(props: Props) {
     return(
-        <div className="relative inline-block group" onClick={() => props.setProfileSide(!props.profileSide)}>
+        <div className="relative inline-block group cursor-pointer" 
+            onClick={() => props.setProfileSide(!props.profileSide)}>
             {props.profileSide
                 ? <EyeOff size={25} color="white"/>
                 : <Eye size={25} color="white" />

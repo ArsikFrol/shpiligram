@@ -26,7 +26,7 @@ export default function LoadingTopContent(props: Props) {
                         className="group-hover:scale-115 transition-transform duration-300" />
                 </div>
                 <div className='w-[35px] h-[35px] flex justify-center items-center group cursor-pointer'>
-                    <ThreeDots onClick={() => { }} />
+                    <ThreeDots onClick={() => { }} onClose={() => {}}/>
                 </div>
 
             </div>

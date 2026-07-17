@@ -8,7 +8,7 @@ import useChats from "@/store/chats/chatsStore";
 import useProfile from "@/store/profile/profileStore";
 import SkeletonForLogoChats from "@/components/Skeletons/SkeletonForLogoChats";
 import ElemChatForChatIdPage from "@/components/Chat/ElemChatForChatIdPage";
-import Chatseved from "@/components/Chat/ChatSeved";
+import Chatseved from "@/components/Chat/ChatSeved/ChatSeved";
 
 export default function page() {
 

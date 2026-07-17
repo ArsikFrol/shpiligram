@@ -45,6 +45,10 @@ export default function TopContentChat() {
         setShowSettings(!showSettings)
     }
 
+    const closeThreeDots = () => {
+        setShowSettings(false)
+    }
+
     useEscape(() => {
         router.push('/chats')
 
@@ -89,7 +93,7 @@ export default function TopContentChat() {
                         className="group-hover:scale-115 transition-transform duration-300" />
                 </div>
                 <div className='w-[35px] h-[35px] flex justify-center items-center group cursor-pointer'>
-                    <ThreeDots onClick={clickThreeDots} />
+                    <ThreeDots onClick={clickThreeDots} onClose={closeThreeDots} />
                 </div>
             </div>
         </div>

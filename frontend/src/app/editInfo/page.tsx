@@ -1,16 +1,16 @@
 'use client'
 
-import EditInfo from "@/components/EditInfo/EditInfo";
-import HeaderEditorInfo from "@/components/Headers/HeaderEditorInfo";
-import WarningText from "@/components/UI/WarningText";
-import { useFetchProfile } from "@/hooks/useFetchProfile";
-import useProfile from "@/store/profile/profileStore";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
+import EditInfo from "@/components/EditInfo/EditInfo";
+import HeaderEditorInfo from "@/components/Headers/HeaderEditorInfo";
+import WarningText from "@/components/UI/WarningText";
+import { useTypedRouter } from "@/hooks/useTypedRouter";
+import useProfile from "@/store/profile/profileStore";
+
 export default function page() {
-    const router = useRouter()
+    const router = useTypedRouter()
 
     const {
         setFirstName,
@@ -47,7 +47,7 @@ export default function page() {
                 setShowWarning={setShowWarning} />
             <EditInfo valueInpoutName={valueInpoutName} setValueInpoutName={setValueInpoutName}
                 valueInpoutLastName={valueInpoutLastName} setValueInpoutLastName={setValueInpoutLastName}
-                valueBio={valueBio} setValueBio={setValueBio} />
+                valueBio={valueBio} setValueBio={setValueBio} objProfile={objProfile}/>
             {showWarning &&
                 <WarningText functionNo={clickBackPage} functionYes={clickSave}
                     textWarning="Уверены, что хотите изменить данные?" />

@@ -49,7 +49,7 @@ export default function HeaderProfileUser(props: Props) {
                     <div className={cn(
                         'relative flex items-center gap-x-[20px]',
                     )}>
-                        <ThreeDots onClick={() => setShowSettings(!showSettings)} />
+                        <ThreeDots onClick={() => setShowSettings(!showSettings)} onClose={() => setShowSettings(false)} />
 
                     </div>
                 </div>
