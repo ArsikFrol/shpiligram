@@ -27,7 +27,7 @@ export const createChat = async (ownerId: string, interlocutorId: string): Promi
     return data
 }
 
-export const deleteChat = async (chatId: string): Promise<TChat> => {
+export const deleteChat = async (chatId: string) => {
     const { data } = await axiosInstance.delete<TChat>(`${ApiRoutes.CHATS}/${chatId}`)
 
     return data

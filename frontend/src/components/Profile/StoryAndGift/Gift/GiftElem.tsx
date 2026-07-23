@@ -6,7 +6,7 @@ import { TGetGift } from "@/store/gifts/types"
 type Props = {
     clickGift: (giftId: string) => void,
 
-    obj: TGetGift
+    obj: TGetGift,
 }
 
 export default function GiftElem(props: Props) {

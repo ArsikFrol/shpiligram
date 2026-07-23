@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 
 import Navigation from '@/components/Navigation'
-import Header from '@/components/HeaderRoot/Header'
 
 import { cn } from '@/lib/utils'
 
@@ -16,7 +15,6 @@ export default function Layout({
 }) {
     return (
         <>
-            <Header />
             {children}
             <div className={cn(
                 'absolute bottom-[20px] left-1/2 -translate-x-1/2 z-0',

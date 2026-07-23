@@ -1,9 +1,10 @@
 'use client'
 
-import { formatMonthDay } from "@/lib/formatDate";
-import { cn } from "@/lib/utils";
 import { AtSign, Cake, Phone } from "lucide-react";
 import { useState } from "react";
+
+import { formatMonthDay } from "@/lib/formatDate";
+import { cn } from "@/lib/utils";
 import WarningInput from "../UI/WarningInput";
 import useProfile from "@/store/profile/profileStore";
 
@@ -20,7 +21,7 @@ export default function YourInfoEdit() {
     const [showWarningInputUserName, setShowWarningInputUserName] = useState<boolean>(false)
     const [showWarningInputBirthday, setShowWarningInputBirthday] = useState<boolean>(false)
 
-    return(
+    return (
         <>
             <div className='bg-bg rounded-2xl p-[20px]'>
                 <div className='text-blue-400 text-[20px] pb-[20px]'>Your Info</div>

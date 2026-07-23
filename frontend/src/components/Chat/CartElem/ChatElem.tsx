@@ -1,7 +1,5 @@
 'use client'
 
-import { useRouter } from "next/navigation"
-
 import { cn } from "@/lib/utils"
 import { TChat } from "@/store/chats/types"
 import Interlocutor from "./Interlocutor"

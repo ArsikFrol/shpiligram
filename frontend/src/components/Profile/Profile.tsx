@@ -7,17 +7,17 @@ import DescriptionProfile from "./DescriptionProfile";
 import SelectStoryAndGift from "./StoryAndGift/SelectStoryAndGift";
 
 export default function Profile() {
-    
+
     const {
         loading,
         objProfile
     } = useProfile()
 
-    return(
+    return (
         <>
-            <PhotoProfile loading={loading} objProfile={objProfile}/>
+            <PhotoProfile loading={loading} objProfile={objProfile} />
             <SettingsProfile />
-            <DescriptionProfile loading={loading} objProfile={objProfile}/>
+            <DescriptionProfile loading={loading} objProfile={objProfile} />
             <SelectStoryAndGift />
         </>
     )

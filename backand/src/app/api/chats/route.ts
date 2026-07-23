@@ -48,7 +48,8 @@ export async function GET(req: NextRequest) {
                         avatar: true,
                         lastName: true,
                         firstName: true,
-                        lastSeen: true
+                        lastSeen: true,
+                        isOnline: true
                     }
                 },
                 lastMessage: {

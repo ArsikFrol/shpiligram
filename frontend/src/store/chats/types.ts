@@ -6,6 +6,7 @@ export type Tinterlocutor = {
     lastName: string,
     firstName: string,
     lastSeen: Date,
+    isOnline: boolean
 }
 
 type TLastMessage = {

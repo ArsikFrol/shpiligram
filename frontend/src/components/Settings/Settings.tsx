@@ -42,41 +42,44 @@ export default function Settings() {
         router.push(link)
     }
 
-    /* TODO: добавить <PhotoProfile loading={loading} objProfile={objProfile} /> */
+    if (!objProfile) return;
 
     return (
-        <div className="h-[calc(100vh-190px)] overflow-y-auto">
+        <div className=''>
             <div className="flex items-center justify-end h-[40px] gap-x-[10px] ml-auto">
-                <SearchUI width={400} />
-                <ThreeDots onClick={() => { }} onClose={() => { }}/>
+                <SearchUI width={400} placeholder="Setting" />
+                <ThreeDots onClick={() => { }} onClose={() => { }} classForContainer="" classForElem=""
+                    listSettings={[]} />
             </div>
-            <div className="h-[calc(100vh-235px)] mt-[20px] overflow-y-auto scrollbar">
-                
-                <div className={cn(
-                    "rounded-2xl mx-auto bg-bg p-[20px] mt-[50px]",
-                    'flex flex-col gap-y-[20px]',
-                    'min-lg:w-[800px] max-lg:mx-[30px]'
-                )}>
-                    {
-                        listElem.map((obj: TElem, index) => {
-                            return (
-                                <div className={cn(
-                                    "flex items-center gap-x-[20px]",
-                                    'hover:scale-101 transition-transform duration-300 cursor-pointer'
-                                )}
-                                    key={index} onClick={() => clickElem(obj.link)}>
-                                    <div className="w-[50px] h-[50px] rounded-2xl flex items-center justify-center"
-                                        style={{ background: `${obj.bgColor}` }}>
-                                        {obj.elem}
+            <div className="h-[calc(100vh-230px)] overflow-y-auto scrollbar">
+                <div className="h-[calc(100vh-235px)] mt-[20px] overflow-y-auto scrollbar">
+                    <PhotoProfile loading={loading} objProfile={objProfile} />
+                    <div className={cn(
+                        "rounded-2xl mx-auto bg-bg p-[20px] mt-[50px]",
+                        'flex flex-col gap-y-[20px]',
+                        'min-lg:w-[800px] max-lg:mx-[30px]'
+                    )}>
+                        {
+                            listElem.map((obj: TElem, index) => {
+                                return (
+                                    <div className={cn(
+                                        "flex items-center gap-x-[20px]",
+                                        'hover:scale-101 transition-transform duration-300 cursor-pointer'
+                                    )}
+                                        key={index} onClick={() => clickElem(obj.link)}>
+                                        <div className="w-[50px] h-[50px] rounded-2xl flex items-center justify-center"
+                                            style={{ background: `${obj.bgColor}` }}>
+                                            {obj.elem}
+                                        </div>
+                                        <div className="flex flex-col gap-x-[10px]">
+                                            <div className="text-[18px] font-semibold text-white">{obj.title}</div>
+                                            <div className="text-[16px] font-medium text-gray-500">{obj.desc}</div>
+                                        </div>
                                     </div>
-                                    <div className="flex flex-col gap-x-[10px]">
-                                        <div className="text-[18px] font-semibold text-white">{obj.title}</div>
-                                        <div className="text-[16px] font-medium text-gray-500">{obj.desc}</div>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,17 +1,16 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+import { ClipLoader } from "react-spinners"
 
-import { cn } from "@/lib/utils";
-import Navigation from "@/components/Navigation";
-import Header from "@/components/HeaderRoot/Header";
-import Folders from "../../components/Folders/Folders";
-import useChats from "@/store/chats/chatsStore";
-import ListChats from "@/components/Chat/ListChats";
-import useProfile from "@/store/profile/profileStore";
-import SkeletonForListChats from "@/components/Skeletons/SkeletonForListChats";
-import SkeletonFolder from "@/components/Skeletons/SkeletonFolder";
-import { useTypedRouter } from "@/hooks/useTypedRouter";
+import { cn } from "@/lib/utils"
+import Navigation from "@/components/Navigation"
+import Folders from "../../components/Folders/Folders"
+import useChats from "@/store/chats/chatsStore"
+import ListChats from "@/components/Chat/ListChats"
+import useProfile from "@/store/profile/profileStore"
+import SkeletonFolder from "@/components/Skeletons/SkeletonFolder"
+import { useTypedRouter } from "@/hooks/useTypedRouter"
 
 export default function Home() {
     const router = useTypedRouter()
@@ -49,9 +48,11 @@ export default function Home() {
             }
             <div className='w-full'>
                 {loading
-                    ? <div className='w-full flex flex-col gap-y-[20px] h-[calc(100vh-320px)] overflow-y-auto'>
-                        {[...Array(10)].map((_, index) => <SkeletonForListChats key={index} />)}
-                    </div>
+                    ? <ClipLoader color="#3B82F6" size={50} className={cn(
+                        'w-[50px] h-[50px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+                    )} cssOverride={{
+                        borderWidth: '2px'
+                    }} />
                     : listChats.length
                         ? <ListChats setShowBtnById={setShowBtnById} showBtnById={showBtnById} />
                         : <div className={cn(
@@ -68,8 +69,7 @@ export default function Home() {
             </div>
             <div className={cn(
                 'absolute bottom-[20px] left-1/2 -translate-x-1/2 z-0',
-            )}
-                style={{ zIndex: 0 }}>
+            )} style={{ zIndex: 0 }}>
                 <Navigation activeElem={1} />
             </div>
         </>

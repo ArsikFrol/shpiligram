@@ -3,7 +3,7 @@ import { MessageModel } from "../../../../backand/src/generated/prisma/models/Me
 export type TGetMessage = MessageModel
 
 export type TUseMessage = {
-    loading: boolean,
+    loadingMessages: boolean,
     error: boolean,
 
     listMessages: TGetMessage[],

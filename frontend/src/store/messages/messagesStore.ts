@@ -3,27 +3,27 @@ import { Api } from "@/services/api-client";
 import { TGetMessage, TUseMessage } from "./types";
 
 const useMessages = create<TUseMessage>((set) => ({
-    loading: true,
+    loadingMessages: true,
     error: false,
 
     listMessages: [],
 
     fetchListMessages: async (chatId: string) => {
         try {
-            set({ loading: true, error: false })
+            set({ loadingMessages: true, error: false })
             const data = await Api.messages.messages(chatId)
             set({ listMessages: data })
         } catch (error) {
             console.log(error)
             set({ error: true })
         } finally {
-            set({ loading: false })
+            set({ loadingMessages: false })
         }
     },
 
     addMessageInChat: async (chatId: string, message: TGetMessage) => {
         try {
-            set({ loading: true, error: false })
+            set({ loadingMessages: true, error: false })
 
             const data = await Api.messages.createMessage(
                 message.content,
@@ -38,7 +38,7 @@ const useMessages = create<TUseMessage>((set) => ({
             console.log(error)
             set({ error: true })
         } finally {
-            set({ loading: false })
+            set({ loadingMessages: false })
         }
     }
 }))

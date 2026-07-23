@@ -16,14 +16,16 @@ type Props = {
     setShowStory: (value: boolean) => void
 }
 
-type TElem = {
+type TSetting = {
     id: number,
-    text: string
+    text: string,
+    onClick: () => void
 }
 
-const listSettings: TElem[] = [
-    { id: 1, text: 'Удалить историю' },
-    { id: 2, text: 'Посмотреть статистику' }
+const listSettings: TSetting[] = [
+    { id: 1, onClick: () => { console.log('sdf') }, text: 'Удалить историю' },
+    { id: 2, onClick: () => { }, text: 'Посмотреть статистику' },
+    { id: 3, onClick: () => { }, text: 'Переместить в архив' }
 ]
 
 export default function ShowStoryFromProfile(props: Props) {
@@ -46,26 +48,10 @@ export default function ShowStoryFromProfile(props: Props) {
                                 {formatMonthDayTime(chat.releaseDate)}
                             </div>
                         </div>
-                        <div className=''>
-                            <ThreeDots onClick={() => setShowSettings(!showSettings)} onClose={() => setShowSettings(false)} />
-                            {showSettings &&
-                                <div className={cn(
-                                    "absolute right-0 top-[30px] flex flex-col gap-y-[10px] bg-container rounded-2xl w-[180px]",
-                                    'p-[10px] shadow'
-                                )}>
-                                    {
-                                        listSettings.map((obj, index) => {
-                                            return (
-                                                <div key={index} className={cn(
-                                                    'text-left text-[14px] text-white',
-                                                    'hover:scale-101 transition-transform duration-300 cursor-pointer'
-                                                )}>{obj.text}</div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            }
-                        </div>
+                        <ThreeDots onClick={() => setShowSettings(!showSettings)} onClose={() => setShowSettings(false)}
+                            classForElem="text-left text-[14px] text-white" listSettings={listSettings} classForContainer={cn(
+                                'bg-bg w-[180px]'
+                            )} />
                     </div>
                     <div className={cn(
                         'bg-gray-400 w-full rounded-2xl flex-1'

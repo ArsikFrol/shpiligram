@@ -34,9 +34,8 @@ export default function page() {
                 'min-xl:grid-cols-[250px_auto]'
             )}>
                 <div className={cn(
-                    'flex flex-col gap-y-[30px] h-[calc(100vh-240px)] overflow-y-auto mt-[20px]',
-                    showRowStories && 'h-[calc(100vh-320px)]'
-                )}>
+                    'flex flex-col gap-y-[30px] h-[calc(100vh-240px)] overflow-y-auto mt-[20px]'
+                )} style={showRowStories ? { height: 'calc(100vh - 320px)' } : { height: 'calc(100vh-320px)' }}>
                     {loading
                         ? [...Array(10)].map((_, index) => {
                             return (
@@ -55,7 +54,7 @@ export default function page() {
                                 </div>
                             )
                         })
-                        : listChats.map((obj, index) => {
+                        : listChats.filter(objChat => objChat.lastMessage).map((obj, index) => {
                             return (
                                 <ElemChatForChatIdPage obj={obj} key={index} />
                             )

@@ -1,14 +1,14 @@
 'use client'
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { ChevronDown } from "lucide-react"
+
 import { cn } from "@/lib/utils"
 import YourInfoEdit from "./YourInfoEdit"
 import { useEscape } from "@/hooks/useEscape"
 import { useTypedRouter } from "@/hooks/useTypedRouter"
-import useProfile from "@/store/profile/profileStore"
 import { TGetUser } from "@/store/profile/types"
 import WarningText from "../UI/WarningText"
-import { ChevronDown, MoveRight } from "lucide-react"
 import TextChange from "./TextChange"
 
 type Props = {
@@ -33,7 +33,7 @@ export default function EditInfo(props: Props) {
 
     const getChangedFields = () => {
         const changes: { [key: string]: string } = {}
-        
+
         if (props.objProfile.firstName !== props.valueInpoutName) {
             changes.firstName = props.valueInpoutName
         }
@@ -43,7 +43,7 @@ export default function EditInfo(props: Props) {
         if (props.objProfile.bio !== props.valueBio) {
             changes.bio = props.valueBio
         }
-        
+
         return changes
     }
 
@@ -57,16 +57,16 @@ export default function EditInfo(props: Props) {
     const clickDontSave = () => {
         setShowWarning(false)
 
-        props.setValueBio('')
-        props.setValueInpoutLastName('')
-        props.setValueInpoutName('')
+        props.setValueBio(props.objProfile.bio)
+        props.setValueInpoutLastName(props.objProfile.lastName)
+        props.setValueInpoutName(props.objProfile.firstName)
 
         setShowChange(false)
     }
 
     const escapeFunction = () => {
         if (props.objProfile.firstName !== props.valueInpoutName ||
-            props.objProfile.lastName !== props.valueInpoutLastName || 
+            props.objProfile.lastName !== props.valueInpoutLastName ||
             props.objProfile.bio !== props.valueBio
         ) setShowWarning(true)
         else router.push('/profile')
@@ -128,7 +128,7 @@ export default function EditInfo(props: Props) {
                                     valueInpoutLastName={props.valueInpoutLastName} valueInpoutName={props.valueInpoutName} />
                             }
                         </>
-                    }/>
+                    } />
             }
         </div>
     )

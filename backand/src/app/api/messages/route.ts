@@ -1,16 +1,17 @@
+import { NextRequest, NextResponse } from "next/server"
+
 import { prisma } from '@/lib/prisma'
-import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
     const chatId = req.nextUrl.searchParams.get('chatId')!
 
-    const gifts = await prisma.message.findMany({
+    const messages = await prisma.message.findMany({
         where: {
             chatId
         }
     })
 
-    return NextResponse.json(gifts)
+    return NextResponse.json(messages)
 }
 
 interface CreateMessageBody {

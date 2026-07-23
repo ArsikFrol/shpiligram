@@ -1,4 +1,5 @@
 import { create } from "zustand";
+
 import { TFolder, TGetUser, TUseProfile } from "./types";
 import { Api } from "@/services/api-client";
 import { StoryModel } from "../../../../backand/src/generated/prisma/models";

@@ -1,12 +1,12 @@
 import ContantChat from "../ContantChat";
-import InputFolder from "../InputFolder";
 import TopContant from "./TopContant";
 
 export default function Chatseved() {
-    return(
+    return (
         <div className="bg-bg rounded-2xl">
             <TopContant />
-            <ContantChat />
+            <ContantChat listMessages={ } loadingChat={loadingChat} loadingMessages={loadingMessages}
+                objChat={objChat} />
         </div>
     )
 }

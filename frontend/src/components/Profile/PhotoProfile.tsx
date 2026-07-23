@@ -15,7 +15,7 @@ export default function PhotoProfile(props: Props) {
         <div className='w-[300px] mx-auto'>
             {props.loading
                 ? <ContentLoader speed={2} width={100} height={100} viewBox="0 0 100 100"
-                    backgroundColor="#3f3f46" foregroundColor="#52525b" className="mx-auto mb-[5px]" >
+                    backgroundColor="#3f3f46" foregroundColor="#52525b" className="mx-auto" >
                     <circle cx="50" cy="50" r="45" />
                 </ContentLoader>
                 : <UserCircle2Icon size={100} color="white" strokeWidth={1} className="mx-auto" />
@@ -26,7 +26,7 @@ export default function PhotoProfile(props: Props) {
                         backgroundColor="#3f3f46" foregroundColor="#52525b" >
                         <rect x="0" y="0" rx="6" ry="6" width="300" height="38" />
                     </ContentLoader>
-                    : <div className=''>{props.objProfile.firstName} {props.objProfile.lastName}</div>
+                    : <div className='leading-[38px]'>{props.objProfile.firstName} {props.objProfile.lastName}</div>
                 }
             </div>
         </div>

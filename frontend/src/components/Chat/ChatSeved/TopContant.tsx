@@ -7,16 +7,16 @@ import { ArrowLeft, BookMarked } from "lucide-react";
 
 export default function TopContant() {
     const router = useTypedRouter()
-    
+
     const clickBack = () => {
         router.push('/chats')
     }
 
-    return(
+    return (
         <div className={cn(
-                'mx-[10px] bg-container my-[10px] py-[10px]',
-                'flex justify-between items-center px-[40px] rounded-2xl'
-            )}>
+            'mx-[10px] bg-container my-[10px] py-[10px]',
+            'flex justify-between items-center px-[40px] rounded-2xl'
+        )}>
             <div className='w-[35px] h-[35px] flex justify-center items-center group  cursor-pointer'
                 onClick={clickBack}>
                 <ArrowLeft color="#ffffff" size={20}
@@ -31,7 +31,8 @@ export default function TopContant() {
                 </div>
             </div>
             <div className='w-[35px] h-[35px] flex justify-center items-center group cursor-pointer'>
-                <ThreeDots onClick={() => {}} onClose={() => {}}/>
+                <ThreeDots onClick={() => { }} onClose={() => { }} classForElem="" listSettings={[]}
+                    classForContainer="" />
             </div>
         </div>
     )

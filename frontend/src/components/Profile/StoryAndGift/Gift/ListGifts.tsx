@@ -1,55 +1,48 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import DescGift from "./DescGift"
 import GiftElem from "./GiftElem"
-import useGifts from "@/store/gifts/giftsStore"
 import { cn } from "@/lib/utils"
+import { TGetGift } from "@/store/gifts/types"
 
 type Props = {
-    recipientId: string
+    recipientId: string,
+
+    listGifts: TGetGift[]
 }
 
 export default function ListGifts(props: Props) {
     const [showDescGift, setShowDescGift] = useState<boolean>(false)
     const [idGiftShowDesc, setIdGiftShowDesc] = useState<string>('')
 
-    const {
-        loading,
-        listGifts,
-        fetchListGifts
-    } = useGifts()
-
     const clickGift = (id: string) => {
         setIdGiftShowDesc(id)
         setShowDescGift(true)
     }
 
-    useEffect(() => {
-        fetchListGifts(props.recipientId)
-    }, [props.recipientId])
-
-    if (loading) return <div className=''>Загрузка....</div>
-    if (!listGifts) return <div className=''>Нет данных</div>
-
     return (
-        <div className=''>
+        <>
             <div className={cn(
-                'bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px]',
-                'min-lg:w-[800px] max-lg:mx-[30px]'
+                'bg-bg rounded-2xl mx-auto py-[10px] min-h-[250px]',
+                'min-lg:w-[800px] max-lg:mx-[30px]',
+                props.listGifts.length && 'grid grid-cols-3 grid-row-1 gap-y-[15px]'
             )}>
-                {
-                    listGifts.map((obj, index: number) => {
+                {props.listGifts.length
+                    ? props.listGifts.map((obj, index: number) => {
                         return (
                             <GiftElem clickGift={clickGift} obj={obj} key={index} />
                         )
                     })
+                    : <div className='text-[22px] text-white text-center leading-[230px]'>
+                        Подарков нет
+                    </div>
                 }
             </div>
             {showDescGift &&
-                <DescGift obj={listGifts.find(obj => obj.giftId === idGiftShowDesc)!} setShowDescGift={setShowDescGift} />
+                <DescGift obj={props.listGifts.find(obj => obj.giftId === idGiftShowDesc)!} setShowDescGift={setShowDescGift} />
             }
-        </div>
+        </>
     )
 }

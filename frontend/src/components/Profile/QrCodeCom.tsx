@@ -1,8 +1,10 @@
-import { cn } from "@/lib/utils"
 import { QrCode, X } from "lucide-react"
 import Image from "next/image"
 import QRCode from 'qrcode'
 import { useEffect, useState } from "react"
+
+import { cn } from "@/lib/utils"
+import { useEscape } from "@/hooks/useEscape"
 
 type Props = {
     userId: string,
@@ -40,18 +42,9 @@ export default function QrCodeCom(props: Props) {
 
     useEffect(() => {
         generateQR()
-
-        const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') {
-                setShowBigQr(false)
-            }
-        }
-
-        window.addEventListener('keydown', handleEsc)
-        return () => {
-            window.removeEventListener('keydown', handleEsc)
-        }
     }, [])
+
+    useEscape(() => setShowBigQr(false))
 
     return (
         <>
@@ -59,7 +52,7 @@ export default function QrCodeCom(props: Props) {
                 className="hover:scale-105 transition-transform duration-300 cursor-pointer"
                 onClick={clickQr} />
             {showBigQr &&
-                <div className='fixed top-0 left-0 w-full h-screen bg-bg'>
+                <div className='fixed top-0 left-0 w-full h-screen bg-bg z-50'>
                     <div className={cn(
                         'w-[500px] h-[450px] bg-container rounded-2xl',
                         'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'

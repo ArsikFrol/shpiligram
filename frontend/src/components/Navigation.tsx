@@ -63,8 +63,7 @@ export default function Navigation(props: Props) {
 
     return (
         <div className={cn(
-            'bg-[#202D3D] rounded-4xl flex items-center gap-x-[10px] shadow',
-            'min-md:p-[10px] max-md:p-[5px]',
+            'bg-[#202D3D] rounded-4xl flex items-center gap-x-[10px] shadow p-[7px]'
         )}>
             {
                 listNav.map((obj, index: number) => {
@@ -72,12 +71,11 @@ export default function Navigation(props: Props) {
                     const activeColor = 'oklch(62.3% 0.214 259.815)'
 
                     return (
-                        <div className={cn(
+                        <div key={index} className={cn(
                             "flex flex-col items-center gap-y-[5px] py-[10px]",
                             'hover:scale-105 transition-transform duration-300 cursor-pointer',
                             'min-md:w-[150px] max-md:w-[120px]',
-                            isActive && 'bg-active-bg rounded-4xl'
-                        )} key={index} onClick={() => clickNav(obj)}>
+                        )} style={isActive ? { background: '#20364D', borderRadius: '32px' } : {}} onClick={() => clickNav(obj)}>
                             {isActive
                                 ? cloneElement(obj.elem, { color: activeColor })
                                 : obj.elem

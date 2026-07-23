@@ -5,7 +5,7 @@ import { TChat } from '@/store/chats/types'
 
 export function useFetchChat(chatId: string) {
     const [objChat, setObjChat] = useState<TChat>()
-    const [loading, setLoading] = useState(true)
+    const [loadingChat, setLoadingChat] = useState(true)
     const [error, setError] = useState<Error>()
 
     useEffect(() => {
@@ -17,12 +17,12 @@ export function useFetchChat(chatId: string) {
             } catch (err) {
                 setError(err as Error)
             } finally {
-                setLoading(false)
+                setLoadingChat(false)
             }
         }
 
         fetchChat()
     }, [chatId])
 
-    return { objChat, loading, error }
+    return { objChat, loadingChat, error }
 }
