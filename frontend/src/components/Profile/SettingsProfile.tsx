@@ -22,7 +22,10 @@ export default function SettingsProfile() {
     const router = useTypedRouter()
 
     return (
-        <div className="flex justify-between w-[600px] mx-auto mt-[50px]">
+        <div className={cn(
+            "flex justify-between mx-auto mt-[50px]",
+            'min-lg:w-[800px] max-lg:mx-[30px]'
+        )}>
             {
                 listElem.map((obj, index: number) => {
                     return (

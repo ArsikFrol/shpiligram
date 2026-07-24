@@ -4,21 +4,22 @@ import useProfile from "@/store/profile/profileStore";
 import PhotoProfile from "./PhotoProfile";
 import SettingsProfile from "./SettingsProfile";
 import DescriptionProfile from "./DescriptionProfile";
-import SelectStoryAndGift from "./StoryAndGift/SelectStoryAndGift";
+import StoryAndGift from "./StoryAndGift/StoryAndGift";
 
 export default function Profile() {
 
     const {
-        loading,
-        objProfile
+        loadingProfile,
+        objProfile,
+        errorProfile
     } = useProfile()
 
     return (
         <>
-            <PhotoProfile loading={loading} objProfile={objProfile} />
+            <PhotoProfile loading={loadingProfile} objProfile={objProfile} error={errorProfile} />
             <SettingsProfile />
-            <DescriptionProfile loading={loading} objProfile={objProfile} />
-            <SelectStoryAndGift />
+            <DescriptionProfile loading={loadingProfile} objProfile={objProfile} error={errorProfile} />
+            <StoryAndGift />
         </>
     )
 }

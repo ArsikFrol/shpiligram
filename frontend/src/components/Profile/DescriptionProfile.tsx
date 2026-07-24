@@ -7,7 +7,8 @@ import { TGetUser } from "@/store/profile/types"
 type Props = {
     objProfile: TGetUser,
 
-    loading: boolean
+    loading: boolean,
+    error: boolean
 }
 
 export default function DescriptionProfile(props: Props) {
@@ -24,7 +25,9 @@ export default function DescriptionProfile(props: Props) {
                             backgroundColor="#3f3f46" foregroundColor="#52525b" >
                             <rect x="0" y="0" rx="6" ry="6" width="300" height="30" />
                         </ContentLoader>
-                        : <span>{props.objProfile.mobile}</span>
+                        : props.error
+                            ? <span>Ошибка при загрузке</span>
+                            : <span>{props.objProfile.mobile}</span>
                     }
                 </div>
                 <div className='text-[16px] text-gray-500'>Mobile</div>
@@ -37,7 +40,9 @@ export default function DescriptionProfile(props: Props) {
                                 backgroundColor="#3f3f46" foregroundColor="#52525b" >
                                 <rect x="0" y="0" rx="6" ry="6" width="300" height="30" />
                             </ContentLoader>
-                            : <span>{props.objProfile.bio}</span>
+                            : props.error
+                                ? <span>Ошибка при загрузке</span>
+                                : <span>{props.objProfile.bio}</span>
                         }
                     </div>
                     <div className='text-[16px] text-gray-500'>Bio</div>
@@ -50,7 +55,9 @@ export default function DescriptionProfile(props: Props) {
                             backgroundColor="#3f3f46" foregroundColor="#52525b" >
                             <rect x="0" y="0" rx="6" ry="6" width="300" height="30" />
                         </ContentLoader>
-                        : <span>@{props.objProfile.userName}</span>
+                        : props.error
+                            ? <span>Ошибка при загрузке</span>
+                            : <span>@{props.objProfile.userName}</span>
                     }
                 </div>
                 <div className='text-[16px] text-gray-500'>Username</div>
@@ -61,7 +68,9 @@ export default function DescriptionProfile(props: Props) {
                         backgroundColor="#3f3f46" foregroundColor="#52525b" >
                         <rect x="0" y="0" rx="6" ry="6" width="300" height="30" />
                     </ContentLoader>
-                    : <div className='flex items-center gap-x-[10px]'>
+                    : props.error
+                        ? <span className="text-[20px] text-white">Ошибка при загрузке</span>
+                        : <div className='flex items-center gap-x-[10px]'>
                         <div className='text-[20px] text-white'>
                             {formatMonthDay(new Date(props.objProfile.birthday))}
                         </div>

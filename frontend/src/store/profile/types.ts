@@ -27,8 +27,8 @@ export type TGetUser = UserModel & {
 
 export type TUseProfile = {
 
-    loading: boolean,
-    error: boolean,
+    loadingProfile: boolean,
+    errorProfile: boolean,
 
     userId: string,
     setUserId: (newValue: string) => void,

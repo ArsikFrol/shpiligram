@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation"
 import { useEffect } from "react"
 
-import TopContentChat from "./TopContentChat"
+import TopContentChat from "./TopContantChat/TopContentChat"
 import ContantChat from "./ContantChat"
 import { cn } from "@/lib/utils"
 import useProfile from "@/store/profile/profileStore"

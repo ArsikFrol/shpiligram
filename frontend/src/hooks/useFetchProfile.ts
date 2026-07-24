@@ -5,19 +5,19 @@ import { TGetUser } from '@/store/profile/types'
 
 type TReturn = {
     objProfile: TGetUser | undefined,
-    loading: boolean,
-    error: Error | undefined
+    loadingProfileHookFetch: boolean,
+    errorProfileHookFetch: Error | undefined
 }
 
 export function useFetchProfile(userId: string): TReturn {
     const [objProfile, setObjProfile] = useState<TGetUser>()
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState<Error>()
+    const [loadingProfileHookFetch, setLoadingProfileHookFetch] = useState(true)
+    const [errorProfileHookFetch, setErrorProfileHookFetch] = useState<Error>()
 
     useEffect(() => {
         if (!userId) {
             console.log('Нет userId')
-            setLoading(false)
+            setLoadingProfileHookFetch(false)
             return
         }
 
@@ -25,14 +25,14 @@ export function useFetchProfile(userId: string): TReturn {
             try {
                 await Api.profile.getProfile(userId).then(profile => setObjProfile(profile))
             } catch (err) {
-                setError(err as Error)
+                setErrorProfileHookFetch(err as Error)
             } finally {
-                setLoading(false)
+                setLoadingProfileHookFetch(false)
             }
         }
 
         fetchProfile()
     }, [userId])
 
-    return { objProfile, loading, error }
+    return { objProfile, loadingProfileHookFetch, errorProfileHookFetch }
 }

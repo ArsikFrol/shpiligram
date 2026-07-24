@@ -1,6 +1,5 @@
 import Navigation from '@/components/Navigation'
 import ReturnToSettings from '@/components/Settings/ReturnToSettings'
-import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -16,11 +15,7 @@ export default function RootLayout({
         <>
             <ReturnToSettings />
             {children}
-            <div className={cn(
-                'absolute bottom-[20px] left-1/2 -translate-x-1/2',
-            )}>
-                <Navigation activeElem={0} />
-            </div>
+            <Navigation activeElem={0} />
         </>
     )
 }

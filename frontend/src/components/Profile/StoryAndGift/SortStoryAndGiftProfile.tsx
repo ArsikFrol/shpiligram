@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 
-import { TActiveBtn } from "./SelectStoryAndGift"
 import StoryElem from "./Story/StoryElem"
 import GiftElem from "./Gift/GiftElem"
 import ShowStoryFromProfile from "./ShowStoryFromProfile"
@@ -14,6 +13,7 @@ import useProfile from "@/store/profile/profileStore"
 import useStories from "@/store/stories/storiesStore"
 import useGifts from "@/store/gifts/giftsStore"
 import { useEscape } from "@/hooks/useEscape"
+import { TActiveBtn } from "./StoryAndGift"
 
 type Props = {
     activeBtn: TActiveBtn
@@ -34,12 +34,15 @@ export default function SortStoryAndGiftProfile(props: Props) {
     const {
         listStoriesProfile,
         fetchListStoriesProfile,
-        loading
+        loadingStories,
+        errorStories
     } = useStories()
 
     const {
         listGifts,
         fetchListGifts,
+        loadingGifts,
+        errorGifts  
     } = useGifts()
 
     const clickStory = (storyId: string) => {
@@ -59,13 +62,13 @@ export default function SortStoryAndGiftProfile(props: Props) {
         fetchListGifts(userId)
     }, [userId])
 
-    if (loading) return (
+    if (loadingStories) return (
         <div className={cn(
             'bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px] justify-items-center',
             'min-lg:w-[800px] max-lg:mx-[30px]'
         )}>
             {
-                [...Array(12)].map((_, index) => <SkeletStoryAndGift key={index} />)
+                [...Array(3)].map((_, index) => <SkeletStoryAndGift key={index} />)
             }
         </div>
     )
@@ -74,7 +77,7 @@ export default function SortStoryAndGiftProfile(props: Props) {
     return (
         <>
             <div className={cn(
-                'bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px]',
+                'bg-bg rounded-2xl mx-auto grid grid-cols-3 grid-row-1 gap-y-[15px] py-[10px] min-h-[250px]',
                 'min-lg:w-[800px] max-lg:mx-[30px]'
             )}>
                 {props.activeBtn === 'stories' &&

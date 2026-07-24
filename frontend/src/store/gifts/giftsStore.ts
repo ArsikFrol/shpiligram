@@ -3,21 +3,21 @@ import { create } from "zustand"
 import { TUseGifts } from "./types"
 
 const useGifts = create<TUseGifts>((set) => ({
-    loading: true,
-    error: false,
+    loadingGifts: true,
+    errorGifts: false,
 
     listGifts: [],
 
     fetchListGifts: async (recipientId: string) => {
         try {
-            set({ loading: true, error: false })
+            set({ loadingGifts: true, errorGifts: false })
             const data = await Api.gifts.gifts(recipientId)
             set({ listGifts: data })
         } catch (error) {
             console.log(error)
-            set({ error: true })
+            set({ errorGifts: true })
         } finally {
-            set({ loading: false })
+            set({ loadingGifts: false })
         }
     },
 }))

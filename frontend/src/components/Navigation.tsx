@@ -63,7 +63,8 @@ export default function Navigation(props: Props) {
 
     return (
         <div className={cn(
-            'bg-[#202D3D] rounded-4xl flex items-center gap-x-[10px] shadow p-[7px]'
+            'bg-[#202D3D] rounded-4xl flex items-center gap-x-[10px] shadow p-[7px]',
+            'absolute bottom-[20px] left-1/2 -translate-x-1/2 z-0'
         )}>
             {
                 listNav.map((obj, index: number) => {

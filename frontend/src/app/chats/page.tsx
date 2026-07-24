@@ -67,11 +67,7 @@ export default function Home() {
                         </div>
                 }
             </div>
-            <div className={cn(
-                'absolute bottom-[20px] left-1/2 -translate-x-1/2 z-0',
-            )} style={{ zIndex: 0 }}>
-                <Navigation activeElem={1} />
-            </div>
+            <Navigation activeElem={1} />
         </>
     )
 }

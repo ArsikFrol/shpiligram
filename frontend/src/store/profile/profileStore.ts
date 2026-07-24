@@ -44,8 +44,8 @@ const defaultObjProfile: TGetUser = {
 
 const useProfile = create<TUseProfile>((set, get) => ({
 
-    loading: true,
-    error: false,
+    loadingProfile: true,
+    errorProfile: false,
 
     userId: 'user_1',
     setUserId: (newValue) => set({ userId: newValue }),
@@ -57,14 +57,14 @@ const useProfile = create<TUseProfile>((set, get) => ({
 
     fetchProfile: async (userId: string) => {
         try {
-            set({ loading: true, error: false })
+            set({ loadingProfile: true, errorProfile: false })
             const data = await Api.profile.getProfile(userId)
             set({ objProfile: data })
         } catch (error) {
             console.log(error)
-            set({ error: true })
+            set({ errorProfile: true })
         } finally {
-            set({ loading: false })
+            set({ loadingProfile: false })
         }
     },
 

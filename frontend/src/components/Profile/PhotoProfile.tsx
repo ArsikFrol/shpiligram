@@ -7,7 +7,8 @@ import { TGetUser } from "@/store/profile/types";
 type Props = {
     objProfile: TGetUser
 
-    loading: boolean
+    loading: boolean,
+    error: boolean
 }
 
 export default function PhotoProfile(props: Props) {
@@ -26,7 +27,9 @@ export default function PhotoProfile(props: Props) {
                         backgroundColor="#3f3f46" foregroundColor="#52525b" >
                         <rect x="0" y="0" rx="6" ry="6" width="300" height="38" />
                     </ContentLoader>
-                    : <div className='leading-[38px]'>{props.objProfile.firstName} {props.objProfile.lastName}</div>
+                    : props.error
+                        ? <div className="leading-[38px]">Ошибка при загрузке</div>
+                        : <div className='leading-[38px]'>{props.objProfile.firstName} {props.objProfile.lastName}</div>
                 }
             </div>
         </div>

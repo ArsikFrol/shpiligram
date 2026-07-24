@@ -6,16 +6,16 @@ import { JSX, useState } from "react"
 import { cn } from "@/lib/utils"
 import useChats from "@/store/chats/chatsStore"
 
-import ThreeDots from "../UI/ThreeDots"
+import ThreeDots from "../../UI/ThreeDots"
 import { formatDateTime } from "@/lib/formatDate"
 import { useFetchProfile } from "@/hooks/useFetchProfile"
 import { useEscape } from "@/hooks/useEscape"
 import { useTypedRouter } from "@/hooks/useTypedRouter"
-import SkeletonTopContentChat from "../Skeletons/SkeletonTopContentChat"
+import SkeletonTopContentChat from "../../Skeletons/SkeletonTopContentChat"
 import { TChat } from "@/store/chats/types"
 import EmptyTopContantChat from "./EmptyTopContantChat"
-import SearchUI from "../UI/SearchUI"
-import WarningText from "../UI/WarningText"
+import SearchUI from "../../UI/SearchUI"
+import WarningText from "../../UI/WarningText"
 
 type Props = {
     loadingChat: boolean,

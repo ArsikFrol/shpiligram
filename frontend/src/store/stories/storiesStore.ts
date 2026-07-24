@@ -4,10 +4,10 @@ import { TUseStories } from "./types";
 import { Api } from "@/services/api-client";
 
 const useStories = create<TUseStories>((set) => ({
-    loading: true,
-    setLoadingStories: (value: boolean) => set({ loading: value }),
+    loadingStories: true,
+    setLoadingStories: (value: boolean) => set({ loadingStories: value }),
 
-    error: false,
+    errorStories: false,
 
     listStoriesProfile: [],
 
@@ -16,26 +16,26 @@ const useStories = create<TUseStories>((set) => ({
 
     fetchListStoriesProfile: async (userId: string) => {
         try {
-            set({ loading: true, error: false })
+            set({ loadingStories: true, errorStories: false })
             const data = await Api.stories.getStoriesProfile(userId)
             set({ listStoriesProfile: data })
         } catch (error) {
             console.log(error)
-            set({ error: true })
+            set({ errorStories: true })
         } finally {
-            set({ loading: false })
+            set({ loadingStories: false })
         }
     },
     fetchListStoriesInterlocutors: async (userId: string, InterlocutorsId: string[]) => {
         try {
-            set({ loading: true, error: false })
+            set({ loadingStories: true, errorStories: false })
             const data = await Api.stories.getStoriesInterlocutors(userId, InterlocutorsId)
             set({ listStoriesInterlocutors: data })
         } catch (error) {
             console.log(error)
-            set({ error: true })
+            set({ errorStories: true })
         } finally {
-            set({ loading: false })
+            set({ loadingStories: false })
         }
     }
 }))

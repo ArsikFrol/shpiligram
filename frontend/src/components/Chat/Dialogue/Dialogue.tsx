@@ -69,9 +69,8 @@ export default function Dialogue(props: Props) {
             'px-[10px] overflow-y-auto',
             'flex flex-col gap-y-[10px] scrollbar',
         )} style={showRowStories ? { height: 'calc(100vh - 475px)' } : { height: 'calc(100vh - 395px' }} >
-            {props.listMessages.map((obj, index: number) => (
-                <Message objMessage={obj} userId={userId} key={index} />
-            ))
+            {
+                props.listMessages.map((obj, index: number) => <Message objMessage={obj} userId={userId} key={index} />)
             }
             <div ref={messagesEndRef} />
         </div>

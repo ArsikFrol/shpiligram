@@ -3,19 +3,21 @@
 import useProfile from "@/store/profile/profileStore"
 import PhotoProfile from "../PhotoProfile"
 import DescriptionProfile from "../DescriptionProfile"
-import SortStoryAndGiftInUser from "../StoryAndGift/SortStoryAndGiftInUser"
+import StoryAndGift from "../StoryAndGift/StoryAndGift"
 
 export default function ProfileSide() {
     const {
-        loading,
-        objProfile
+        loadingProfile,
+        objProfile,
+        errorProfile
     } = useProfile()
     
     return(
         <>
-            <PhotoProfile loading={loading} objProfile={objProfile}/>
-            <DescriptionProfile loading={loading} objProfile={objProfile}/>
-            <SortStoryAndGiftInUser obj={objProfile}/>  
+            <PhotoProfile loading={loadingProfile} objProfile={objProfile} error={errorProfile} />
+            <DescriptionProfile loading={loadingProfile} objProfile={objProfile} error={errorProfile} />
+            {/* <SortStoryAndGiftInUser obj={objProfile}/>   */}
+            <StoryAndGift hiddenBtnArchinedStories/>
         </>
     )
 }

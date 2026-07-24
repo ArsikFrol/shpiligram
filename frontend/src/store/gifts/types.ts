@@ -13,8 +13,8 @@ export type TGetGift = GiftModel & {
 }
 
 export type TUseGifts = {
-    loading: boolean,
-    error: boolean,
+    loadingGifts: boolean,
+    errorGifts: boolean,
 
     listGifts: TGetGift[],
 

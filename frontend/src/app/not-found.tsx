@@ -1,13 +1,13 @@
 'use client'
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 import notFoundImage from '../../public/404.png'
 import { cn } from "@/lib/utils";
+import { useTypedRouter } from "@/hooks/useTypedRouter";
 
 export default function NotFound() {
-    const router = useRouter()
+    const router = useTypedRouter()
 
     return (
         <div className="fixed w-full h-screen top-0 left-0 z-10 bg-bg">

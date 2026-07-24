@@ -1,8 +1,30 @@
-import { ArrowLeft, CircleUser, EllipsisVertical, Phone } from "lucide-react"
+'use client'
+
+import { ArrowLeft, CircleUser, Copy, EllipsisVertical, Forward, Phone, Pin, Reply, Trash } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import ThreeDots from "@/components/UI/ThreeDots"
+import { JSX, useState } from "react"
+
+type TSetting = {
+    id: number,
+    text: string,
+    elem: JSX.Element
+
+    onClick: () => void
+}
+
+const listSettings: TSetting[] = [
+    {id: 1, elem: <Reply color="white" size={25} />, text: 'Reply', onClick: () => {}},
+    {id: 2, elem: <Copy color="white" size={25} />, text: 'Copy', onClick: () => {}},
+    {id: 3, elem: <Forward color="white" size={25} />, text: 'Forward', onClick: () => {}},
+    {id: 4, elem: <Pin color="white" size={25} />, text: 'Pin', onClick: () => {}},
+    {id: 5, elem: <Trash color="white" size={25} />, text: 'Delete', onClick: () => {}}
+]
 
 export default function EmptyTopContantChat() {
+    const [showSettings, setShowSettings] = useState<boolean>(false)
+    
     return (
         <div className={cn(
             'mx-[10px] bg-container my-[10px] py-[10px]',
@@ -36,7 +58,25 @@ export default function EmptyTopContantChat() {
                         className="group-hover:scale-115 transition-transform duration-300" />
                 </div>
                 <div className='w-[35px] h-[35px] flex justify-center items-center group cursor-pointer'>
-                    <EllipsisVertical size={25} color="white" />
+                    <EllipsisVertical size={25} color="white" onClick={() => setShowSettings(true)} />
+                    {showSettings &&
+                        <div className={cn(
+                            ''
+                        )}>
+                            {
+                                listSettings.map((obj: TSetting, index) => {
+                                    return(
+                                        <div key={index} className={cn(
+                                            "flex items-center gap-x-[10px]"
+                                        )}>
+                                            {obj.elem}
+                                            <div className="">{obj.text}</div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    }
                 </div>
             </div>
         </div>

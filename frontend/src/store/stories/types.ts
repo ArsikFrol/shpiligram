@@ -25,10 +25,10 @@ export type TGetStory = StoryModel & {
 }
 
 export type TUseStories = {
-    loading: boolean,
+    loadingStories: boolean,
     setLoadingStories: (value: boolean) => void,
 
-    error: boolean,
+    errorStories: boolean,
 
     listStoriesProfile: TGetStoryProfile[]
 
