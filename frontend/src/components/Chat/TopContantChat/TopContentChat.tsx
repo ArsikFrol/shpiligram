@@ -9,7 +9,6 @@ import useChats from "@/store/chats/chatsStore"
 import ThreeDots from "../../UI/ThreeDots"
 import { formatDateTime } from "@/lib/formatDate"
 import { useFetchProfile } from "@/hooks/useFetchProfile"
-import { useEscape } from "@/hooks/useEscape"
 import { useTypedRouter } from "@/hooks/useTypedRouter"
 import SkeletonTopContentChat from "../../Skeletons/SkeletonTopContentChat"
 import { TChat } from "@/store/chats/types"
@@ -47,15 +46,10 @@ export default function TopContentChat(props: Props) {
 
 
     const {
-        deleteFromStoreAllChats,
-        setLoadingChats,
         deleteChat
     } = useChats()
 
     const clickToReturn = () => {
-        deleteFromStoreAllChats()
-        setLoadingChats(true)
-
         router.push('/chats')
     }
 
@@ -75,13 +69,6 @@ export default function TopContentChat(props: Props) {
         deleteChat(props.objChat.chatId)
         router.push('/chats')
     }
-
-    useEscape(() => {
-        router.push('/chats')
-
-        deleteFromStoreAllChats()
-        setLoadingChats(true)
-    })
 
     if (props.loadingChat) return <SkeletonTopContentChat />
     if (!objProfile) return <EmptyTopContantChat />;

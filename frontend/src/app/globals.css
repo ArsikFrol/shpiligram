@@ -10,7 +10,7 @@
 }
 
 *:focus {
-  outline: none !important;
+    outline: none !important;
 }
 
 ::-webkit-scrollbar {
@@ -44,6 +44,15 @@
 .scrollbar {
     scrollbar-width: thin;
     scrollbar-color: var(--color-container) var(--color-bg);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 body {

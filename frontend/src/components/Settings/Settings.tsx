@@ -36,7 +36,7 @@ export default function Settings() {
         userId
     } = useProfile()
 
-    const { objProfile, loading } = useFetchProfile(userId)
+    const { objProfile, loadingProfileHookFetch, errorProfileHookFetch } = useFetchProfile(userId)
 
     const clickElem = (link: TypeRoutes) => {
         router.push(link)
@@ -53,7 +53,8 @@ export default function Settings() {
             </div>
             <div className="h-[calc(100vh-230px)] overflow-y-auto scrollbar">
                 <div className="h-[calc(100vh-235px)] mt-[20px] overflow-y-auto scrollbar">
-                    <PhotoProfile loading={loading} objProfile={objProfile} />
+                    <PhotoProfile loading={loadingProfileHookFetch} objProfile={objProfile}
+                        error={Boolean(errorProfileHookFetch)} />
                     <div className={cn(
                         "rounded-2xl mx-auto bg-bg p-[20px] mt-[50px]",
                         'flex flex-col gap-y-[20px]',

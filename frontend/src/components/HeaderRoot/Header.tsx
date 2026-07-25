@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { BookMarked, Moon, Sun } from "lucide-react"
 
 import Stories from "./Stories"
@@ -19,12 +19,12 @@ export default function Header() {
     const router = useTypedRouter()
     const dayMode = 'sun'
 
-    const listSettings: TSetting[] = [
+    const listSettings: TSetting[] = useMemo(() => [
         {
             id: 1, onClick: () => { }, elem: dayMode === 'sun' ? <Sun size={25} color="white" /> : <Moon size={25} color="white" />, text: 'Day mode'
         },
         { id: 2, onClick: () => router.push('/chats/savedMessages'), elem: <BookMarked size={25} color="white" />, text: 'Seved messages', link: '/chats/savedMessages' }
-    ]
+    ], [dayMode])
 
     const [showBigStories, setShowBigStories] = useState<boolean>(false)
     const [idStoriesShow, setIdStoriesShow] = useState<string>('')
@@ -35,7 +35,7 @@ export default function Header() {
     const {
         listStoriesInterlocutors,
         fetchListStoriesInterlocutors,
-        loading,
+        loadingStories,
     } = useStories()
 
     const {
@@ -49,13 +49,13 @@ export default function Header() {
     } = useChats()
 
 
-    const clickBurger = () => {
+    const clickBurger = useCallback(() => {
         setShowSettings(!showSettings)
-    }
+    }, [showSettings])
 
-    const closeBurger = () => {
+    const closeBurger = useCallback(() => {
         setShowSettings(false)
-    }
+    }, [])
 
 
     useEffect(() => {
@@ -75,7 +75,7 @@ export default function Header() {
         <>
             <div className='flex relative'>
                 <div className=''>
-                    {loading
+                    {loadingStories
                         ? [...Array(3)].map((_, index) => <SkeletonStories index={index} key={index} />)
                         : !showRowStories
                         && <Stories setShowRowStories={setShowRowStories} listStories={listStoriesInterlocutors} />

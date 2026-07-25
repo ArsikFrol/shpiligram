@@ -1,7 +1,7 @@
 'use client'
 
 import { EllipsisVertical } from "lucide-react"
-import { JSX, useRef, useState } from "react"
+import { JSX, memo, useRef, useState } from "react"
 import { useClickAway } from 'react-use'
 
 import { cn } from "@/lib/utils"
@@ -25,7 +25,7 @@ type Props = {
     classForContainer: string
 }
 
-export default function ThreeDots(props: Props) {
+const ThreeDots = memo(function ThreeDots(props: Props) {
     const [animateShow, setAnimateShow] = useState<boolean>(false)
     const [showSettimgs, setShowSettimgs] = useState<boolean>(false)
 
@@ -77,4 +77,6 @@ export default function ThreeDots(props: Props) {
             }
         </div>
     )
-}
+})
+
+export default ThreeDots
