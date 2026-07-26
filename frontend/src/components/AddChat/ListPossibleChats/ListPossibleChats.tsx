@@ -1,7 +1,5 @@
 'use client'
 
-import { ClipLoader } from "react-spinners"
-
 import { cn } from "@/lib/utils"
 import PossibleElem from "./PossibleElem"
 import EmptyListPossibleChats from "./EmptyListPossibleChats"
@@ -25,10 +23,10 @@ export default function ListPossibleChats(props: Props) {
 
     return (
         <div className={cn(
-            'flex flex-col gap-y-[20px] overflow-y-auto scrollbar',
+            'flex flex-col gap-y-[20px] h-[calc(100vh-300px)] overflow-y-auto overflow-x-hidden',
         )}>
             {
-                props.listPossibleChats.map((obj, index) => <PossibleElem profile={obj} key={index} />)   
+                props.listPossibleChats.map((obj, index) => <PossibleElem profile={obj} key={index} />)
             }
         </div>
 

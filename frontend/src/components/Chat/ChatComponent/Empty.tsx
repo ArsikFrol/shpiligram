@@ -10,7 +10,7 @@ type Props = {
 
 }
 
-export default function EmptyChat(props: Props) {
+export default function Empty(props: Props) {
     const router = useTypedRouter()
 
     const {

@@ -39,7 +39,7 @@ export default function ProfilePage() {
         <div className='overflow-y-hidden w-full'>
             <HeaderProfile profile={objProfile} profileSide={profileSide}
                 setProfileSide={setProfileSide} />
-            <div className='mt-[60px] h-[calc(100vh-250px)] overflow-y-auto scrollbar'>
+            <div className='mt-[60px] h-[calc(100vh-250px)] overflow-y-auto'>
                 {profileSide
                     ? <ProfileSide />
                     : <Profile />

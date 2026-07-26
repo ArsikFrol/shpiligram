@@ -1,8 +1,11 @@
 'use client'
 
 import useProfile from "@/store/profile/profileStore"
-import SortingChatsByFolder from "./SortingChatsByFolder"
 import useChats from "@/store/chats/chatsStore"
+import SortingChatsByFolder from "../SortingChatsByFolder"
+import Loading from "./Loading"
+import Empty from "./Empty"
+import Error from "./Error"
 
 type Props = {
     showBtnById: string,
@@ -21,7 +24,9 @@ export default function ListChats(props: Props) {
         error
     } = useChats()
 
-    if (loading) return
+    if (loading) return <Loading />
+    if (error) return <Error />
+    if (!listChats.length) return <Empty />
 
     return (
         <>

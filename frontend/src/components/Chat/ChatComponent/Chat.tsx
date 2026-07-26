@@ -3,15 +3,15 @@
 import { usePathname } from "next/navigation"
 import { useEffect } from "react"
 
-import TopContentChat from "./TopContantChat/TopContentChat"
-import ContantChat from "./ContantChat"
 import { cn } from "@/lib/utils"
 import useProfile from "@/store/profile/profileStore"
 import { useFetchChat } from "@/hooks/useFetchChat"
 import { TypeRoutes } from "@/hooks/useTypedRouter"
-import EmptyChat from "./EmptyChat"
-import LoadingChat from "./LoadingChat"
 import useMessages from "@/store/messages/messagesStore"
+import TopContentChat from "../TopContantChat/TopContentChat"
+import ContantChat from "../ContantChat"
+import Empty from "./Empty"
+import Loading from "./Loading"
 
 export default function Chat() {
     const pathName: TypeRoutes = usePathname() as TypeRoutes
@@ -32,8 +32,8 @@ export default function Chat() {
         fetchListMessages(objChat?.chatId || '')
     }, [objChat?.chatId])
 
-    if (loadingChat) return <LoadingChat />
-    if (!objChat) return <EmptyChat />
+    if (loadingChat) return <Loading />
+    if (!objChat) return <Empty />
 
     return (
         <div className={cn(

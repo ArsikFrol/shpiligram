@@ -25,7 +25,7 @@ export default function Description(props: Props) {
             <Mobile error={props.error} loading={props.loading} objProfile={props.objProfile} />
             <Bio error={props.error} loading={props.loading} objProfile={props.objProfile} />
             <UserName error={props.error} loading={props.loading} objProfile={props.objProfile} />
-            <Birthday error={props.error} loading={props.loading} objProfile={props.objProfile}/>
+            <Birthday error={props.error} loading={props.loading} objProfile={props.objProfile} />
         </div>
     )
 }

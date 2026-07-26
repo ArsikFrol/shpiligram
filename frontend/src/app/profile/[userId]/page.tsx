@@ -58,10 +58,10 @@ export default function page() {
     if (!objProfile) return <NotFound />
 
     return (
-        <div className='h-[calc(100vh-200px)] overflow-y-hidden' >
+        <>
             <HeaderProfileUser profile={objProfile} />
-            <div className='h-[calc(100vh-250px)] overflow-y-auto scrollbar'>
-                <PhotoProfile objProfile={objProfile} loading={loadingProfileHookFetch} 
+            <div className='h-[calc(100vh-250px)] overflow-y-auto'>
+                <PhotoProfile objProfile={objProfile} loading={loadingProfileHookFetch}
                     error={Boolean(errorProfileHookFetch)} />
                 {createNewChat &&
                     <div className={cn(
@@ -72,10 +72,10 @@ export default function page() {
                         Написать сообщенение
                     </div>
                 }
-                <Description objProfile={objProfile} loading={loadingProfileHookFetch} 
-                    error={Boolean(errorProfileHookFetch)}  />
+                <Description objProfile={objProfile} loading={loadingProfileHookFetch}
+                    error={Boolean(errorProfileHookFetch)} />
                 <SortStoryAndGiftInUser obj={objProfile} />
             </div>
-        </div >
+        </>
     )
 }

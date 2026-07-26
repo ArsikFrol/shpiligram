@@ -4,10 +4,10 @@ import { ClipLoader } from "react-spinners"
 import { Mic, Paperclip, Sticker } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import SkeletonTopContentChat from "../Skeletons/SkeletonTopContentChat"
 import useProfile from "@/store/profile/profileStore"
+import SkeletonTopContentChat from "@/components/Skeletons/SkeletonTopContentChat"
 
-export default function LoadingChat() {
+export default function Loading() {
     const {
         showRowStories
     } = useProfile()

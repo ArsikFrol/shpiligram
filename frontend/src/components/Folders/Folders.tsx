@@ -5,6 +5,7 @@ import useChats from "@/store/chats/chatsStore"
 import useProfile from "@/store/profile/profileStore"
 import { TFolder } from "@/store/profile/types"
 import FolderElem from "./FolderElem"
+import SkeletonFolder from "../Skeletons/SkeletonFolder"
 
 type Props = {
     setShowBtnById: (value: string) => void
@@ -24,12 +25,21 @@ const listFolder: TElemFolder[] = [
 export default function Folders(props: Props) {
 
     const {
-        listChats,        
+        listChats,
+        loading,
+        error
     } = useChats()
 
     const {
         activeFolder
     } = useProfile()
+
+    if (loading) return (
+        <div className='my-[20px]'>
+            <SkeletonFolder />
+        </div>
+    )
+    if (error) return
 
     return (
         <div className={cn(
