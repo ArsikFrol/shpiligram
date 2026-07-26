@@ -13,7 +13,7 @@ import useProfile from "@/store/profile/profileStore"
 import useStories from "@/store/stories/storiesStore"
 import useGifts from "@/store/gifts/giftsStore"
 import { useEscape } from "@/hooks/useEscape"
-import { TActiveBtn } from "./StoryAndGift"
+import { TActiveBtn } from "./Tabs"
 
 type Props = {
     activeBtn: TActiveBtn

@@ -3,9 +3,9 @@ import { cn } from "@/lib/utils"
 import { TGetStoryProfile } from "@/store/stories/types"
 
 type Props = {
-    recipientId: string,
+    listStoriesProfile: TGetStoryProfile[],
 
-    listStoriesProfile: TGetStoryProfile[]
+    arshinedStories?: boolean
 }
 
 export default function ListStories(props: Props) {
@@ -17,9 +17,13 @@ export default function ListStories(props: Props) {
         )}>
             {props.listStoriesProfile.length
                 ? props.listStoriesProfile.map((obj, index) => <StoryElem clickStory={() => { }} obj={obj} key={index} />)
-                : <div className='text-[22px] text-white text-center leading-[230px]'>
-                    Историй нет
-                </div>
+                : props.arshinedStories 
+                    ? <div className='text-[22px] text-white text-center leading-[230px]'>
+                        Архивных историй нет
+                    </div>
+                    : <div className='text-[22px] text-white text-center leading-[230px]'>
+                        Историй нет
+                    </div>
             }
         </div>
     )

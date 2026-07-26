@@ -24,7 +24,7 @@ const listPostBtn: TBtn[] = [
     { id: 3, type: 'gifts', text: 'Gifts' }
 ]
 
-export default function StoryAndGift(props: Props) {
+export default function Tabs(props: Props) {
     
     const [activeBtn, setActiveBtn] = useState<TActiveBtn>('stories')
     
@@ -41,10 +41,9 @@ export default function StoryAndGift(props: Props) {
                             <div key={index} onClick={() => setActiveBtn(obj.type)} className={cn(
                                 'flex-1 text-[15px] w-[150px] text-center font-bold text-gray-500 py-[5px]',
                                 style
-                            )} style={props.hiddenBtnArchinedStories && obj.type === 'arshinedStories' 
-                                ? {display: 'none'}
-                                : {}
-                            }>{obj.text}</div>
+                            )} style={{
+                                display: (props.hiddenBtnArchinedStories && obj.type === 'arshinedStories') ? 'none' : ''
+                            }}>{obj.text}</div>
                         )
                     })
                 }

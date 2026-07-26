@@ -1,13 +1,13 @@
-import { Nunito_Sans } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import ToasterProvider from "@/components/Providers/ToasterProvider";
-import { Metadata } from "next";
+import { Nunito_Sans } from "next/font/google"
+import { Metadata } from "next"
+import "./globals.css"
+import { cn } from "@/lib/utils"
+import ToasterProvider from "@/components/Providers/ToasterProvider"
 
 const nunitoSans = Nunito_Sans({
     variable: "--font-nunito-sans",
     subsets: ["latin"],
-});
+})
 
 export const metadata: Metadata = {
     title: 'Chats'
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
     children,
 }: Readonly<{
-    children: React.ReactNode;
+    children: React.ReactNode
 }>) {
     return (
         <html lang="en" className={`${nunitoSans.variable}`}>
@@ -30,5 +30,5 @@ export default function RootLayout({
                 <ToasterProvider />
             </body>
         </html>
-    );
+    )
 }

@@ -1,25 +1,26 @@
 'use client'
 
-import useProfile from "@/store/profile/profileStore";
-import PhotoProfile from "./PhotoProfile";
-import SettingsProfile from "./SettingsProfile";
-import DescriptionProfile from "./DescriptionProfile";
-import StoryAndGift from "./StoryAndGift/StoryAndGift";
+import useProfile from "@/store/profile/profileStore"
+import PhotoProfile from "./PhotoProfile"
+import SettingsProfile from "./SettingsProfile"
+import Tabs from "./StoryAndGift/Tabs"
+import Description from "./Description/Description"
 
 export default function Profile() {
 
     const {
         loadingProfile,
         objProfile,
-        errorProfile
+        errorProfile,
+        userId
     } = useProfile()
 
     return (
         <>
             <PhotoProfile loading={loadingProfile} objProfile={objProfile} error={errorProfile} />
             <SettingsProfile />
-            <DescriptionProfile loading={loadingProfile} objProfile={objProfile} error={errorProfile} />
-            <StoryAndGift />
+            <Description loading={loadingProfile} objProfile={objProfile} error={errorProfile} />
+            <Tabs userId={userId}/>
         </>
     )
 }

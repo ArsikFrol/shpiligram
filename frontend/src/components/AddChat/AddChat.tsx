@@ -28,13 +28,14 @@ export default function AddChat() {
             "mx-auto h-[calc(100vh-190px)] flex flex-col",
             'min-lg:w-[800px] max-lg:mx-[30px]'
         )}>
-            {error &&
+            {!error &&
                 <SearchAddChat setValue={setValue} value={value} />
             }
             <div className={cn(
                 'bg-bg rounded-2xl mt-[20px] p-[20px] flex-1',
             )}>
-                <ListPossibleChats listPossibleChats={listPossibleChats ? listPossibleChats : []} loading={loading}/>
+                <ListPossibleChats value={value} error={Boolean(error)} 
+                    listPossibleChats={listPossibleChats ? listPossibleChats : []} loading={loading}/>
             </div>
         </div>
     )

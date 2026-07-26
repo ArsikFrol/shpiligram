@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useCallback, useState } from "react"
 
 import DescGift from "./DescGift"
 import GiftElem from "./GiftElem"
@@ -8,8 +8,6 @@ import { cn } from "@/lib/utils"
 import { TGetGift } from "@/store/gifts/types"
 
 type Props = {
-    recipientId: string,
-
     listGifts: TGetGift[]
 }
 
@@ -17,10 +15,10 @@ export default function ListGifts(props: Props) {
     const [showDescGift, setShowDescGift] = useState<boolean>(false)
     const [idGiftShowDesc, setIdGiftShowDesc] = useState<string>('')
 
-    const clickGift = (id: string) => {
+    const clickGift = useCallback((id: string) => {
         setIdGiftShowDesc(id)
         setShowDescGift(true)
-    }
+    }, [])
 
     return (
         <>

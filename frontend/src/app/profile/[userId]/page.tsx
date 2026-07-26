@@ -3,7 +3,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import DescriptionProfile from "@/components/Profile/DescriptionProfile";
 import PhotoProfile from "@/components/Profile/PhotoProfile";
 import SortStoryAndGiftInUser from "@/components/Profile/StoryAndGift/SortStoryAndGiftInUser";
 import { useFetchProfile } from "@/hooks/useFetchProfile";
@@ -14,6 +13,7 @@ import { TypeRoutes } from "@/hooks/useTypedRouter";
 import NotFound from "@/app/not-found";
 import HeaderProfileUser from "@/components/Headers/HeaderProfileUser";
 import SkeletonProfilePageUser from "@/components/Skeletons/SkeletonProfilePageUser";
+import Description from "@/components/Profile/Description/Description";
 
 export default function page() {
     const pathName: TypeRoutes = usePathname() as TypeRoutes
@@ -23,7 +23,7 @@ export default function page() {
 
     const [createNewChat, setCreateNewChat] = useState<boolean>(false)
 
-    const { objProfile, loading } = useFetchProfile(pathName.split('/')[2])
+    const { objProfile, loadingProfileHookFetch, errorProfileHookFetch } = useFetchProfile(pathName.split('/')[2])
 
     const {
         userId
@@ -54,14 +54,15 @@ export default function page() {
 
     }, [searchParams])
 
-    if (loading) return <SkeletonProfilePageUser />
+    if (loadingProfileHookFetch) return <SkeletonProfilePageUser />
     if (!objProfile) return <NotFound />
 
     return (
         <div className='h-[calc(100vh-200px)] overflow-y-hidden' >
             <HeaderProfileUser profile={objProfile} />
             <div className='h-[calc(100vh-250px)] overflow-y-auto scrollbar'>
-                <PhotoProfile objProfile={objProfile} loading={loading} />
+                <PhotoProfile objProfile={objProfile} loading={loadingProfileHookFetch} 
+                    error={Boolean(errorProfileHookFetch)} />
                 {createNewChat &&
                     <div className={cn(
                         'mx-auto text-center bg-bg rounded-2xl text-white text-[20px] mt-[20px] py-[10px]',
@@ -71,7 +72,8 @@ export default function page() {
                         Написать сообщенение
                     </div>
                 }
-                <DescriptionProfile objProfile={objProfile} loading={loading} />
+                <Description objProfile={objProfile} loading={loadingProfileHookFetch} 
+                    error={Boolean(errorProfileHookFetch)}  />
                 <SortStoryAndGiftInUser obj={objProfile} />
             </div>
         </div >

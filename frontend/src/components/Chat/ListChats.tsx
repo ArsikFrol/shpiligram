@@ -16,8 +16,12 @@ export default function ListChats(props: Props) {
     } = useProfile()
 
     const {
-        listChats
+        listChats,
+        loading,
+        error
     } = useChats()
+
+    if (loading) return
 
     return (
         <>

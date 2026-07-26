@@ -10,8 +10,12 @@ import { cn } from "@/lib/utils";
 import { TypeRoutes, useTypedRouter } from "@/hooks/useTypedRouter";
 import SearchUI from "../UI/SearchUI";
 import { useFetchProfile } from "@/hooks/useFetchProfile";
+import { useCallback } from "react";
+import SettingsELem from "./SettingsELem";
+import ErrorSettings from "./ErrorSettings";
+import LoadingSettings from "./LoadingSettings";
 
-type TElem = {
+export type TElemSetting = {
     id: number,
     title: string,
     link: TypeRoutes,
@@ -20,7 +24,7 @@ type TElem = {
     bgColor: string,
 }
 
-const listElem: TElem[] = [
+const listElem: TElemSetting[] = [
     { id: 1, elem: <CircleUser color="white" size={35} strokeWidth={1.5} />, title: 'Account', link: '/editInfo', desc: 'Number, UserName, Bio', bgColor: '#60A5FA' },
     { id: 2, elem: <MessageCircleMore color="white" size={35} strokeWidth={1.5} />, title: 'Chat Settings', link: '/settings/chatSettings', desc: 'Night Mode, wallpaper', bgColor: '#34D399' },
     { id: 3, elem: <UserRoundKey color="white" size={35} strokeWidth={1.5} />, title: 'Privacy', link: '/settings/privacy', desc: 'Last seen, ', bgColor: '#A78BFA' },
@@ -38,14 +42,15 @@ export default function Settings() {
 
     const { objProfile, loadingProfileHookFetch, errorProfileHookFetch } = useFetchProfile(userId)
 
-    const clickElem = (link: TypeRoutes) => {
+    const clickElem = useCallback((link: TypeRoutes) => {
         router.push(link)
-    }
+    }, [])
 
-    if (!objProfile) return;
+    if (loadingProfileHookFetch) return <LoadingSettings />
+    if (!objProfile || errorProfileHookFetch) return <ErrorSettings />
 
     return (
-        <div className=''>
+        <>
             <div className="flex items-center justify-end h-[40px] gap-x-[10px] ml-auto">
                 <SearchUI width={400} placeholder="Setting" />
                 <ThreeDots onClick={() => { }} onClose={() => { }} classForContainer="" classForElem=""
@@ -61,28 +66,15 @@ export default function Settings() {
                         'min-lg:w-[800px] max-lg:mx-[30px]'
                     )}>
                         {
-                            listElem.map((obj: TElem, index) => {
+                            listElem.map((obj: TElemSetting, index) => {
                                 return (
-                                    <div className={cn(
-                                        "flex items-center gap-x-[20px]",
-                                        'hover:scale-101 transition-transform duration-300 cursor-pointer'
-                                    )}
-                                        key={index} onClick={() => clickElem(obj.link)}>
-                                        <div className="w-[50px] h-[50px] rounded-2xl flex items-center justify-center"
-                                            style={{ background: `${obj.bgColor}` }}>
-                                            {obj.elem}
-                                        </div>
-                                        <div className="flex flex-col gap-x-[10px]">
-                                            <div className="text-[18px] font-semibold text-white">{obj.title}</div>
-                                            <div className="text-[16px] font-medium text-gray-500">{obj.desc}</div>
-                                        </div>
-                                    </div>
+                                    <SettingsELem key={index} obj={obj} clickElem={clickElem}/>
                                 )
                             })
                         }
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

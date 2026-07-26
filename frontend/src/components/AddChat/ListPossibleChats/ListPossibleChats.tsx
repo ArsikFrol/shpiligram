@@ -7,9 +7,12 @@ import PossibleElem from "./PossibleElem"
 import EmptyListPossibleChats from "./EmptyListPossibleChats"
 import { TGetUser } from "@/store/profile/types"
 import LoadingPossibleChats from "./LoadingPossibleChats"
+import ErrorPossibleChats from "./ErrorPossibleChats"
 
 type Props = {
-    loading: boolean
+    loading: boolean,
+    value: string,
+    error: boolean
 
     listPossibleChats: TGetUser[]
 }
@@ -17,7 +20,8 @@ type Props = {
 export default function ListPossibleChats(props: Props) {
 
     if (props.loading) return <LoadingPossibleChats />
-    if (!props.listPossibleChats.length) return <EmptyListPossibleChats />;
+    if (props.error) return <ErrorPossibleChats />
+    if (!props.listPossibleChats.length && props.value !== '') return <EmptyListPossibleChats />;
 
     return (
         <div className={cn(
