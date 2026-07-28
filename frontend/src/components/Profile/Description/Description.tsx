@@ -12,7 +12,9 @@ type Props = {
     objProfile: TGetUser,
 
     loading: boolean,
-    error: boolean
+    error: boolean,
+
+    moreMT?: boolean
 }
 
 export default function Description(props: Props) {
@@ -21,7 +23,9 @@ export default function Description(props: Props) {
             'mx-auto bg-bg rounded-2xl p-[20px]',
             'flex flex-col gap-y-[30px] mt-[10px]',
             'min-lg:w-[800px] max-lg:mx-[30px]'
-        )}>
+        )} style={{
+            marginTop: props.moreMT ? '40px' : '10px'
+        }}>
             <Mobile error={props.error} loading={props.loading} objProfile={props.objProfile} />
             <Bio error={props.error} loading={props.loading} objProfile={props.objProfile} />
             <UserName error={props.error} loading={props.loading} objProfile={props.objProfile} />

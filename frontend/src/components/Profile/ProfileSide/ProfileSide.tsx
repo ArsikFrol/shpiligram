@@ -16,7 +16,7 @@ export default function ProfileSide() {
     return(
         <>
             <PhotoProfile loading={loadingProfile} objProfile={objProfile} error={errorProfile} />
-            <Description loading={loadingProfile} objProfile={objProfile} error={errorProfile} />
+            <Description loading={loadingProfile} objProfile={objProfile} error={errorProfile} moreMT />
             <Tabs hiddenBtnArchinedStories userId={userId}/>
         </>
     )
