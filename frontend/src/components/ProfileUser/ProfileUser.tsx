@@ -1,3 +1,5 @@
+'use client'
+
 import { usePathname, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -36,7 +38,7 @@ export default function ProfileUser() {
                 <PhotoProfile objProfile={objProfile} loading={loadingProfileHookFetch}
                     error={Boolean(errorProfileHookFetch)} />
                 {createNewChat &&
-                    <WriteMessage objProfile={objProfile}/>
+                    <WriteMessage objProfile={objProfile} />
                 }
                 <Description objProfile={objProfile} loading={loadingProfileHookFetch}
                     error={Boolean(errorProfileHookFetch)} />

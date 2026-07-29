@@ -22,9 +22,9 @@ export default function WriteMessage(props: Props) {
     } = useChats()
 
     const clickWriteMessage = async () => {
-        if (!props.objProfile) return
+        router.push(`/chats/newChat?userId=${props.objProfile.userId}`)
 
-        try {
+/*         try {
             const result = await createChat(userId, props.objProfile.userId)
 
             if (result) {
@@ -33,9 +33,9 @@ export default function WriteMessage(props: Props) {
         } catch (error) {
             console.error('Ошибка создания чата:', error)
         }
-    }
+ */    }
 
-    return(
+    return (
         <div className={cn(
             'mx-auto text-center bg-bg rounded-2xl text-white text-[20px] mt-[20px] py-[10px]',
             'hover:scale-101 transition-transform duration-300 cursor-pointer',

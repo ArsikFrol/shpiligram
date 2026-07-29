@@ -16,15 +16,11 @@ type Props = {
     listSettings: TSettingForMessage[],
     listSmile: TSmile[]
 
-    state: {
-        showSettingsElem: string,
-        showAllSmile: boolean
-    }
+    showSettingsElem: string,
+    setShowSettingsElem: (value: string) => void
 
-    setState: {
-        setShowSettingsElem: (value: string) => void
-        setShowAllSmile: (value: boolean) => void
-    }
+    showAllSmile: boolean
+    setShowAllSmile: (value: boolean) => void
 
     actionsSettings: {
         clickCopyMessage: (textMessage: string, messageId: string) => void,
@@ -35,18 +31,18 @@ type Props = {
     }
 }
 
-export default function Message({ state, setState, ...props }: Props) {
+export default function Message(props: Props) {
     const messageRef = useRef<HTMLDivElement>(null)
     const [showAbove, setShowAbove] = useState(false)
 
     const sender = props.objMessage.senderId === props.userId
 
     const clickElemSetting = (messageId: string) => {
-        setState.setShowSettingsElem(messageId)
+        props.setShowSettingsElem(messageId)
     }
 
     useEffect(() => {
-        if (state.showSettingsElem === props.objMessage.messageId && messageRef.current) {
+        if (props.showSettingsElem === props.objMessage.messageId && messageRef.current) {
             const rect = messageRef.current.getBoundingClientRect()
             const menuHeight = sender ? 250 : 200
             const spaceAbove = rect.top - 150
@@ -60,7 +56,7 @@ export default function Message({ state, setState, ...props }: Props) {
                 setShowAbove(false)
             }
         }
-    }, [state.showSettingsElem, props.objMessage.messageId, sender])
+    }, [props.showSettingsElem, props.objMessage.messageId, sender])
 
     return (
         <div ref={messageRef} className={cn(
@@ -68,10 +64,10 @@ export default function Message({ state, setState, ...props }: Props) {
             props.objMessage.senderId === props.userId
                 ? 'ml-auto bg-active-bg rounded-l-2xl'
                 : 'mr-auto bg-active-bg/50 rounded-r-2xl',
-            state.showSettingsElem === props.objMessage.messageId && 'border-1 border-gray-600 p-[9px]'
+            props.showSettingsElem === props.objMessage.messageId && 'border-1 border-gray-600 p-[9px]'
         )} onContextMenu={e => {
             e.preventDefault()
-            if (state.showSettingsElem === props.objMessage.messageId) setState.setShowSettingsElem('')
+            if (props.showSettingsElem === props.objMessage.messageId) props.setShowSettingsElem('')
             else clickElemSetting(props.objMessage.messageId)
         }}>
             <div className='text-white text-[16px] max-w-[500px] break-words'>{props.objMessage.content}</div>
@@ -81,10 +77,10 @@ export default function Message({ state, setState, ...props }: Props) {
             )}>
                 {formatDateTime(new Date(props.objMessage.sendTime))}
             </div>
-            {state.showSettingsElem === props.objMessage.messageId &&
+            {props.showSettingsElem === props.objMessage.messageId &&
                 <Settings listSettings={props.listSettings} listSmile={props.listSmile}
-                    showAllSmile={state.showAllSmile} setShowAllSmile={setState.setShowAllSmile}
-                    sender={sender} setShowSettingsElem={setState.setShowSettingsElem}
+                    showAllSmile={props.showAllSmile} setShowAllSmile={props.setShowAllSmile}
+                    sender={sender} setShowSettingsElem={props.setShowSettingsElem}
                     showAbove={showAbove} />
             }
         </div>

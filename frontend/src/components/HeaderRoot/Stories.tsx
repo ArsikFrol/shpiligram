@@ -3,11 +3,13 @@ import Image from "next/image";
 import user from '../../../public/user.jpg'
 import { cn } from "@/lib/utils";
 import { TGetStory } from "@/store/stories/types";
+import SkeletonStories from "../Skeletons/SkeletonStories";
 
 type Props = {
     setShowRowStories: (newValue: boolean) => void,
 
-    listStories: TGetStory[]
+    listStories: TGetStory[],
+    loadingStories: boolean
 }
 
 export default function Stories(props: Props) {
@@ -15,6 +17,14 @@ export default function Stories(props: Props) {
     const clickStory = () => {
         props.setShowRowStories(true)
     }
+
+    if (props.loadingStories) return (
+        <>
+            {
+                [...Array(3)].map((_, index) => <SkeletonStories index={index} key={index} />)
+            }
+        </>
+    )
 
     return (
         <div className='reltive hover:scale-102 transition-transform duration-300 cursor-pointer'

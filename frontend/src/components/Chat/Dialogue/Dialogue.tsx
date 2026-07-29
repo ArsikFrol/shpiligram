@@ -14,14 +14,12 @@ import smile from '../../../../public/smile.png'
 import { useEscape } from "@/hooks/useEscape"
 import { useTypedRouter } from "@/hooks/useTypedRouter"
 import { useMessageActions } from "@/hooks/useMessageActions"
+import useMessages from "@/store/messages/messagesStore"
+import EmptyDialogue from "./EmptyDialogue"
 
 type Props = {
-    listMessages: TGetMessage[],
-
     objChat: TChat,
     textareaRef: RefObject<HTMLTextAreaElement | null>
-
-    addMessageInChat: (chatId: string, message: TGetMessage) => void
 }
 
 export type TSettingForMessage = {
@@ -72,34 +70,24 @@ export default function Dialogue(props: Props) {
     const [showAllSmile, setShowAllSmile] = useState<boolean>(false)
     const [showForward, setShowForward] = useState<boolean>(false)
 
-    const stateMessage = useMemo(() => ({
-        showAllSmile,
-        showSettingsElem
-    }), [])
-
-    const setStateMessage = {
-        setShowAllSmile,
-        setShowSettingsElem
-    }
-
     const {
         userId,
         showRowStories
     } = useProfile()
 
     const {
+        listMessages,
+        loadingMessages,
+        addMessageInChat
+    } = useMessages()
+
+    const {
         clickCopyMessage,
         clickDelete,
         clickForward,
         clickPin,
-        clickSentHello,
         clickReply
     } = useMessageActions({
-        userId,
-        chatId: props.objChat.chatId,
-        textareaRef: props.textareaRef,
-
-        addMessageInChat: props.addMessageInChat,
         setShowForward
     })
 
@@ -116,7 +104,7 @@ export default function Dialogue(props: Props) {
 
     useEffect(() => {
         scrollToBottom(containerRef)
-    }, [props.listMessages.length])
+    }, [listMessages.length])
 
     useEscape(() => {
         if (showAllSmile) setShowAllSmile(false)
@@ -127,12 +115,15 @@ export default function Dialogue(props: Props) {
     return (
         <div ref={containerRef} className={cn(
             'px-[10px] overflow-y-auto',
-            'flex flex-col gap-y-[10px] scrollbar',
-        )} style={showRowStories ? { height: 'calc(100vh - 475px)' } : { height: 'calc(100vh - 395px' }} >
+            'flex flex-col gap-y-[10px]',
+        )} style={{
+            height: showRowStories ? 'calc(100vh - 475px)' : 'calc(100vh - 395px'
+        }}>
             {
-                props.listMessages.map((obj, index: number) => <Message objMessage={obj} userId={userId} key={index}
+                listMessages.map((obj, index: number) => <Message objMessage={obj} userId={userId} key={index}
                     listSettings={listSettings} listSmile={listSmile} actionsSettings={actions}
-                    setState={setStateMessage} state={stateMessage} />)
+                    setShowAllSmile={setShowAllSmile} setShowSettingsElem={setShowSettingsElem}
+                    showAllSmile={showAllSmile} showSettingsElem={showSettingsElem} />)
             }
             <div ref={messagesEndRef} />
         </div>

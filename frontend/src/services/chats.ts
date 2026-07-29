@@ -32,3 +32,14 @@ export const deleteChat = async (chatId: string) => {
 
     return data
 }
+
+export const getSearchChat = async (userName: string, userId: string): Promise<TChat[]> => {
+    const { data } = await axiosInstance.get<TChat[]>(ApiRoutes.CHATS + '/search', {
+        params: {
+            userName,
+            userId
+        }
+    })
+
+    return data
+}

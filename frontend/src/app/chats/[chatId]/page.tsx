@@ -12,7 +12,6 @@ export default function page() {
 
     const {
         fetchListChats,
-        listChats
     } = useChats()
 
     const {
@@ -24,13 +23,12 @@ export default function page() {
     }, [])
 
     return (
-        <>
-            <div className={cn(
-                'grid grid-cols-[50px_auto] gap-x-[20px]',
-                'min-xl:grid-cols-[250px_auto]'
-            )}>
-                <ListChatForChatIdPage />
-                <Chat />
-            </div>
-        </>)
+        <div className={cn(
+            'grid gap-x-[30px]',
+            'min-xl:grid-cols-[250px_auto] max-xl:grid-cols-[50px_auto] '
+        )}>
+            <ListChatForChatIdPage />
+            <Chat />
+        </div>
+    )
 }

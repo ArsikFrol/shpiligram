@@ -1,7 +1,7 @@
-import { create } from "zustand";
+import { create } from "zustand"
 
-import { TUseChat } from "./types";
-import { Api } from "@/services/api-client";
+import { TUseChat } from "./types"
+import { Api } from "@/services/api-client"
 
 const useChats = create<TUseChat>((set) => ({
     loading: true,
@@ -65,8 +65,21 @@ const useChats = create<TUseChat>((set) => ({
         } finally {
             set({ loading: false })
         }
+    },
+
+    searchChats: async (userName: string, userId: string) => {
+        try {
+            set({ loading: true, error: false })
+            const data = await Api.chats.getSearchChat(userName, userId)
+            set({ listChats: data })
+        } catch (error) {
+            console.log(error)
+            set({ error: true })
+        } finally {
+            set({ loading: false })
+        }
     }
 }))
 
-export default useChats;
-export const { getState, setState, subscribe } = useChats;
+export default useChats
+export const { getState, setState, subscribe } = useChats

@@ -75,10 +75,9 @@ export default function Header() {
         <>
             <div className='flex relative'>
                 <div className=''>
-                    {loadingStories
-                        ? [...Array(3)].map((_, index) => <SkeletonStories index={index} key={index} />)
-                        : !showRowStories
-                        && <Stories setShowRowStories={setShowRowStories} listStories={listStoriesInterlocutors} />
+                    {!showRowStories &&
+                        <Stories loadingStories={loadingStories} setShowRowStories={setShowRowStories}
+                            listStories={listStoriesInterlocutors} />
                     }
                     <div className={cn(
                         'text-[25px] text-white font-semibold',

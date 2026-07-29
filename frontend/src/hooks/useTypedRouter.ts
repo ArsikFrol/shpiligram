@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
-export type TypeRoutes = 
+export type TypeRoutes =
     '/profile'
     | `/profile/${string}`
     | '/settings'
@@ -20,16 +20,16 @@ export type TypeRoutes =
     | `/settings/privacy/${string}`
 
 type TypedRouter = Omit<AppRouterInstance, 'push' | 'replace'> & {
-  push: (path: TypeRoutes) => ReturnType<AppRouterInstance['push']>;
-  replace: (path: TypeRoutes) => ReturnType<AppRouterInstance['replace']>;
+    push: (path: TypeRoutes) => ReturnType<AppRouterInstance['push']>;
+    replace: (path: TypeRoutes) => ReturnType<AppRouterInstance['replace']>;
 };
 
 export const useTypedRouter = (): TypedRouter => {
-  const router = useRouter();
-  
-  return {
-    ...router,
-    push: (path: TypeRoutes) => router.push(path),
-    replace: (path: TypeRoutes) => router.replace(path),
-  };
+    const router = useRouter();
+
+    return {
+        ...router,
+        push: (path: TypeRoutes) => router.push(path),
+        replace: (path: TypeRoutes) => router.replace(path),
+    };
 };

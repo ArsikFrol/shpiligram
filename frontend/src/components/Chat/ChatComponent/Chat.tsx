@@ -21,9 +21,7 @@ export default function Chat() {
     } = useProfile()
 
     const {
-        listMessages,
-        fetchListMessages,
-        loadingMessages,
+        fetchListMessages
     } = useMessages()
 
     const { loadingChat, objChat } = useFetchChat(pathName.split('/')[2])
@@ -38,10 +36,11 @@ export default function Chat() {
     return (
         <div className={cn(
             'w-full bg-bg mt-[10px] rounded-2xl flex flex-col'
-        )} style={showRowStories ? { height: 'calc(100vh-400px)' } : { height: 'calc(100vh-225px)' }}>
+        )} style={{
+            height: showRowStories ? 'calc(100vh - 310px)' : 'calc(100vh-225px)',
+        }}>
             <TopContentChat loadingChat={loadingChat} objChat={objChat} />
-            <ContantChat loadingChat={loadingChat} objChat={objChat}
-                listMessages={listMessages} loadingMessages={loadingMessages} />
-        </div>
+            <ContantChat objChat={objChat} />
+        </div >
     )
 }

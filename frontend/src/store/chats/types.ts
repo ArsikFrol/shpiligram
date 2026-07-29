@@ -33,4 +33,5 @@ export type TUseChat = {
     fetchListChats: (userId: string) => Promise<void>,
     createChat: (ownerId: string, interlocutorId: string) => Promise<{ chat: TChat, message: string }>,
     deleteChat: (chatId: string) => Promise<void>,
+    searchChats: (userName: string, userId: string) => Promise<void>
 }
