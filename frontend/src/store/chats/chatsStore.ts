@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-import { TUseChat } from "./types"
+import { TPatchDataChat, TUseChat } from "./types"
 import { Api } from "@/services/api-client"
 
 const useChats = create<TUseChat>((set) => ({
@@ -39,9 +39,6 @@ const useChats = create<TUseChat>((set) => ({
             set((state) => ({
                 listChats: [data.chat, ...state.listChats]
             }))
-
-            console.log(data)
-
             return data
         } catch (error) {
             console.log(error)
@@ -62,6 +59,27 @@ const useChats = create<TUseChat>((set) => ({
         } catch (error) {
             console.log(error)
             set({ error: true })
+        } finally {
+            set({ loading: false })
+        }
+    },
+
+    updateChat: async (chatId: string, data: TPatchDataChat) => {
+        try {
+            set({ loading: true, error: false })
+            const chat = await Api.chats.updateChat(chatId, data)
+            set((state) => ({
+                listChats: state.listChats.map(obj =>
+                    obj.chatId === chatId
+                        ? { ...chat }
+                        : obj
+                )
+            }))
+            return chat
+        } catch (error) {
+            console.log(error)
+            set({ error: true })
+            throw error
         } finally {
             set({ loading: false })
         }

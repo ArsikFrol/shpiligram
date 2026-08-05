@@ -1,6 +1,6 @@
 import { axiosInstance } from "./instance"
 import { ApiRoutes } from "./constants"
-import { TChat } from "@/store/chats/types"
+import { TChat, TPatchDataChat } from "@/store/chats/types"
 
 export const getChats = async (ownerId: string): Promise<TChat[]> => {
     const { data } = await axiosInstance.get<TChat[]>(ApiRoutes.CHATS, {
@@ -40,6 +40,12 @@ export const getSearchChat = async (userName: string, userId: string): Promise<T
             userId
         }
     })
+
+    return data
+}
+
+export const updateChat = async (chatId: string, newData: TPatchDataChat): Promise<TChat> => {
+    const { data } = await axiosInstance.patch<TChat>(ApiRoutes.CHATS + `/${chatId}`, newData)
 
     return data
 }

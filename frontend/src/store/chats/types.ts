@@ -1,5 +1,12 @@
 import { ChatModel } from "../../../../backand/src/generated/prisma/models"
 
+export type TPatchDataChat = {
+    pinned?: boolean,
+    folder?: string
+    muteUntil?: string | null,
+    isArchived?: boolean
+}
+
 export type Tinterlocutor = {
     userId: string,
     avatar: string,
@@ -33,5 +40,6 @@ export type TUseChat = {
     fetchListChats: (userId: string) => Promise<void>,
     createChat: (ownerId: string, interlocutorId: string) => Promise<{ chat: TChat, message: string }>,
     deleteChat: (chatId: string) => Promise<void>,
+    updateChat: (chatId: string, data: TPatchDataChat) => Promise<TChat>;
     searchChats: (userName: string, userId: string) => Promise<void>
 }

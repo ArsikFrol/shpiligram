@@ -29,7 +29,7 @@ export default function ListChatForChatIdPage() {
             height: showRowStories ? 'calc(100vh - 320px)' : 'calc(100vh-320px)',
         }}>
             {
-                listChats.filter(objChat => objChat.lastMessage).map((obj, index) => {
+                listChats.map((obj, index) => {
                     return (
                         <ElemChatForChatIdPage obj={obj} key={index} />
                     )

@@ -40,12 +40,7 @@ export default function Interlocutor(props: Props) {
                         </div>
                     </div>
                     <div className='text-[15px] font-medium text-gray-500'>
-                        {props.objChat.lastMessage
-                            ? props.objChat.lastMessage.content
-                            : <div className={cn(
-                                ''
-                            )}>Отправте первое сообщение</div>
-                        }
+                        {props.objChat.lastMessage.content}
                     </div>
                 </div>
             </div>
@@ -64,7 +59,7 @@ export default function Interlocutor(props: Props) {
                             )}>1</div>
                         </div>
                         {props.objChat.pinned &&
-                            < div title='Открепить' className={cn(
+                            <div title='Открепить' className={cn(
                                 'w-[45px] h-[45px] rounded-2xl flex justify-center items-center',
                                 'bg-blue-400 ml-[10px]'
                             )} onClick={clickPinOff}>

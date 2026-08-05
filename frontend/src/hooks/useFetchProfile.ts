@@ -17,7 +17,6 @@ export function useFetchProfile(userId: string): TReturn {
     useEffect(() => {
         if (!userId) {
             console.log('Нет userId')
-            setLoadingProfileHookFetch(false)
             return
         }
 

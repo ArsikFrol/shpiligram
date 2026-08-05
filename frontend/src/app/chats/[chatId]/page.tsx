@@ -20,7 +20,7 @@ export default function page() {
 
     useEffect(() => {
         fetchListChats(userId)
-    }, [])
+    }, [userId])
 
     return (
         <div className={cn(

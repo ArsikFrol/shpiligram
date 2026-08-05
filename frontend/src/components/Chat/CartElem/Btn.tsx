@@ -17,18 +17,26 @@ type Props = {
 export default function Btn(props: Props) {
 
     const {
-        deleteChat
+        deleteChat,
+        updateChat
     } = useChats()
 
-    const clickPin = () => {
-
+    const clickPin = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        if (props.objChat.pinned) {
+            updateChat(props.objChat.chatId, { pinned: false })
+        } else {
+            updateChat(props.objChat.chatId, { pinned: true })
+        }
     }
 
-    const clickX = () => {
+    const clickX = (e: React.MouseEvent) => {
+        e.stopPropagation()
         props.setShowBtnById('')
     }
 
-    const clickDeleteChat = () => {
+    const clickDeleteChat = (e: React.MouseEvent) => {
+        e.stopPropagation()
         deleteChat(props.objChat.chatId)
     }
 
@@ -37,16 +45,13 @@ export default function Btn(props: Props) {
             <div className={cn(
                 'w-[45px] h-[45px] rounded-2xl flex justify-center items-center',
                 'bg-red-600'
-            )} onClick={e => {
-                e.stopPropagation()
-                clickDeleteChat()
-            }}>
+            )} onClick={e => clickDeleteChat(e)}>
                 <Trash color="white" />
             </div>
             <div className={cn(
                 'w-[45px] h-[45px] rounded-2xl flex justify-center items-center',
                 'bg-blue-400'
-            )} onClick={props.objChat.pinned ? props.clickPinOff : clickPin}>
+            )} onClick={props.objChat.pinned ? props.clickPinOff : (e) => clickPin(e)}>
                 {props.objChat.pinned
                     ? <PinOff />
                     : <Pin />
@@ -64,10 +69,7 @@ export default function Btn(props: Props) {
             <div className={cn(
                 'w-[45px] h-[45px] rounded-2xl flex justify-center items-center',
                 'bg-white'
-            )} onClick={(e) => {
-                e.stopPropagation()
-                clickX()
-            }} >
+            )} onClick={(e) => clickX(e)} >
                 <X />
             </div>
         </div>

@@ -8,17 +8,16 @@ import useChats from "@/store/chats/chatsStore"
 
 import ThreeDots from "../../UI/ThreeDots"
 import { formatDateTime } from "@/lib/formatDate"
-import { useFetchProfile } from "@/hooks/useFetchProfile"
 import { useTypedRouter } from "@/hooks/useTypedRouter"
-import SkeletonTopContentChat from "../../Skeletons/SkeletonTopContentChat"
 import { TChat } from "@/store/chats/types"
-import EmptyTopContantChat from "./EmptyTopContantChat"
 import SearchUI from "../../UI/SearchUI"
 import WarningText from "../../UI/WarningText"
+import { TGetUser } from "@/store/profile/types"
 
 type Props = {
-    loadingChat: boolean,
-    objChat: TChat
+    objChat: TChat,
+
+    objProfile: TGetUser
 }
 
 type TSetting = {
@@ -35,15 +34,12 @@ export default function TopContentChat(props: Props) {
     const [showSettings, setShowSettings] = useState<boolean>(false)
     const [deleteChatClick, setDeleteChatClick] = useState<boolean>(false)
 
-    const { objProfile } = useFetchProfile(props.objChat.interlocutorId || '')
-
     const listSettings: TSetting[] = [
         { id: 1, text: 'Mute', onClick: () => { }, elem: <Volume2 color="white" size={25} /> },
         { id: 2, text: 'Change wallpaper', onClick: () => { }, elem: <Images color="white" size={25} /> },
         { id: 3, text: 'Clear history', onClick: () => { }, elem: <BrushCleaning color="white" size={25} /> },
         { id: 4, text: 'Delet chat', onClick: () => setDeleteChatClick(true), elem: <Trash color="white" size={25} /> },
     ]
-
 
     const {
         deleteChat
@@ -70,9 +66,6 @@ export default function TopContentChat(props: Props) {
         router.push('/chats')
     }
 
-    if (props.loadingChat) return <SkeletonTopContentChat />
-    if (!objProfile) return <EmptyTopContantChat />;
-
     return (
         <>
             <div className={cn(
@@ -86,19 +79,19 @@ export default function TopContentChat(props: Props) {
                 </div>
                 <div className={cn(
                     'flex gap-x-[10px] hover:scale-105 transition-transform duration-300 cursor-pointer'
-                )} onClick={() => clickUser(objProfile.userId)}>
+                )} onClick={() => clickUser(props.objProfile.userId)}>
                     <CircleUser size={40} strokeWidth={1} color="#ffffff" />
                     <div className=''>
                         <div className='flex items-center gap-x-[5px]'>
                             <div className='text-[16px] font-semibold text-white'>
-                                {objProfile.firstName}
+                                {props.objProfile.firstName}
                             </div>
                             <div className='text-[16px] font-semibold text-white'>
-                                {objProfile.lastName}
+                                {props.objProfile.lastName}
                             </div>
                         </div>
                         <div className='text-[14px] font-medium text-gray-500'>
-                            {formatDateTime(new Date(objProfile.lastSeen))}
+                            {formatDateTime(new Date(props.objProfile.lastSeen))}
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,11 @@
 'use client'
 
+import { useTypedRouter } from "@/hooks/useTypedRouter"
 import { cn } from "@/lib/utils"
+import useChats from "@/store/chats/chatsStore"
 import { TGetMessage } from "@/store/messages/types"
 import useProfile from "@/store/profile/profileStore"
+import { useSearchParams } from "next/navigation"
 
 type Props = {
     userId: string,
@@ -11,13 +14,23 @@ type Props = {
 }
 
 export default function EmptyDialogue(props: Props) {
+    const router = useTypedRouter()
+
+    const searchParams = useSearchParams()
+    const interlocutor = searchParams.get('interlocutor')!
+
+    const {
+        createChat
+    } = useChats()
 
     async function clickSentHello() {
+
+        const result = await createChat(props.userId, interlocutor)
+
         const messageId = `temp_${Date.now()}`
-        const chatId = `temp_${Date.now()}`
         const obj: TGetMessage = {
             messageId,
-            chatId,
+            chatId: result.chat.chatId,
             content: 'Привет!',
             senderId: props.userId,
             sendTime: new Date(),
@@ -27,7 +40,9 @@ export default function EmptyDialogue(props: Props) {
             isEdited: false,
         }
 
-        await props.addMessageInChat(messageId, obj)
+        await props.addMessageInChat(result.chat.chatId, obj)
+
+        router.push(`/chats/${result.chat.chatId}`)
     }
 
     const {

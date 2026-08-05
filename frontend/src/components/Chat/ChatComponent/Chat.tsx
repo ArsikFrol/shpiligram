@@ -12,6 +12,7 @@ import TopContentChat from "../TopContantChat/TopContentChat"
 import ContantChat from "../ContantChat"
 import Empty from "./Empty"
 import Loading from "./Loading"
+import { useFetchProfile } from "@/hooks/useFetchProfile"
 
 export default function Chat() {
     const pathName: TypeRoutes = usePathname() as TypeRoutes
@@ -24,14 +25,16 @@ export default function Chat() {
         fetchListMessages
     } = useMessages()
 
-    const { loadingChat, objChat } = useFetchChat(pathName.split('/')[2])
+    const chatId = pathName.split('/')[2]
+    const { loadingChat, objChat } = useFetchChat(chatId)
+    const { objProfile, loadingProfileHookFetch } = useFetchProfile(objChat ? objChat.interlocutorId : '')
 
     useEffect(() => {
-        fetchListMessages(objChat?.chatId || '')
-    }, [objChat?.chatId])
+        fetchListMessages(objChat ? objChat.chatId : '')
+    }, [objChat])
 
-    if (loadingChat) return <Loading />
-    if (!objChat) return <Empty />
+    if (loadingChat || loadingProfileHookFetch) return <Loading />
+    if (!objChat || !objProfile) return <Empty />
 
     return (
         <div className={cn(
@@ -39,7 +42,7 @@ export default function Chat() {
         )} style={{
             height: showRowStories ? 'calc(100vh - 310px)' : 'calc(100vh-225px)',
         }}>
-            <TopContentChat loadingChat={loadingChat} objChat={objChat} />
+            <TopContentChat objChat={objChat} objProfile={objProfile} />
             <ContantChat objChat={objChat} />
         </div >
     )

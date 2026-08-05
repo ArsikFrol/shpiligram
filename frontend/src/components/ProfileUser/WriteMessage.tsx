@@ -2,8 +2,6 @@
 
 import { useTypedRouter } from "@/hooks/useTypedRouter"
 import { cn } from "@/lib/utils"
-import useChats from "@/store/chats/chatsStore"
-import useProfile from "@/store/profile/profileStore"
 import { TGetUser } from "@/store/profile/types"
 
 type Props = {
@@ -13,27 +11,9 @@ type Props = {
 export default function WriteMessage(props: Props) {
     const router = useTypedRouter()
 
-    const {
-        userId
-    } = useProfile()
-
-    const {
-        createChat
-    } = useChats()
-
     const clickWriteMessage = async () => {
-        router.push(`/chats/newChat?userId=${props.objProfile.userId}`)
-
-/*         try {
-            const result = await createChat(userId, props.objProfile.userId)
-
-            if (result) {
-                router.push(`/chats/${result.chat.chatId}`)
-            }
-        } catch (error) {
-            console.error('Ошибка создания чата:', error)
-        }
- */    }
+        router.push(`/chats/newChat?userId=${props.objProfile.userId}&interlocutor=${props.objProfile.userId}`)
+    }
 
     return (
         <div className={cn(

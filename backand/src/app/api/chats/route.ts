@@ -1,17 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma'
 
-export async function OPTIONS() {
-    return new NextResponse(null, {
-        status: 204,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept',
-        },
-    })
-}
-
 export async function GET(req: NextRequest) {
     try {
         const ownerId = req.nextUrl.searchParams.get('ownerId')
@@ -19,12 +8,7 @@ export async function GET(req: NextRequest) {
         if (!ownerId) {
             return NextResponse.json(
                 { error: 'ownerId обязателен' },
-                {
-                    status: 400,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                    }
-                }
+                { status: 400 }
             )
         }
 
@@ -38,9 +22,10 @@ export async function GET(req: NextRequest) {
                     not: null
                 }
             },
-            orderBy: {
-                lastMessageAt: 'desc'
-            },
+            orderBy: [
+                { pinned: 'desc' },
+                { lastMessageAt: 'desc' }
+            ],
             include: {
                 interlocutor: {
                     select: {
@@ -61,24 +46,13 @@ export async function GET(req: NextRequest) {
             }
         })
 
-        return NextResponse.json(chats, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept',
-            }
-        })
+        return NextResponse.json(chats)
 
     } catch (error) {
         console.error('[API] Ошибка: ', error)
         return NextResponse.json(
             { error: 'Ошибка сервера' },
-            {
-                status: 500,
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                }
-            }
+            { status: 500 }
         )
     }
 
