@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { BookMarked, Moon, Sun } from "lucide-react"
 
-import Stories from "./Stories"
+import ThreeStories from "./ThreeStories"
 import RowStories from "./RowStories"
 import StoriesFullScreen from "./StoriesFullScreen"
 import useProfile from "@/store/profile/profileStore"
@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils"
 import ThreeDots, { TSetting } from "../UI/ThreeDots"
 import useChats from "@/store/chats/chatsStore"
 import useStories from "@/store/stories/storiesStore"
-import SkeletonStories from "../Skeletons/SkeletonStories"
 import { useTypedRouter } from "@/hooks/useTypedRouter"
 import SearchUI from "../UI/SearchUI"
 
@@ -30,7 +29,6 @@ export default function Header() {
     const [idStoriesShow, setIdStoriesShow] = useState<string>('')
 
     const [showSettings, setShowSettings] = useState<boolean>(false)
-
 
     const {
         listStoriesInterlocutors,
@@ -76,7 +74,7 @@ export default function Header() {
             <div className='flex relative'>
                 <div className=''>
                     {!showRowStories &&
-                        <Stories loadingStories={loadingStories} setShowRowStories={setShowRowStories}
+                        <ThreeStories loadingStories={loadingStories} setShowRowStories={setShowRowStories}
                             listStories={listStoriesInterlocutors} />
                     }
                     <div className={cn(

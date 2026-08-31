@@ -15,19 +15,14 @@ type Props = {
 
 export default function ContantChat(props: Props) {
 
-    const {
-        addMessageInChat
-    } = useMessages()
-
-    const {
-        userId
-    } = useProfile()
+    const { addMessageInChat } = useMessages()
+    const { userId } = useProfile()
 
     const textareaRef = useRef<HTMLTextAreaElement>(null)
 
     return (
         <div className="flex flex-col">
-            <Dialogue objChat={props.objChat} textareaRef={textareaRef} />
+            <Dialogue />
             <InputFolder objChat={props.objChat} userId={userId} addMessageInChat={addMessageInChat}
                 textareaRef={textareaRef} />
         </div>

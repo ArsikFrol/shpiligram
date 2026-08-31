@@ -42,7 +42,7 @@ export default function ProfileUser() {
                 }
                 <Description objProfile={objProfile} loading={loadingProfileHookFetch}
                     error={Boolean(errorProfileHookFetch)} />
-                <Tabs userId={objProfile.userId} />
+                <Tabs userId={objProfile.userId} hiddenBtnArchinedStories />
             </div>
         </>
     )

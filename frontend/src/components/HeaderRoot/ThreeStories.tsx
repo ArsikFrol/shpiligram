@@ -12,7 +12,7 @@ type Props = {
     loadingStories: boolean
 }
 
-export default function Stories(props: Props) {
+export default function ThreeStories(props: Props) {
 
     const clickStory = () => {
         props.setShowRowStories(true)

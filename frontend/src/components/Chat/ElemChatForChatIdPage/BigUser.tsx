@@ -14,13 +14,15 @@ export default function BigUser(props: Props) {
     const router = useTypedRouter()
 
     return (
-        <div className="flex items-center justify-between gap-x-[10px]"
+        <div className={cn(
+            "flex items-center justify-between gap-x-[10px]",
+            'hover:scale-101 transition-transform duration-300 cursor-pointer'
+        )}
             onClick={() => router.push(`/chats/${props.obj.chatId}`)}>
             <div className='flex gap-x-[10px]'>
                 <div className='relative'>
                     <CircleUser size={50} strokeWidth={1} color="#ffffff" className={cn(
                         "w-[50px] h-[50px] flex-shrink-0",
-                        'hover:scale-105 transition-transform duration-300 cursor-pointer'
                     )} />
                     <div className={cn(
                         'w-[10px] h-[10px] bg-green-300 rounded-2xl',

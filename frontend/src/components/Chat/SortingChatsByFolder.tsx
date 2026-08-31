@@ -5,6 +5,8 @@ import useProfile from "@/store/profile/profileStore"
 import { TChat } from "@/store/chats/types"
 import ChatElem from "./CartElem/ChatElem"
 import { useChatNavigation } from "@/hooks/useChatNavigation"
+import { useTypedRouter } from "@/hooks/useTypedRouter"
+import useChats from "@/store/chats/chatsStore"
 
 type Props = {
     listChats: TChat[],
@@ -14,26 +16,47 @@ type Props = {
 }
 
 export default function SortingChatsByFolder(props: Props) {
-    const { showRowStories, setShowRowStories } = useProfile()
-    const { activeIndex, chatRefs } = useChatNavigation(props.listChats)
+    const router = useTypedRouter()
+
+    const { showRowStories } = useProfile()
+    const { chatRefs } = useChatNavigation(props.listChats)
+    const { deleteFromStoreAllChats, setLoadingChats, activeIdElemChatNav } = useChats()
+
+    const clickChat = (chatId: string) => {
+        router.push(`/chats/${chatId}`)
+
+        deleteFromStoreAllChats()
+        setLoadingChats(true)
+    }
+
+    const clickPKM = (e: any, chatId: string) => {
+        e.preventDefault()
+        props.setShowBtnById(chatId)
+    }
 
     return (
         <div className={cn(
-            "flex flex-col gap-y-[10px] overflow-y-auto",
-            showRowStories ? 'h-[calc(100vh-420px)]' : 'h-[calc(100vh-320px)] px-[15px]'
-        )}>
+            "flex flex-col gap-y-[10px] overflow-y-auto px-[7px]"
+        )} style={{
+            height: showRowStories ? 'var(--chat-height-with-stories)' : 'var(--chat-height-without-stories)'
+        }}>
             {
                 props.listChats.map((objChat, index: number) => {
                     return (
                         <div key={objChat.chatId} ref={(el) => {
                             chatRefs.current[index] = el
-                        }}
-                            className={cn(
-                                'transition-all duration-200 rounded-xl p-[10px]',
-                                activeIndex === index && 'bg-bg'
-                            )}>
-                            <ChatElem key={index} objChat={objChat} setShowRowStories={setShowRowStories}
-                                showBtnById={props.showBtnById} setShowBtnById={props.setShowBtnById} />
+                        }} className={cn(
+                            'hover:scale-101 transition-transform duration-300 cursor-pointer',
+                            'relative p-[10px]',
+                            props.showBtnById === objChat.chatId && [
+                                'scale-101 bg-bg rounded-2xl'
+                            ],
+                            activeIdElemChatNav === index && [
+                                'scale-101 bg-bg rounded-2xl'
+                            ]
+                        )} onClick={() => clickChat(objChat.chatId)} onContextMenu={(e) => clickPKM(e, objChat.chatId)}>
+                            <ChatElem key={index} objChat={objChat} showBtnById={props.showBtnById}
+                                setShowBtnById={props.setShowBtnById} />
                         </div>
                     )
                 })

@@ -14,15 +14,8 @@ type Props = {
 
 export default function ListChats(props: Props) {
 
-    const {
-        activeFolder,
-    } = useProfile()
-
-    const {
-        listChats,
-        loading,
-        error
-    } = useChats()
+    const { activeFolder } = useProfile()
+    const { listChats, loading, error } = useChats()
 
     if (loading) return <Loading />
     if (error) return <Error />

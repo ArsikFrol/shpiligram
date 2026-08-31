@@ -8,36 +8,47 @@ import { useEscape } from "@/hooks/useEscape"
 import { cn } from "@/lib/utils"
 import useChats from "@/store/chats/chatsStore"
 import useProfile from "@/store/profile/profileStore"
+import { useChatNavigation } from "@/hooks/useChatNavigation"
 
 type Props = {
     hiddenSearch?: boolean,
     width: number,
 
-    placeholder: string
+    placeholder: string,
 }
 
 export default function SearchUI(props: Props) {
     const [valueSearch, setValueSearch] = useState<string>('')
     const [activeSearch, setActiveSearch] = useState<boolean>(false)
 
+
     const ref = useRef(null)
 
     const {
-        searchChats
+        searchChats,
+        activeIdElemChatNav, setActiveIdElemChatNav
     } = useChats()
 
     const {
-        userId
+        userId,
+        setShowRowStories
     } = useProfile()
+
 
     const escapeFunc = () => {
         setActiveSearch(false)
         setValueSearch('')
+        setActiveIdElemChatNav(-1)
     }
 
     useEffect(() => {
         searchChats(valueSearch, userId)
-    }, [valueSearch])
+    }, [valueSearch, userId])
+
+    useEffect(() => {
+        if (activeIdElemChatNav === -2) setActiveSearch(true)
+        else setActiveSearch(false)
+    }, [activeIdElemChatNav])
 
     useClickAway(ref, () => {
         setActiveSearch(false)
@@ -70,7 +81,7 @@ export default function SearchUI(props: Props) {
                 'hover:scale-110 transition-all duration-300 cursor-pointer',
                 activeSearch ? 'opacity-0' : 'opacity-100',
                 props.hiddenSearch && 'hidden'
-            )} onClick={() => setActiveSearch(true)} />
+            )} onClick={() => { setActiveSearch(true); setShowRowStories(false) }} />
         </>
     )
 }

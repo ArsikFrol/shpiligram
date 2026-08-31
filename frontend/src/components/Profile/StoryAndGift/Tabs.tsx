@@ -1,7 +1,8 @@
 'use client'
 
-import { cn } from "@/lib/utils"
 import { useState } from "react"
+
+import { cn } from "@/lib/utils"
 import Sort from "./Sort"
 
 type Props = {
@@ -25,10 +26,10 @@ const listPostBtn: TBtn[] = [
 ]
 
 export default function Tabs(props: Props) {
-    
+
     const [activeBtn, setActiveBtn] = useState<TActiveBtn>('stories')
-    
-    return(
+
+    return (
         <>
             <div className='flex gap-x-[10px] w-[440px] p-[5px] mx-auto bg-bg rounded-2xl my-[20px]'>
                 {

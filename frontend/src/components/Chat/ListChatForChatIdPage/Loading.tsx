@@ -4,7 +4,7 @@ import SkeletonForLogoChats from "@/components/Skeletons/SkeletonForLogoChats"
 
 export default function Loading() {
     return (
-        <div className="w-[250px] flex flex-col gap-y-[30px] h-[calc(100vh-240px)] overflow-y-auto mt-[20px]">
+        <div className="pl-[5px] w-[250px] flex flex-col gap-y-[30px] h-[calc(100vh-230px)] overflow-y-auto mt-[20px]">
             {
                 [...Array(10)].map((_, index) => {
                     return (

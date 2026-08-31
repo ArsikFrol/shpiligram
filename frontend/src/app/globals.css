@@ -9,6 +9,11 @@
     --color-active-text: #2239EF;
 }
 
+:root {
+    --chat-height-with-stories: calc(100vh - 400px);
+    --chat-height-without-stories: calc(100vh - 320px);
+}
+
 *:focus {
     outline: none !important;
 }

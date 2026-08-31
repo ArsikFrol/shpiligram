@@ -23,9 +23,7 @@ export default function ListGifts(props: Props) {
     return (
         <>
             <div className={cn(
-                'bg-bg rounded-2xl mx-auto py-[10px] min-h-[250px]',
-                'min-lg:w-[800px] max-lg:mx-[30px]',
-                props.listGifts.length && 'grid grid-cols-3 grid-row-1 gap-y-[15px]'
+                props.listGifts.length && 'grid grid-cols-3 grid-row-1 gap-y-[15px] gap-x-[15px]'
             )}>
                 {props.listGifts.length
                     ? props.listGifts.map((obj, index: number) => {

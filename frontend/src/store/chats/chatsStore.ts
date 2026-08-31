@@ -3,7 +3,7 @@ import { create } from "zustand"
 import { TPatchDataChat, TUseChat } from "./types"
 import { Api } from "@/services/api-client"
 
-const useChats = create<TUseChat>((set) => ({
+const useChats = create<TUseChat>((set, get) => ({
     loading: true,
     setLoadingChats: (value: boolean) => set({ loading: value }),
 
@@ -11,6 +11,17 @@ const useChats = create<TUseChat>((set) => ({
 
     listChats: [],
     listInterlocutorsId: [],
+
+    activeIdElemChatNav: -1,
+    setActiveIdElemChatNav: (value: number | ((prev: number) => number)) => {
+        if (typeof value === 'function') {
+            set((state) => ({
+                activeIdElemChatNav: value(state.activeIdElemChatNav)
+            }))
+        } else {
+            set({ activeIdElemChatNav: value })
+        }
+    },
 
     deleteFromStoreAllChats: () => set({
         listChats: []
@@ -88,6 +99,19 @@ const useChats = create<TUseChat>((set) => ({
     searchChats: async (userName: string, userId: string) => {
         try {
             set({ loading: true, error: false })
+            const state = get()
+
+            if (!userName || userName.trim() === '') {
+                const data = await Api.chats.getChats(userId)
+                set({ listChats: data, loading: false })
+                return
+            }
+
+            if (state.listChats.length === 0) {
+                set({ listChats: [], loading: false })
+                return
+            }
+
             const data = await Api.chats.getSearchChat(userName, userId)
             set({ listChats: data })
         } catch (error) {

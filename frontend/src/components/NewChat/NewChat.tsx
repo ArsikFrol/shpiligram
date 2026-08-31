@@ -21,7 +21,7 @@ export default function NewChat() {
     return (
         <div className={cn(
             'grid gap-x-[30px] ',
-            'min-xl:grid-cols-[250px_auto] max-xl:grid-cols-[50px_auto] '
+            'min-xl:grid-cols-[270px_auto] max-xl:grid-cols-[50px_auto] '
         )}>
             <ListChatForChatIdPage />
             <div className='w-full bg-bg mt-[10px] rounded-2xl flex flex-col'>

@@ -3,6 +3,7 @@ import Image from "next/image"
 import user from '../../../public/user.jpg'
 import { TGetStory } from "@/store/stories/types"
 import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react"
 
 type Props = {
     listStories: TGetStory[]
@@ -12,16 +13,29 @@ type Props = {
 }
 
 export default function RowStories(props: Props) {
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+        requestAnimationFrame(() => {
+            setIsVisible(true)
+        })
+    }, [])
 
     const clickStory = (id: string) => {
         props.setShowBigStories(true)
         props.setIdStoriesShow(id)
     }
 
+    const unviewedStories = props.listStories.filter(story => !story.isViewed)
+    const viewedStories = props.listStories.filter(story => story.isViewed)
+
     return (
-        <div className='flex gap-x-[20px] w-[1140px] overflow-x-auto p-[10px]'>
+        <div className={cn(
+            'flex gap-x-[20px] w-full overflow-x-auto p-[10px] transition-all duration-500 ease-in-out',
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5'
+        )}>
             {
-                props.listStories.filter(story => !story.isViewed).map((obj, index: number) => {
+                unviewedStories.map((obj, index: number) => {
                     return (
                         <Image src={user} alt='' width={40} height={40} draggable='false' key={index}
                             className={cn(
@@ -32,7 +46,7 @@ export default function RowStories(props: Props) {
                 })
             }
             {
-                props.listStories.filter(story => story.isViewed).map((obj, index: number) => {
+                viewedStories.map((obj, index: number) => {
                     return (
                         <Image src={user} alt='' width={40} height={40} draggable='false' key={index}
                             className={cn(

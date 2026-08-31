@@ -10,13 +10,8 @@ import ListChatForChatIdPage from "@/components/Chat/ListChatForChatIdPage/ListC
 
 export default function page() {
 
-    const {
-        fetchListChats,
-    } = useChats()
-
-    const {
-        userId
-    } = useProfile()
+    const { fetchListChats } = useChats()
+    const { userId, showRowStories } = useProfile()
 
     useEffect(() => {
         fetchListChats(userId)
@@ -25,8 +20,10 @@ export default function page() {
     return (
         <div className={cn(
             'grid gap-x-[30px]',
-            'min-xl:grid-cols-[250px_auto] max-xl:grid-cols-[50px_auto] '
-        )}>
+            'min-xl:grid-cols-[270px_auto] max-xl:grid-cols-[50px_auto]'
+        )} style={{
+            height: showRowStories ? 'calc(var(--chat-height-with-stories) - 50px)' : 'calc(var(--chat-height-without-stories) + 100px)'
+        }}>
             <ListChatForChatIdPage />
             <Chat />
         </div>

@@ -11,13 +11,8 @@ import ListChats from "@/components/Chat/listChats/ListChats"
 export default function Home() {
     const [showBtnById, setShowBtnById] = useState<string>('')
 
-    const {
-        userId
-    } = useProfile()
-
-    const {
-        fetchListChats
-    } = useChats()
+    const { userId } = useProfile()
+    const { fetchListChats } = useChats()
 
     useEffect(() => {
         fetchListChats(userId)

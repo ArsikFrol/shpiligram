@@ -33,7 +33,10 @@ export type TUseChat = {
     error: boolean,
 
     listChats: TChat[],
-    listInterlocutorsId: string[]
+    listInterlocutorsId: string[],
+
+    activeIdElemChatNav: number,
+    setActiveIdElemChatNav: (value: number | ((prev: number) => number)) => void,
 
     deleteFromStoreAllChats: () => void,
 

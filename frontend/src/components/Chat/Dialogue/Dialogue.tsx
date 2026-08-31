@@ -1,26 +1,18 @@
 'use client'
 
-import { JSX, RefObject, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { JSX, useEffect, useRef, useState } from "react"
 import { StaticImageData } from "next/image"
+import { Copy, Forward, Pin, Reply, Trash } from "lucide-react"
 
-import { TGetMessage } from "@/store/messages/types"
 import { cn, scrollToBottom } from "@/lib/utils"
 import useProfile from "@/store/profile/profileStore"
-import { TChat } from "@/store/chats/types"
 import Message from "./Message"
-import { Copy, Forward, Pin, Reply, Trash } from "lucide-react"
 
 import smile from '../../../../public/smile.png'
 import { useEscape } from "@/hooks/useEscape"
 import { useTypedRouter } from "@/hooks/useTypedRouter"
 import { useMessageActions } from "@/hooks/useMessageActions"
 import useMessages from "@/store/messages/messagesStore"
-import EmptyDialogue from "./EmptyDialogue"
-
-type Props = {
-    objChat: TChat,
-    textareaRef: RefObject<HTMLTextAreaElement | null>
-}
 
 export type TSettingForMessage = {
     id: number,
@@ -63,41 +55,17 @@ const listSmile: TSmile[] = [
     { id: 19, image: smile },
 ]
 
-export default function Dialogue(props: Props) {
+export default function Dialogue() {
     const router = useTypedRouter()
 
     const [showSettingsElem, setShowSettingsElem] = useState<string>('')
     const [showAllSmile, setShowAllSmile] = useState<boolean>(false)
     const [showForward, setShowForward] = useState<boolean>(false)
 
-    const {
-        userId,
-        showRowStories
-    } = useProfile()
-
-    const {
-        listMessages,
-        loadingMessages,
-        addMessageInChat
-    } = useMessages()
-
-    const {
-        clickCopyMessage,
-        clickDelete,
-        clickForward,
-        clickPin,
-        clickReply
-    } = useMessageActions({
-        setShowForward
-    })
-
-    const actions = {
-        clickCopyMessage,
-        clickDelete,
-        clickForward,
-        clickReply,
-        clickPin
-    }
+    const { userId, showRowStories } = useProfile()
+    const { listMessages } = useMessages()
+    const { clickCopyMessage, clickDelete, clickForward, clickPin, clickReply } = useMessageActions({ setShowForward })
+    const actions = { clickCopyMessage, clickDelete, clickForward, clickReply, clickPin }
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
@@ -117,7 +85,7 @@ export default function Dialogue(props: Props) {
             'px-[10px] overflow-y-auto',
             'flex flex-col gap-y-[10px]',
         )} style={{
-            height: showRowStories ? 'calc(100vh - 475px)' : 'calc(100vh - 395px'
+            height: showRowStories ? 'calc(100vh - 475px)' : 'calc(100vh - 395px)'
         }}>
             {
                 listMessages.map((obj, index: number) => <Message objMessage={obj} userId={userId} key={index}

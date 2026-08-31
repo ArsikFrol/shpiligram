@@ -14,43 +14,10 @@ export async function GET(req: NextRequest) {
     }
 
     if (!userName || userName.trim() === '') {
-        const chats = await prisma.chat.findMany({
-            where: {
-                OR: [
-                    { ownerId: userId },
-                    { interlocutorId: userId }
-                ]
-            },
-            orderBy: {
-                lastMessageAt: 'desc'
-            },
-            include: {
-                interlocutor: {
-                    select: {
-                        userId: true,
-                        avatar: true,
-                        lastName: true,
-                        firstName: true,
-                        lastSeen: true,
-                        isOnline: true
-                    }
-                },
-                lastMessage: {
-                    select: {
-                        content: true,
-                        sendTime: true,
-                    }
-                }
-            }
-        })
-
-        const sortedChats = chats.sort((a, b) => {
-            const nameA = `${a.interlocutor.firstName || ''} ${a.interlocutor.lastName || ''}`.trim()
-            const nameB = `${b.interlocutor.firstName || ''} ${b.interlocutor.lastName || ''}`.trim()
-            return nameA.localeCompare(nameB)
-        })
-
-        return NextResponse.json(sortedChats)
+        return NextResponse.json(
+            { error: 'userName не прописан' },
+            { status: 400 }
+        )
     }
 
     const chats = await prisma.chat.findMany({
@@ -92,11 +59,5 @@ export async function GET(req: NextRequest) {
         }
     })
 
-    const sortedChats = chats.sort((a, b) => {
-        const nameA = `${a.interlocutor.firstName || ''} ${a.interlocutor.lastName || ''}`.trim()
-        const nameB = `${b.interlocutor.firstName || ''} ${b.interlocutor.lastName || ''}`.trim()
-        return nameA.localeCompare(nameB)
-    })
-
-    return NextResponse.json(sortedChats)
+    return NextResponse.json(chats)
 }

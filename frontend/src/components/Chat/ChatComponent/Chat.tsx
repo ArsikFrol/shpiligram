@@ -40,7 +40,7 @@ export default function Chat() {
         <div className={cn(
             'w-full bg-bg mt-[10px] rounded-2xl flex flex-col'
         )} style={{
-            height: showRowStories ? 'calc(100vh - 310px)' : 'calc(100vh-225px)',
+            height: showRowStories ? 'calc(100vh - 310px)' : 'calc(100vh - 230px)',
         }}>
             <TopContentChat objChat={objChat} objProfile={objProfile} />
             <ContantChat objChat={objChat} />
